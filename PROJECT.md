@@ -22,3 +22,9 @@ Decision: BlastLab leading candidate; Repro preserved as alternative. No final p
 ## Current blocker
 `agent_spike.py doctor` on Windows: inference key/model false, VM host/user/SSH key false, Docker unavailable. Do NOT claim live Vultr or real-model success.
 Next action: user provisions/authorizes Vultr inference subscription and VM, then rerun `python agent_spike.py doctor --env-file .env.vultr` where supported; follow BROWSER_SPIKE.md for VM deployment. Verify CLI options before running.
+
+## Update 2026-11-04: Vultr activation unblocked
+- User confirmed $200 hackathon credit redemption worked through Vultr **Gift Codes** (not coupon codes).
+- Authenticated Vultr browser page shows active Serverless Inference subscription labelled "Hack" with $0.00 charges. This is OBSERVED SUBSCRIPTION STATUS only, not evidence of API inference.
+- Local inference key and model have not yet been configured; VM and Docker cloud runtime remain unverified.
+- Next action: retrieve subscription API key securely from Vultr manage page; select exact enabled tool-capable model; configure ignored .env.vultr and run doctor, then provision VM/Docker and live model test.

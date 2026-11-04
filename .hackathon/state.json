@@ -1,42 +1,42 @@
 ﻿{
-  "project": "BlastLab",
-  "event": "Vultr Agent Rush",
-  "updated_at": "2026-11-04",
-  "phase": "TECHNICAL_DERISK",
-  "specialist": "engineering",
-  "exit_proof": "Real tool-using Vultr-inference agent in disposable Docker container on verified Vultr VM, with attack/denial/destruction/resume trace",
-  "gate": "BLOCKED_EXTERNAL_CONFIGURATION",
-  "evidence": {
-    "local_tests": {
-      "status": "OBSERVED",
-      "total": 63,
-      "passed": 60,
-      "skipped": 3,
-      "failures": 0
-    },
-    "browser_local": {
-      "status": "OBSERVED_WITH_SIMULATED_PLANNER",
-      "mission_cents": 7200,
-      "denied_actions": 4,
-      "browser_reads": 2,
-      "trace_events": 65,
-      "reset_verified": true
-    },
-    "live_vultr": {
-      "status": "UNPROVEN"
-    },
-    "docker_on_vm": {
-      "status": "UNPROVEN"
-    },
-    "public_demo": {
-      "status": "NOT_STARTED"
-    }
-  },
-  "blockers": [
-    "VULTR_INFERENCE_API_KEY missing",
-    "VULTR_INFERENCE_MODEL missing",
-    "Vultr VM access/provenance missing",
-    "Docker sandbox runtime not yet exercised on Vultr VM"
-  ],
-  "next_action": "Acquire secure Vultr inference subscription and VM access; run doctor; perform Docker runtime test and real Vultr tool-call mission; capture proof. No simulated claims."
+    "project":  "BlastLab",
+    "event":  "Vultr Agent Rush",
+    "updated_at":  "2026-11-04",
+    "phase":  "TECHNICAL_DERISK",
+    "specialist":  "engineering",
+    "exit_proof":  "Real tool-using Vultr-inference agent in disposable Docker container on verified Vultr VM, with attack/denial/destruction/resume trace",
+    "gate":  "PARTIALLY_UNBLOCKED_INFERENCE_SUBSCRIPTION_ACTIVE",
+    "evidence":  {
+                     "local_tests":  {
+                                         "status":  "OBSERVED",
+                                         "total":  63,
+                                         "passed":  60,
+                                         "skipped":  3,
+                                         "failures":  0
+                                     },
+                     "browser_local":  {
+                                           "status":  "OBSERVED_WITH_SIMULATED_PLANNER",
+                                           "mission_cents":  7200,
+                                           "denied_actions":  4,
+                                           "browser_reads":  2,
+                                           "trace_events":  65,
+                                           "reset_verified":  true
+                                       },
+                     "live_vultr":  {
+                                        "status":  "UNPROVEN"
+                                    },
+                     "docker_on_vm":  {
+                                          "status":  "UNPROVEN"
+                                      },
+                     "public_demo":  {
+                                         "status":  "NOT_STARTED"
+                                     }
+                 },
+    "blockers":  [
+                     "VULTR_INFERENCE_API_KEY missing",
+                     "VULTR_INFERENCE_MODEL missing",
+                     "Vultr VM access/provenance missing",
+                     "Docker sandbox runtime not yet exercised on Vultr VM"
+                 ],
+    "next_action":  "Retrieve inference API key securely on PC (not in chat), choose exact enabled tool-capable model, configure ignored .env.vultr, then run doctor and test live inference; provision VM/Docker for cloud sandbox proof."
 }

@@ -16,3 +16,5 @@ Updated: 2026-11-04. All claims refer to the Windows development host, not a Vul
 | Public URL and submission video | NOT STARTED | Future deployment/recording proof | Required judge-facing deliverables |
 
 Generated raw traces are local artifacts, not included in public Git by default. Do not turn synthetic proof into a live claim.
+
+| Active Serverless Inference subscription | OBSERVED on 2026-11-04 | Authenticated Vultr Console Inference list: "Hack", active, charges $0.00 | Key/model not yet configured; no live request proof |
