@@ -31,3 +31,13 @@ Chosen technical thesis: crash-test browser agents reading hostile content; enfo
 ## Status notes
 
 The initial account block was solved by redeeming the `$200` hackathon credit via Vultr **Gift Codes** (not Coupon Codes). Initial local Chromium startup timeout, Docker image pull/build and Docker teardown-verification errors are now fixed. Technical de-risk proof is real; final product and submission are still **NOT READY**.
+
+## 2026-11-04: full product control room deployed
+
+- PUBLIC HTTPS: https://blastlab.45-77-138-147.sslip.io/ (Caddy on real Vultr VM, DNS/TLS externally verified).
+- Genuine React/TypeScript product: landing, Control Room with real causal event timeline and injected web specimen, independent model/fixture source switch, policy/worker inspectors, Evidence vault/export and Architecture views, responsive mobile and reduction of motion.
+- The public interface is read-only until a credentialed operator initiates a fixed test. Live and scripted owner-initiated tests both completed via /api/runs on actual Vultr backend, with fresh hash-chained proof published; NO client secrets or arbitrary commands.
+- Gateway security tests 8/8 passed; full Python regression 71 tests, 0 failed, 3 intentional skips. Playwright interaction suite passed desktop/mobile workflows, no app JS page errors. Mobile 390px layouts have zero document overflow.
+- Official build and product QA details: PRODUCT.md, BRAND.md, DESIGN.md, HYGIENE.md, SCORECARD.md, web/VISUAL_QA.md.
+- OPEN FOR SUBMISSION: public GitHub remote/repository missing; final judge demo video and receipt still missing. Current SSLip domain works but is not permanent branded domain. Vultr VM billable while running.
+- NEXT ACTION: polish demo script, record real browser/UI + model/fixture distinction, publish public source repository after secret audit, submit before verified November 8 cutoff.

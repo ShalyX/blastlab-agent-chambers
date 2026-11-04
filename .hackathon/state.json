@@ -2,18 +2,17 @@
     "project":  "BlastLab",
     "event":  "Vultr Agent Rush",
     "updated_at":  "2026-11-04",
-    "phase":  "BUILD_VERTICAL_SLICE",
-    "specialist":  "engineering",
-    "exit_proof":  "Real public control-room UX with live Vultr agent-run trace, secure backend API, distinctive brand, recorded demo and accessible judge-facing evidence",
-    "gate":  "TECHNICAL_DERISK_PASSED__JUDGE_PRODUCT_AND_PUBLIC_DEMO_PENDING",
+    "phase":  "PRODUCT_HYGIENE",
+    "specialist":  "product-hygiene",
+    "exit_proof":  "Public product site working with authentic evidence, owner-run API, screenshot/interaction QA; public source, final recording and submission audit are still required.",
+    "gate":  "PUBLIC_PRODUCT_LIVE_QA_VERIFIED__REPOSITORY_VIDEO_SUBMISSION_PENDING",
     "evidence":  {
                      "local_tests":  {
-                                         "passed":  60,
-                                         "elapsed_seconds":  141.446,
-                                         "total":  63,
+                                         "status":  "VERIFIED",
                                          "failures":  0,
                                          "skipped":  3,
-                                         "status":  "VERIFIED"
+                                         "total":  71,
+                                         "passed":  68
                                      },
                      "browser_local":  {
                                            "status":  "OBSERVED_WITH_SIMULATED_PLANNER",
@@ -44,14 +43,25 @@
                                           "scripted_trace_sha256":  "05da3c367af2a15dfafcb93afd0a5511a10d2c26c4055717908fb4b71680d518"
                                       },
                      "public_demo":  {
-                                         "status":  "NOT_STARTED"
-                                     }
+                                         "responsive_390px":  true,
+                                         "visual_qa_captured":  true,
+                                         "public_readonly":  true,
+                                         "typecheck_passed":  true,
+                                         "status":  "VERIFIED_LIVE_HTTPS_PRODUCT",
+                                         "url":  "https://blastlab.45-77-138-147.sslip.io/"
+                                     },
+                     "owner_run_api":  {
+                                           "status":  "VERIFIED_REAL_VM_RUNS",
+                                           "scripted_sha256":  "eb1f40885c6a6b2f6f5e8b64fa6ccb00b76fee2a91b6a56d2a00216638a262c1",
+                                           "hosted_on_vultr":  true,
+                                           "auth_tests_passed":  8,
+                                           "live_model_sha256":  "694294d4031432fb7da4f3123e4844b439c8d47883f6807aeb7a1535a9337c7f"
+                                       }
                  },
     "blockers":  [
-                     "No public product UI/API or URL",
-                     "No recorded demo or published proof",
-                     "VM full optional-host test suite needs Node/Playwright/JS local fixture; targeted VM tests pass",
-                     "Need final product name/brand and Product Hygiene/judge QA"
+                     "Hackathon-ready public GitHub repository and remote not yet configured",
+                     "Actual final demo video/QA and submission confirmation missing",
+                     "Temporary sslip.io address needs branded domain for long-term launch"
                  ],
-    "next_action":  "Build judge-facing BlastLab control-room UI and hardened API consuming real run evidence; publish an accessible deployment, record honest live demo and attack fixture distinction; monitor costs on active Vultr VM."
+    "next_action":  "Record genuine product/demo and submit; publish cleaned public GitHub repo after secret check; run product launch hygiene final audit and confirm exact Nov 8 submission cutoff."
 }

@@ -1,0 +1,34 @@
+[Unit]
+Description=BlastLab Trusted Controller (fixed scenario agent test)
+Documentation=https://community.vultr.com/e/vultr-agent-rush-hackathon
+After=network-online.target docker.service
+Requires=docker.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=root
+Group=root
+WorkingDirectory=/opt/blastlab
+Environment=PYTHONUNBUFFERED=1
+Environment=BLASTLAB_HOST=127.0.0.1
+Environment=BLASTLAB_PORT=8123
+Environment=BLASTLAB_PROOF_DIR=/var/www/blastlab/data
+Environment=BLASTLAB_RUNS_DIR=/var/lib/blastlab/runs
+Environment=BLASTLAB_INFERENCE_ENV=/etc/blastlab/inference.env
+Environment=BLASTLAB_OPERATOR_TOKEN_FILE=/etc/blastlab/operator.token
+Environment=BLASTLAB_ALLOWED_ORIGIN=https://blastlab.45-77-138-147.sslip.io
+ExecStart=/usr/bin/python3 /opt/blastlab/control_api.py
+Restart=on-failure
+RestartSec=4
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectHome=true
+ProtectSystem=strict
+ReadWritePaths=/var/lib/blastlab /var/www/blastlab/data
+RestrictSUIDSGID=true
+LimitNOFILE=2048
+
+[Install]
+WantedBy=multi-user.target

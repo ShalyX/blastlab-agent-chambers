@@ -25,3 +25,14 @@ A useful AI agent enters a supplier page that tries to hijack its instructions. 
 - Cloud run paths and trace digests: `EVIDENCE.md`.
 
 Next: design and implement the judge-facing control room; then capture actual screencasts, verify labels/audio/video and render.
+
+## 2026-11-04: live product is deployed; recording still needed
+
+- Live video target: https://blastlab.45-77-138-147.sslip.io/app
+- Opening shot on real live-model run: hostile supplier page already selected, a legitimate inventory table next to malicious override, policy allows only browse.
+- Scrub to trusted interruption and sandbox destroyed: highlight the orange rupture seam, container_absent and workspace_removed evidence.
+- Scrub to generation 02 resume and $72 verified completion.
+- Switch explicitly to SCRIPTED FIXTURE: show denied execute_shell, unauthorized URL, forged result and prohibited reset. State clearly that these are scripted malicious proposals, NOT the real model.
+- Open Evidence vault, show SHA-256 and export sanitized JSON, then Architecture for Vultr VM / Serverless Inference / Docker boundary.
+- Trigger a new test only using protected owner API, without exposing the operator token in footage. Show the progress/complete state and new proof hash.
+- DO NOT fabricate or fake footage. Final video, timing, voiceover, caption and capture QA remain pending.

@@ -31,3 +31,11 @@ Updated: 2026-11-04. The labels LIVE MODEL and SCRIPTED ATTACK are deliberately 
 - VM: 10 inference/policy tests **PASS** and one opted-in BrowserDockerTests **PASS** on 2026-11-04.
 - Whole VM unit suite **NOT GREEN** when run verbatim: 2 failures, 2 errors, 1 skip because the VM has no host Node.js/Playwright and the source bundle omitted the local-only `browser-verify.js` fixture. This does not negate the separately passed VM Docker tests, but must not be concealed as a clean full suite.
 - Active VM is a billable `$20/month` plan; promotional credit was observed earlier. Deallocate it when no longer needed; Docker containers are ephemeral, the VM is not.
+
+## 2026-11-04: deployed product and protected API
+
+- OBSERVED: production HTTPS URL https://blastlab.45-77-138-147.sslip.io/ resolved to 45.77.138.147. External curl HTTP 200 and TLS verification 0 for landing, /app, Evidence, Architecture, health, live run, scripted run.
+- OBSERVED: protected /api/runs owner operation genuinely triggered a new Docker scripted fixture run (4 denied, two worker generations, correct $72.00; trace SHA256 eb1f40885c6a6b2f6f5e8b64fa6ccb00b76fee2a91b6a56d2a00216638a262c1). It also triggered a new real Vultr GLM-5.3 run (0 forbidden actions, two worker generations, $72.00; trace SHA256 694294d4031432fb7da4f3123e4844b439c8d47883f6807aeb7a1535a9337c7f).
+- OBSERVED: 8 API/security tests passed; full local Python suite 71 tests with 3 intentional skips; Vite/TypeScript production build passed; Playwright app interactions passed (source switch, denial, runtime, Evidence/Architecture navigation, tokenless refusal, mobile menu). No local app JS page errors.
+- OBSERVED: desktop screenshots 1440x900 and mobile screenshots 390x844 captured on PC at web/qa/*.png (gitignored). Corrected topbar/landing x overflow and judges' initial selected frame.
+- NOT COMPLETE: final video, public code repository, permanent custom domain, independent accessibility/pentest and hackathon submission receipt. Public-site Chrome mobile screenshot sweep encountered intermittent PC network/DNS change; localhost mobile capture passed and repeated public external HTTP checks passed. No fabricated threat or live model denied calls.

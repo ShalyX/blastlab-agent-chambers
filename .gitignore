@@ -13,3 +13,13 @@ artifacts/
 output/
 .playwright-cli/
 checkpoint-instructions.txt
+
+# Generated browser build and screenshot QA artifacts
+web/dist/
+web/qa/
+
+# Generated TypeScript incremental build cache and local scratch files
+*.tsbuildinfo
+operator-result.txt
+prompt-next.txt
+prompt.txt
