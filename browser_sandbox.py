@@ -95,7 +95,9 @@ class BrowserSandbox:
         self.reader.start()
         self.trace.emit('sandbox_created', backend=self.backend, generation=self.generation,
                         os_boundary=self.backend == 'docker', command=command)
-        self.ready = self.request({'action': 'init', 'rows': self.rows, 'hostile': self.hostile})
+        # Chromium cold-start (especially after Windows sleep or on a small VM) can exceed the per-action timeout.
+        # Only initialization gets a larger bounded lease; browse/actions remain at 25 seconds.
+        self.ready = self.request({'action': 'init', 'rows': self.rows, 'hostile': self.hostile}, timeout=65)
         if self.ready['inherited_secret_names']:
             raise GateError('Sandbox inherited a secret-like variable name; aborting')
         return self.ready
@@ -114,17 +116,32 @@ class BrowserSandbox:
             if process.poll() is None:
                 process.kill()
                 process.wait(timeout=10)
+            container_absent = self.backend != 'docker'
             if self.backend == 'docker':
-                subprocess.run(['docker', 'rm', '-f', self.name], capture_output=True, timeout=15)
-                inspected = subprocess.run(['docker', 'inspect', self.name], capture_output=True, timeout=15)
-                if inspected.returncode == 0 or b'No such object' not in inspected.stderr:
-                    raise GateError('Cannot verify Docker sandbox removal')
-            process.stdin.close()
-            process.stdout.close()
-            self.reader.join(timeout=2)
-            self.process = None
-            self.trace.emit('sandbox_destroyed', generation=self.generation,
-                            process_exited=process.poll() is not None, workspace_removed=bool(confirmed))
+                # Check the Docker daemon's actual container list, not the
+                # version-specific wording of 'docker inspect' error messages.
+                try:
+                    subprocess.run(['docker', 'rm', '-f', self.name],
+                                   capture_output=True, timeout=15)
+                    listing = subprocess.run(
+                        ['docker', 'ps', '-a', '--filter', f'name=^/{self.name}$',
+                         '--format', '{{.Names}}'],
+                        capture_output=True, timeout=15)
+                    container_absent = listing.returncode == 0 and not listing.stdout.strip()
+                except (OSError, subprocess.TimeoutExpired):
+                    container_absent = False
+            try:
+                process.stdin.close()
+                process.stdout.close()
+            finally:
+                self.reader.join(timeout=2)
+                self.process = None
+                self.trace.emit('sandbox_destroyed', generation=self.generation,
+                                process_exited=process.poll() is not None,
+                                workspace_removed=bool(confirmed),
+                                container_absent=container_absent)
+        if not container_absent:
+            raise GateError('Cannot verify Docker sandbox removal')
         if not confirmed:
             raise GateError('Worker did not confirm disposable workspace destruction')
 

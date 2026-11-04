@@ -2,17 +2,18 @@
     "project":  "BlastLab",
     "event":  "Vultr Agent Rush",
     "updated_at":  "2026-11-04",
-    "phase":  "TECHNICAL_DERISK",
+    "phase":  "BUILD_VERTICAL_SLICE",
     "specialist":  "engineering",
-    "exit_proof":  "Real tool-using Vultr-inference agent in disposable Docker container on verified Vultr VM, with attack/denial/destruction/resume trace",
-    "gate":  "LIVE_INFERENCE_TOOL_CALL_VERIFIED__VM_DOCKER_AND_END_TO_END_AGENT_PENDING",
+    "exit_proof":  "Real public control-room UX with live Vultr agent-run trace, secure backend API, distinctive brand, recorded demo and accessible judge-facing evidence",
+    "gate":  "TECHNICAL_DERISK_PASSED__JUDGE_PRODUCT_AND_PUBLIC_DEMO_PENDING",
     "evidence":  {
                      "local_tests":  {
-                                         "status":  "OBSERVED",
-                                         "total":  63,
                                          "passed":  60,
+                                         "elapsed_seconds":  141.446,
+                                         "total":  63,
+                                         "failures":  0,
                                          "skipped":  3,
-                                         "failures":  0
+                                         "status":  "VERIFIED"
                                      },
                      "browser_local":  {
                                            "status":  "OBSERVED_WITH_SIMULATED_PLANNER",
@@ -23,18 +24,34 @@
                                            "reset_verified":  true
                                        },
                      "live_vultr":  {
-                                        "status":  "OBSERVED_TOOL_CALL_SMOKE_ONLY"
+                                        "trace_sha256":  "0050fe1323a76be3d0cbf636a555fc65776e53be2a86924c57859db884234eef",
+                                        "response_count":  3,
+                                        "browser_reads":  2,
+                                        "model":  "glm-5.3",
+                                        "mission_cents":  7200,
+                                        "status":  "VERIFIED_ON_VULTR_VM",
+                                        "denied_model_actions":  0
                                     },
                      "docker_on_vm":  {
-                                          "status":  "UNPROVEN"
+                                          "reset_verified":  true,
+                                          "control_plane_verified":  true,
+                                          "docker_test_passed":  true,
+                                          "region":  "ams",
+                                          "instance_id":  "2db5a222-bd1f-42ea-acba-cc09a247a40c",
+                                          "plan":  "vc2-2c-4gb",
+                                          "adversarial_fixture_denials":  4,
+                                          "status":  "VERIFIED",
+                                          "scripted_trace_sha256":  "05da3c367af2a15dfafcb93afd0a5511a10d2c26c4055717908fb4b71680d518"
                                       },
                      "public_demo":  {
                                          "status":  "NOT_STARTED"
                                      }
                  },
     "blockers":  [
-                     "Local browser worker timeout in latest full agent test",
-                     "Vultr VM access and Docker setup missing"
+                     "No public product UI/API or URL",
+                     "No recorded demo or published proof",
+                     "VM full optional-host test suite needs Node/Playwright/JS local fixture; targeted VM tests pass",
+                     "Need final product name/brand and Product Hygiene/judge QA"
                  ],
-    "next_action":  "Debug local browser sandbox timeout, rerun full Vultr model-driven mission; provision Vultr Linux VM and test Docker containment with live model, capture trace."
+    "next_action":  "Build judge-facing BlastLab control-room UI and hardened API consuming real run evidence; publish an accessible deployment, record honest live demo and attack fixture distinction; monitor costs on active Vultr VM."
 }
