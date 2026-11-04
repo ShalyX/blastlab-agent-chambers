@@ -18,3 +18,6 @@ Updated: 2026-11-04. All claims refer to the Windows development host, not a Vul
 Generated raw traces are local artifacts, not included in public Git by default. Do not turn synthetic proof into a live claim.
 
 | Active Serverless Inference subscription | OBSERVED on 2026-11-04 | Authenticated Vultr Console Inference list: "Hack", active, charges $0.00 | Key/model not yet configured; no live request proof |
+
+| Live Vultr model authentication and tool call | OBSERVED (2026-11-04) | `artifacts/vultr-inference-smoke.json`: HTTP 200, `glm-5.3` requested/returned, `ping` function called, 197 tokens | Minimal API call only; not a full browser mission; evidence is local and ignored by Git |
+| Full Vultr model-driven browser-agent mission | BLOCKED / FAILED LOCAL ATTEMPT | `artifacts/agent-run-89vxler_/result.json`: local browser worker timed out before inference; 0 browser reads, 0 model responses | This does not invalidate live API authentication; browser sandbox needs debug; Docker/VM not configured |

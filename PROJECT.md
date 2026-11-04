@@ -28,3 +28,6 @@ Next action: user provisions/authorizes Vultr inference subscription and VM, the
 - Authenticated Vultr browser page shows active Serverless Inference subscription labelled "Hack" with $0.00 charges. This is OBSERVED SUBSCRIPTION STATUS only, not evidence of API inference.
 - Local inference key and model have not yet been configured; VM and Docker cloud runtime remain unverified.
 - Next action: retrieve subscription API key securely from Vultr manage page; select exact enabled tool-capable model; configure ignored .env.vultr and run doctor, then provision VM/Docker and live model test.
+
+## 2026-11-04 inference configuration update
+Private, gitignored `.env.vultr` is now configured with Hack subscription key and `glm-5.3`; doctor reported inference_ready=true. A real API request to Vultr returned HTTP 200 with exact model `glm-5.3` and a `ping` function tool call (197 tokens); key not logged. Full local model-driven browser mission attempted but failed due to a local browser sandbox timeout before reaching inference. Next: repair worker startup, then run complete real-model mission; VM/Docker proof still pending.

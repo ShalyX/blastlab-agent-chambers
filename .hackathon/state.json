@@ -5,7 +5,7 @@
     "phase":  "TECHNICAL_DERISK",
     "specialist":  "engineering",
     "exit_proof":  "Real tool-using Vultr-inference agent in disposable Docker container on verified Vultr VM, with attack/denial/destruction/resume trace",
-    "gate":  "PARTIALLY_UNBLOCKED_INFERENCE_SUBSCRIPTION_ACTIVE",
+    "gate":  "LIVE_INFERENCE_TOOL_CALL_VERIFIED__VM_DOCKER_AND_END_TO_END_AGENT_PENDING",
     "evidence":  {
                      "local_tests":  {
                                          "status":  "OBSERVED",
@@ -23,7 +23,7 @@
                                            "reset_verified":  true
                                        },
                      "live_vultr":  {
-                                        "status":  "UNPROVEN"
+                                        "status":  "OBSERVED_TOOL_CALL_SMOKE_ONLY"
                                     },
                      "docker_on_vm":  {
                                           "status":  "UNPROVEN"
@@ -33,10 +33,8 @@
                                      }
                  },
     "blockers":  [
-                     "VULTR_INFERENCE_API_KEY missing",
-                     "VULTR_INFERENCE_MODEL missing",
-                     "Vultr VM access/provenance missing",
-                     "Docker sandbox runtime not yet exercised on Vultr VM"
+                     "Local browser worker timeout in latest full agent test",
+                     "Vultr VM access and Docker setup missing"
                  ],
-    "next_action":  "Retrieve inference API key securely on PC (not in chat), choose exact enabled tool-capable model, configure ignored .env.vultr, then run doctor and test live inference; provision VM/Docker for cloud sandbox proof."
+    "next_action":  "Debug local browser sandbox timeout, rerun full Vultr model-driven mission; provision Vultr Linux VM and test Docker containment with live model, capture trace."
 }
