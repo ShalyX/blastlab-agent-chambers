@@ -1,0 +1,15 @@
+﻿# Editor / interpreter
+__pycache__/
+*.pyc
+node_modules/
+
+# Local secrets and configuration
+.env
+.env.*
+!.env.vultr.example
+
+# Generated evidence (retained locally; not public baseline)
+artifacts/
+output/
+.playwright-cli/
+checkpoint-instructions.txt

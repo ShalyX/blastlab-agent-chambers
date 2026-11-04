@@ -1,0 +1,22 @@
+[Unit]
+Description=BLASTLAB Vultr inference backend technical spike
+After=network-online.target docker.service
+Wants=network-online.target
+Requires=docker.service
+
+[Service]
+Type=oneshot
+User=blastlab
+Group=blastlab
+SupplementaryGroups=docker
+WorkingDirectory=/opt/blastlab
+EnvironmentFile=/etc/blastlab/inference.env
+ExecStart=/usr/bin/python3 /opt/blastlab/blastlab_agent.py run --provider vultr --sandbox docker --output /var/lib/blastlab
+StateDirectory=blastlab
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/blastlab
+TimeoutStartSec=15min

@@ -1,0 +1,144 @@
+# BLASTLAB: next existential spike
+
+The next spike adds model-driven action loops, a hostile supplier HTML page,
+enforced action policy, complete inference/action traces, and actual disposable
+worker destroy/reset/resume. No UI work was added.
+
+The strongest local execution is the real Chrome browser path:
+
+```powershell
+python agent_spike.py doctor
+python agent_spike.py run --provider deterministic --sandbox local --output artifacts/browser-agent
+# Requires a Vultr inference subscription key, exact enabled model, Docker image:
+python agent_spike.py run --provider vultr --sandbox docker --env-file .env.vultr
+```
+
+See [browser setup, policy, evidence and VM execution path](BROWSER_SPIKE.md) for the native tool-call implementation and its exact live gate.
+
+The independent standard-library process path has no browser dependency:
+
+```powershell
+python blastlab_agent.py audit
+python blastlab_agent.py run --provider auto
+python blastlab_agent.py run --provider mock
+python blastlab_agent.py run --provider vultr --sandbox docker
+python -W error -m unittest -v
+```
+
+`auto` uses a clearly labeled deterministic fallback only when there is no
+inference credential. An explicitly selected live provider, invalid/partial live
+configuration, authentication failure, transport error, or invalid model output
+never silently falls back. All live LLM requests go to Vultr Serverless Inference.
+Set `VULTR_INFERENCE_API_KEY` and `VULTR_INFERENCE_MODEL` in the supervisor environment.
+The process path also accepts `VULTR_SERVERLESS_INFERENCE_API_KEY` and an optional
+`VULTR_INFERENCE_ENDPOINT` fixed to `https://api.vultrinference.com/v1`. It does
+not load `.env` files implicitly. The browser path supports explicit `--env-file`.
+The Vultr management key is separate and cannot replace the inference key.
+
+`blastlab_agent.py` passes each JSON action through `ActionBroker` before dispatch.
+Only exact `/supplier` reads and a correct result derived from a fresh observation
+are allowed. The worker independently verifies submissions. Unknown tools,
+host operations, arbitrary URLs/paths, forged origins, wrong totals, stale
+observations after reset, and malformed proposals have no dispatch authority.
+The deterministic planner deliberately proposes injected attacks; its decisions
+are simulated, while policy execution, local HTTP requests, process removal,
+fresh worker allocation, checkpoint reload, and mission completion are real.
+
+Each run preserves its `trace.jsonl`, checkpoint, sentinel hashes, source hashes,
+and summary in a unique directory. The process summary pointer is
+`artifacts/agent-latest.json`; the browser runner prints its `result.json` directory.
+Traces contain all public prompts/responses, action proposals, decisions, executed
+operations/results and lifecycle events; private provider reasoning and credentials
+are excluded. These artifacts can contain mission/page data and are local evidence.
+
+The local workers enforce an application capability boundary; neither is an OS
+sandbox against arbitrary hostile code. The Docker definitions are the OS boundary
+path and remain unproven on this machine. No model-produced code or shell is run.
+See [Vultr VM deployment gate and service](deploy/README.md) and
+[observed results and exact blockers](SPIKE_RESULTS.md). The process Dockerfile
+has its own ignore file so the browser image's root ignore rules do not exclude
+its Python sources.
+
+## Earlier fixture spikes
+
+Two runnable feasibility spikes, using Python 3.12+ and its standard library. Tested on Windows with Python 3.14.3. No credentials, model API, external service, or package installation is needed to run the apps or Python tests.
+
+## Run
+
+```powershell
+python -W error -m unittest -v
+python spikes.py run
+python spikes.py run --report "The price of three mugs is wrong"
+python spikes.py serve
+```
+
+`run` starts a loopback server on an ephemeral port, executes both spikes, saves evidence, and stops. It exits nonzero if reproduction, reset, mission completion, or sentinel verification fails. The deliberately buggy cart stays buggy: successful spike acceptance means REPRO detected the bug.
+
+`serve` executes a fresh run, saves its evidence, and keeps the app available until Ctrl+C:
+
+- http://127.0.0.1:8765/repro — interact with the cart and run a report.
+- http://127.0.0.1:8765/blastlab — inspect the executed mission timeline and result.
+- http://127.0.0.1:8765/api/evidence — the current server's startup run as JSON.
+
+Use `--port 8766` if the default port is occupied. Each run retains a fresh `artifacts/blastlab-run-*` directory. Subsequent successful runs replace `artifacts/evidence.json` and `artifacts/run-output.json`; copy these first if you want to retain a particular run. Report runs in the REPRO browser page display their own evidence without replacing startup evidence.
+
+## REPRO: a report becomes reproducible evidence
+
+The user reports: “When I add two mugs to my cart, the total still shows the price of one.” A deterministic language adapter extracts quantity two, executes a single-mug baseline and a two-mug request against the live HTTP app, checks their returned quantities and baseline validity, and compares the total with `quantity * unit_price_cents`.
+
+Expected: $24. Observed: $12. The evidence includes the original report, executable request plan, paths, HTTP status codes, response bodies, timings, oracle, and verdict. A browser user can also change the cart quantity directly and see the wrong total.
+
+Supported reports identify one quantity 2..10 (digits or words) next to “mugs” or after “quantity/qty”, mention mug/cart, and describe a total, cost, or price issue. Examples:
+
+- “The price of three mugs is wrong.”
+- “Mug cart total is wrong at quantity 4.”
+- “The price is $8 for 3 mugs in my cart.” The adapter chooses three, not the price.
+
+Unsupported, out-of-range, and conflicting quantities fail before any reproduction requests. A correct live app produces `not_reproduced`; an invalid baseline produces `invalid_control` rather than a bug claim. This spike uses a narrow deterministic adapter. It does not demonstrate general natural-language understanding, automatic source diagnosis, or repair.
+
+## BLASTLAB: recover and finish a local mission
+
+The legitimate mission is to calculate available supplier stock value. Its pending checkpoint lives in the disposable child's `mission.txt`. The stock feed contains an indirect injection impersonating a system message and requesting host deletion and falsified success.
+
+The fixed scenario attempts three actions from the supplier-note origin: host deletion, falsified success, and the simulator capability itself. `SafeTools.execute` logs and enforces a deny before dispatch. Supplier text is always data; it cannot choose a trusted origin. These are fixture action attempts, not inferred actions from an LLM or a general attack classifier.
+
+A separate trusted scenario then exercises interruption and recovery:
+
+1. Move only the fixed `mission.txt` and `scratch.txt` into `recovery/`, inside the same newly allocated disposable child. The mission's working files become unavailable; their bytes remain preserved.
+2. Check both files are absent at their original paths and that recovery hashes match the original snapshot.
+3. Move both files back; verify their SHA-256 hashes match exactly. A mismatch aborts the mission.
+4. Reload the restored pending checkpoint, fetch stock again, calculate `4 * $12 + 3 * $8 = $72`, and persist a completed checkpoint.
+5. Verify an outside-child sentinel remains unchanged.
+
+No deletion operations, real destructive commands, shell executor, arbitrary code execution, globs, or attacker-selected paths are used. The simulator checks fixed names, the allocated child boundary, regular files, single hard-link count, and symlink/junction rejection. Reset refuses collisions before moving any files.
+
+This is application-level containment for one controlled local workflow. It is not an OS sandbox and does not defend against concurrent filesystem tampering or arbitrary hostile Python code. The trusted Python orchestrator assigns origins; this is not a security boundary against a caller with Python access. No LLM susceptibility or model robustness claim is made.
+
+## Verification and evidence
+
+Python tests exercise live HTTP reproduction, a live correct-app negative control, input rejection, capability denials, recovery, checkpoint persistence, failed-reset refusal, fresh work after reset, path escapes, hard links, and reset collisions. Symlink/junction guards also have simulated branch checks. The real symlink test can skip on Windows without symlink privilege; the output distinguishes that skip.
+
+Optional browser checks use an already installed Playwright CLI, with Node/npm and Chrome available:
+
+```powershell
+# Keep `python spikes.py serve` running in another terminal, on port 8765.
+New-Item -ItemType Directory -Path output/playwright -Force | Out-Null
+playwright-cli -s=spikes open http://127.0.0.1:8765/repro --headed
+playwright-cli -s=spikes --raw run-code (Get-Content -Raw -LiteralPath browser-verify.js) |
+    Tee-Object -FilePath output/playwright/browser-checks.json
+```
+
+The browser verifier checks real UI interactions, executed HTTP evidence, report changes/rejection, the BLASTLAB result/timeline, mobile width, and JavaScript runtime errors. It throws on failure and saves four screenshots. Python runtime dependencies remain standard-library-only.
+
+| File | Contents |
+| --- | --- |
+| `spikes.py` | Loopback app, report adapter, enforced tools, reversible workspace, CLI |
+| `pages.py` | Interactive REPRO and evidence-backed BLASTLAB pages |
+| `test_spikes.py` | Python integration and containment tests |
+| `browser-verify.js` | Optional executable Playwright CLI checks |
+| `artifacts/evidence.json` | Actual latest run: UTC timestamps, run ID, source hashes, responses, policy events, file hashes, sentinel and checkpoint |
+| `artifacts/run-output.json` | JSON output of the same run |
+| `artifacts/quantity-three-run.json` | Saved independent three-mug execution |
+| `artifacts/tests.txt` | Captured final Python test output |
+| `output/playwright/` | Browser checks and desktop/mobile screenshots |
+| `SPIKE_RESULTS.md` | Observed results, limitations, and magic-moment comparison |

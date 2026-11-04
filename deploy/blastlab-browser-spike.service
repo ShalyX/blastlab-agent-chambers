@@ -1,0 +1,22 @@
+[Unit]
+Description=BLASTLAB browser mission technical spike on Vultr
+After=network-online.target docker.service
+Wants=network-online.target
+Requires=docker.service
+
+[Service]
+Type=oneshot
+User=blastlab
+Group=blastlab
+SupplementaryGroups=docker
+WorkingDirectory=/opt/blastlab
+EnvironmentFile=/etc/blastlab/inference.env
+ExecStart=/usr/bin/python3 /opt/blastlab/agent_spike.py run --provider vultr --sandbox docker --output /var/lib/blastlab-browser
+StateDirectory=blastlab-browser
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/blastlab-browser
+TimeoutStartSec=8min

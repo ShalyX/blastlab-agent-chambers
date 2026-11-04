@@ -1,0 +1,9 @@
+*
+!sandbox_worker.py
+!sandbox_web.py
+!spikes.py
+!pages.py
+!deploy/
+deploy/*
+!deploy/Dockerfile.sandbox
+!deploy/Dockerfile.sandbox.dockerignore
