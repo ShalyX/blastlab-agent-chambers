@@ -10,3 +10,5 @@ Type: Space Grotesk display, IBM Plex Sans UI, IBM Plex Mono timestamps/provenan
 Motion: playhead only for real event progression, orange interruption on actual kill, mint state for verified completion. Reduced motion supported.
 Asset and iconography: custom SVG/logo, real trace event information, plain diagrams. No stock art/fake streamer/fake security metrics.
 Status: coherent working brand direction for product build. Name/domain/trademark not formally cleared.
+
+2026-11-05 collision note: Existing Blast Lab software/hardware firm at https://blastlab.co (see Dealroom listing). Name remains WORKING / NOT CLEARED. This is a possible confusion signal, not a trademark/legal ruling. Revisit before NAME_LOCK.

@@ -41,3 +41,6 @@ The initial account block was solved by redeeming the `$200` hackathon credit vi
 - Official build and product QA details: PRODUCT.md, BRAND.md, DESIGN.md, HYGIENE.md, SCORECARD.md, web/VISUAL_QA.md.
 - OPEN FOR SUBMISSION: public GitHub remote/repository missing; final judge demo video and receipt still missing. Current SSLip domain works but is not permanent branded domain. Vultr VM billable while running.
 - NEXT ACTION: polish demo script, record real browser/UI + model/fixture distinction, publish public source repository after secret audit, submit before verified November 8 cutoff.
+
+## 2026-11-05 - Product drift detected (audit only)
+Operator Product Critic verdict MODIFY; the original agent crash-testing facility architecture, including proposed Chambers, was narrowed to one fixed supplier replay in PRODUCT.md. Five Chambers were suggested, not individually locked release requirements. See PRODUCT_DRIFT_AUDIT.md for 20 findings, exact source files and an evidence-preserving repair sequence. Technical Vultr/GLM/Docker proof remains valid for its narrow scenario; the full product/hygiene/demo gates are reopened. No runtime, frontend or deployed infrastructure was changed during this audit. Next action: reconcile/lock the real Web Chamber user journey before further design/demo work.

@@ -15,7 +15,7 @@ Updated: 2026-11-04. The labels LIVE MODEL and SCRIPTED ATTACK are deliberately 
 | Trace integrity and secret exclusion | VERIFIED | `artifacts/vultr-vm-20261104/proof-audit.json`: SHA-256 chained logs valid for both runs, no inference key in traces; no worker-inherited secret variable names, 2 confirmed container removals each | Evidence files remain local and gitignored; judge-facing publication pending |
 | Inference key protected on VM | OBSERVED | `/etc/blastlab/inference.env` is mode `0600` owned by root, inference settings only; management key excluded; containers receive no key | VM root controller is privileged; requires operational hardening before production |
 | Vulnerable model response actually blocked | NOT DEMONSTRATED BY LIVE LLM | Model did not request prohibited tool actions; see scripted attack for policy denial | Red-team coverage needs broader real-model attack cases |
-| Public product UI and shareable URL | NOT STARTED | No published judge-facing UX exists | Submission gate remains open |
+| Public product UI and shareable URL | VERIFIED NOV 4 (supersedes initial gap) | Later `2026-11-04: deployed product` section below, HTTPS route checks | Working product is still narrower than original Chamber facility vision |
 | Final demo video and judge-ready proof package | NOT STARTED | `DEMO.md` is a storyboard; raw traces exist locally | Must record actual demo and publish selected evidence |
 
 ## Immutable run identifiers

@@ -1,4 +1,6 @@
 # BlastLab | Judge Scorecard
+> **AUDIT WARNING (2026-11-05):** The 21/24 score below was an internal *visual-only* rubric, not an official judging score or product-completeness score. PRODUCT_REVIEW is reopened because missing Chambers, user-run workflow, assessment, remediation and independent export verification materially affect judged value.
+
 Updated November 4, 2026. Exact official criterion weights: UNKNOWN, verify participant dashboard.
 
 TECH: Observed real Vultr VM, GLM-5.3 Serverless Inference, Docker Chromium, 2 clean worker generations, SHA-256 hash chains. Live model proposed 0 forbidden calls; separate scripted fixture exercised 4 denied actions. Scope is controlled supplier page.

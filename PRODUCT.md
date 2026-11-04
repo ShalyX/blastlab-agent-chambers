@@ -1,4 +1,6 @@
 # PRODUCT | BlastLab v0.1
+> **PRODUCT LOCK UNDER REVIEW (2026-11-05):** This document describes the existing fixed-run viewer implementation, not an accepted replacement for the original multi-Chamber crash-testing-facility thesis. See PRODUCT_DRIFT_AUDIT.md before adding features or claiming the original scope was delivered.
+
 Target user: AI engineers, agent platform operators and security reviewers who must verify tool-using browser agents against untrusted content.
 Job: observe the exact malicious input, model action proposals, capability policy, worker isolation, teardown/restart, and evidence-backed mission result.
 Promise: Crash-test the blast radius. Prove the boundary held.
