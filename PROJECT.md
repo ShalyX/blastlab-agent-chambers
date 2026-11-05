@@ -54,3 +54,10 @@ The initial account block was solved by redeeming the `$200` hackathon credit vi
 
 ## 2026-11-05 - Product drift detected (audit only)
 Operator Product Critic verdict MODIFY; the original agent crash-testing facility architecture, including proposed Chambers, was narrowed to one fixed supplier replay in PRODUCT.md. Five Chambers were suggested, not individually locked release requirements. See PRODUCT_DRIFT_AUDIT.md for 20 findings, exact source files and an evidence-preserving repair sequence. Technical Vultr/GLM/Docker proof remains valid for its narrow scenario; the full product/hygiene/demo gates are reopened. No runtime, frontend or deployed infrastructure was changed during this audit. Next action: reconcile/lock the real Web Chamber user journey before further design/demo work.
+
+## 2026-11-05: real four-lens Judge Simulation ? FAILED
+- Evidence: verified live public Chrome routes, published organizer rubric, existing demo and source, read-only public API, independent export tamper tests. Full report: JUDGE_SIMULATION_2026-11-05.md.
+- Scores are internal /10 with official weights UNKNOWN: technology 7, presentation 7, business value 4, originality 6; unweighted triage mean 6.0. NOT official judging results.
+- P0 proof: public chain verifies event list but accepts tampered summary, verdict, mission or source digest. P0 truth: landing says "INSTRUCTION OVERRIDE DETECTED IN PAGE" with no independent detection event. P0 demo: genuine inference behind owner token/late, while scripted fixture dominates.
+- Product risk: fixed supplier mission, no customer agent onboarding or validated business/CI workflow. Sponsor stack genuine. Competitor public claims describe broader tasks/probes (not independently tested).
+- JUDGE_SIMULATION FAIL; SUBMISSION HOLD. Route to Proof Engineer and Product Critic. Do NOT enter LabLab until gate re-run and passes.

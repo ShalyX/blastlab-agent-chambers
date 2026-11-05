@@ -1,3 +1,22 @@
+# Judge Simulation ? November 5, 2026
+
+**Result: FAIL / SUBMISSION HOLD.** Actual first full Judge Simulator run; see [JUDGE_SIMULATION_2026-11-05.md](JUDGE_SIMULATION_2026-11-05.md).
+
+Official criteria (from LabLab): Application of Technology, Presentation, Business Value, Originality. **Official weights unknown.** Internal 0?10 scores are estimates, not official scoring:
+
+| Criterion | Internal /10 | Core deduction |
+|---|---:|---|
+| Technology | 7 | Public fixture is scripted; live model only archived/owner; sanitized proof does not bind report metadata |
+| Presentation | 7 | Good UI/film, but real Vultr model proof late, misleading ?detected? homepage copy |
+| Business Value | 4 | Fixed supplier demo, no user-agent onboarding/CI, no buyer validation |
+| Originality | 6 | Strong Chamber aesthetic; competitive entries describe broader real probes and useful live tasks |
+
+Simple average **6.0/10 for internal triage only**; do not infer official equal weights. Four-lens attack and 30-second viewer recorded in complete report.
+
+**P0 corrections:** complete report-integrity binding/tamper verification; remove unsupported detector/automatic-response copy; move genuine model evidence into first 30 seconds. **P0/P1 product:** give a developer a repeat use case beyond the two hardcoded arithmetic missions within approved thesis. **P1:** business use case/pricing, deck render QA, name decision. Submission stays blocked until re-simulation passes.
+
+---
+
 # BlastLab — Chamber release audit | 2026-11-05
 
 **Judge-facing capabilities, Nov 5:**
