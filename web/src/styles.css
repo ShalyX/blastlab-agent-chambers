@@ -1,6 +1,7 @@
 @import './landing.css';
 @import './control.css';
 @import './chambers.css';
+@import './agent-lab.css';
 :root{font-family:'DM Sans',Arial,sans-serif;color:#ecefe9;background:#101416;font-synthesis:none;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;--bg:#101416;--surface:#181e20;--surface2:#222a2c;--line:#30393b;--text:#f3f4ee;--muted:#9faeaa;--mint:#acf0d4;--orange:#ff754a;--paper:#f3f0e8;--ink:#182124}
 *,*::before,*::after{box-sizing:border-box}
 html{scroll-behavior:smooth}

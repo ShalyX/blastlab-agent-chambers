@@ -1,0 +1,37 @@
+{
+  "version": "operator-gate-v1",
+  "product_lock_revision": 3,
+  "current_approved_thesis": "Users connect their own AI agents and BlastLab adversarially tests, evaluates, remediates and supports retests; internal supplier scenario is demo-only.",
+  "exit_proofs": {
+    "PRODUCT_LOCK": {
+      "status": "OPEN",
+      "proof": ["PRODUCT.md","OPERATOR_SEQUENCE.md"],
+      "reason": "P0 restored; technical connector probe underway. Exit requires confirmed baseline and honest scope reconciliation."
+    },
+    "NAME_LOCK": {
+      "status": "OPEN",
+      "proof": ["BRAND.md"],
+      "reason": "Working BlastLab name has a collision candidate; no name-lock certification."
+    },
+    "JUDGE_SIMULATION": {
+      "status": "FAIL",
+      "proof": ["JUDGE_SIMULATION_2026-11-05.md"],
+      "reason": "Prior v2 judge fail; invalid for current product v3."
+    }
+  },
+  "judge_simulation_v3": "NOT_RUN",
+  "v3_locked_p0": {
+    "P0-01":"IN_PROGRESS",
+    "P0-02":"IN_PROGRESS",
+    "P0-03":"IN_PROGRESS",
+    "P0-04":"PARTIAL",
+    "P0-05":"IN_PROGRESS",
+    "P0-06":"IN_PROGRESS",
+    "P0-07":"PARTIAL",
+    "P0-08":"IN_PROGRESS",
+    "P0-09":"PARTIAL",
+    "P0-10":"PARTIAL",
+    "P0-11":"PARTIAL",
+    "P0-12":"IN_PROGRESS"
+  }
+}

@@ -1,5 +1,5 @@
 export type Mode = 'live' | 'scripted';
-export type Section = 'chambers' | 'setup' | 'control' | 'results' | 'evidence' | 'architecture';
+export type Section = 'agent' | 'campaign' | 'chambers' | 'setup' | 'control' | 'results' | 'evidence' | 'architecture';
 export type RunEvent = {
   seq: number;
   at: string;

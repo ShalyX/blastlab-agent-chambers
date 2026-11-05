@@ -2,10 +2,10 @@
   "project": "BlastLab",
   "event": "Vultr Agent Rush",
   "updated_at": "2026-11-05",
-  "phase": "JUDGE_SIMULATION",
-  "specialist": "judge-simulator",
+  "phase": "PRODUCT_LOCK",
+  "specialist": "product-critic",
   "exit_proof": "Reconciled chamber-based crash-test facility thesis; one user-complete Web Chamber from mission/scenario selection through genuine Vultr execution to evidence-grounded assessment and recommendations. No false claims that other Chambers are live.",
-  "gate": "JUDGE_SIMULATION_FAILED__SUBMISSION_HOLD",
+  "gate": "PRODUCT_SCOPE_RESTORED__P0_BYOA_UNPROVEN",
   "evidence": {
     "local_tests": {
       "status": "VERIFIED",
@@ -59,14 +59,16 @@
     }
   },
   "blockers": [
-    "P0 proof integrity: public chain verifies events but does not bind outcome-critical report fields",
-    "P0 honest copy: detection claim not proven; scheduled reset is not breach-triggered",
-    "P0 presentation: real model evidence late and no public live run access",
-    "P0 product: customer agent/repeated real-world developer value unproven",
-    "P1 buyer economics/pricing and competitor differentiation",
-    "LabLab actual submission receipt absent (intentionally on hold)"
+    "P0 user-owned agent connection/invocation missing",
+    "P0 active multi-attack campaign against external agent missing",
+    "P0 actual evaluated agent response + permission violation missing",
+    "P0 remediation/rerun after mitigation missing",
+    "P0 existing supplier test must be labeled DEMO, not product",
+    "P0 public cryptographic verification does not bind report outcomes",
+    "Working name BlastLab unresolved collision; NAME_LOCK must be checked",
+    "Judge Simulation FAIL; submission on HOLD"
   ],
-  "next_action": "Proof Engine: bind complete sanitized run report fields to public manifest and tamper tests, correct detection claims; Product Critic: strengthen real developer use case; then Demo Director and repeat full four-lens Judge Simulation before any submission.",
+  "next_action": "Dependency attack/technical spike: build standard agent connector and prove one genuine independently-authored agent against multiple injected payloads. Do not advance Product Review, Demo or Submission without every prerequisite phase exit proof.",
   "drift_audit": {
     "date": "2026-11-05",
     "status": "VERIFIED_GAPS__NO_PRODUCT_FIXES_APPLIED",
@@ -117,5 +119,40 @@
       "Fixed supplier mission lacks customer-agent/repeat business value"
     ],
     "submission_hold": true
+  },
+  "scope_revision": 3,
+  "phase_integrity": {
+    "baseline": "User explicitly reaffirmed bring-your-own-agent red-teaming product on Nov 5; internal supplier scene is DEMO only",
+    "earliest_unmet": "NAME_LOCK (working BlastLab brand collision unreviewed); EVIDENCE_PLAN/DEPENDENCY_ATTACK for BYOA remain open",
+    "product_review": "FAIL ? earlier v2 reduced product to fixed inventory harness",
+    "build_loop": "NOT STARTED for BYOA; previous internal fixture work classified DEMO_VERIFIED",
+    "downstream_invalidated": [
+      "DEMO_ARCHITECTURE",
+      "EVIDENCE_PLAN",
+      "DEPENDENCY_ATTACK",
+      "TECHNICAL_DERISK",
+      "BUILD_VERTICAL_SLICE",
+      "PRODUCT_REVIEW",
+      "BRAND_KIT",
+      "ART_DIRECTION",
+      "REFERENCE_BOARD",
+      "VISUAL_ASSET_STRATEGY",
+      "MOTION_STORYBOARD",
+      "DESIGN_LOCK",
+      "DESIGN_ENGINEERING",
+      "VISUAL_QA",
+      "BUILD_LOOP",
+      "PROOF_ENGINE",
+      "RED_TEAM",
+      "PRODUCT_HYGIENE",
+      "DEMO_PRODUCTION",
+      "DEMO_QA",
+      "PITCH",
+      "JUDGE_SIMULATION",
+      "PRIORITIZED_FIXES",
+      "FEATURE_FREEZE",
+      "SUBMISSION_AUDIT"
+    ],
+    "skipping_prohibited": true
   }
 }

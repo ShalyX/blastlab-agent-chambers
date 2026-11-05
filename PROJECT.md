@@ -1,3 +1,17 @@
+# BlastLab — CURRENT PRODUCT CHECKPOINT | 2026-11-05
+
+**Controlling lock:** `PRODUCT.md` v3; bring your OWN agent -> configure task / forbidden actions -> launch independent adversarial campaign -> observe real runner-reported behavior -> evidence-grounded recommendations -> rerun and compare. **The supplier Web Chamber is an internal technical DEMO, not the customer product.** All older checkpoint language below is historical, not the current lock.
+
+**Implementation now present:** outbound Python BYOA connector, bounded six-case session API, isolated example vulnerable/resilient agents, agent onboarding UI, per-case report/export/mitigations, and new client-side baseline report comparison. Frontend build PASS. Full local Python suite PASS: 141 tests, 3 skipped. The before/after browser interaction is implemented, not independently browser-verified yet.
+
+**Open integrity/proof gates:** actual independent external user agent on public Vultr-hosted instance; screenshot/video of create -> agent response -> report -> fix -> comparable rerun; baseline import integrity is local runner-reported evidence, not source attestation; broader Chamber execution not implemented for external agents; no judge-ready submission approval. Operator phases must remain evidence-gated.
+
+**Next action:** run public six-case BYOA campaign from independently owned real-agent adapter; capture verified before/after, inspect browser results, then reconfirm rubric fit and full phase sequence. Preserve the $24/$72 supplier test solely as proof of internal Vultr engine.
+
+---
+
+## HISTORICAL CHAMBER-FIRST CHECKPOINT — superseded by PRODUCT.md v3
+
 # BlastLab — Chamber release audit | 2026-11-05
 
 **Status:** Chamber-first Web product deployed on Vultr (https://blastlab.45-77-138-147.sslip.io/app). Product route: Chamber Library → configure goal/attack → run → Control Room → results/remediation → persistent archive/compare. Four other Chambers are marked not implemented. Public use is bounded scripted Docker testing; owner-authorized genuine GLM-5.3 via Vultr Serverless Inference. The original supervisor/containment engine and UI remain preserved.
@@ -61,3 +75,6 @@ Operator Product Critic verdict MODIFY; the original agent crash-testing facilit
 - P0 proof: public chain verifies event list but accepts tampered summary, verdict, mission or source digest. P0 truth: landing says "INSTRUCTION OVERRIDE DETECTED IN PAGE" with no independent detection event. P0 demo: genuine inference behind owner token/late, while scripted fixture dominates.
 - Product risk: fixed supplier mission, no customer agent onboarding or validated business/CI workflow. Sponsor stack genuine. Competitor public claims describe broader tasks/probes (not independently tested).
 - JUDGE_SIMULATION FAIL; SUBMISSION HOLD. Route to Proof Engineer and Product Critic. Do NOT enter LabLab until gate re-run and passes.
+
+## 2026-11-05 ? user-directed product lock restoration (v3)
+User explicitly rejected supplier-fixture-centred product. Locked north star: bring your OWN agent into BlastLab, run genuine multi-attack campaign, record its actual actions, provide evidence-based mitigation and rerun. Internal supplier case is DEMO ONLY. Original v2 UI and Vultr technical evidence preserved as supporting mechanism, not product-completeness proof. Operator reset to PRODUCT_LOCK, sequence debt recorded; Judge Simulation and submission closed until revalidation. See PRODUCT.md.

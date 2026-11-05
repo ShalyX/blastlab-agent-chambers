@@ -8,6 +8,7 @@ import {
 } from 'lucide-react';
 import type { Mode, RunData, RunEvent, Section } from './types';
 import {ChamberLibrary, WebChamberSetup, RunResults} from './ChamberExperience';
+import { AgentLabConnect, AgentLabCampaign } from './AgentLabExperience';
 
 const VALUE = (cents: number) => '$' + ((cents || 0) / 100).toFixed(2);
 const short = (s?: string | null, n=11) => (s ? s.slice(0, n) : '—');
@@ -88,7 +89,7 @@ function Landing() {
         <a href="#proof" onClick={()=>setMenu(false)}>Verified proof</a>
         <a href="#infrastructure" onClick={()=>setMenu(false)}>Architecture</a>
       </nav>
-      <a className="nav-launch" href="/app">EXPLORE CHAMBERS <ArrowUpRight size={17}/></a>
+      <a className="nav-launch" href="/app">CONNECT YOUR AGENT <ArrowUpRight size={17}/></a>
       <button className="mobile-menu" aria-label="Toggle navigation" onClick={()=>setMenu(!menu)}><Menu size={22}/></button>
     </header>
     <main>
@@ -96,16 +97,16 @@ function Landing() {
         <div className="landing-grid" aria-hidden="true"/>
         <div className="hero-left">
           <div className="eyebrow"><span className="signal-bullet"/> SYSTEM 01 — AGENT CONTAINMENT</div>
-          <h1>Your agent read<br/><em>the attack.</em><br/>The boundary held<span className="hero-period">.</span></h1>
-          <p className="hero-copy">A real crash-test environment for agents navigating hostile content. Watch what they attempt, contain what they cannot do, and prove recovery with evidence.</p>
+          <h1>Bring your agent.<br/><em>We try to break it.</em></h1>
+          <p className="hero-copy">Connect an agent you built. BlastLab throws adversarial prompts and poisoned content at it, observes its actual decisions and helps you repair the weaknesses it exposes.</p>
           <div className="hero-actions">
-            <a href="/app" className="primary-btn">ENTER THE CHAMBERS <ArrowUpRight size={20}/></a>
+            <a href="/app" className="primary-btn">START AGENT TESTING <ArrowUpRight size={20}/></a>
             <a href="/app/evidence" className="ghost-btn">INSPECT THE PROOF <ArrowRight size={17}/></a>
           </div>
           <div className="hero-footnote"><span className="live-signal"/><span>RECORDED ON VULTR CLOUD COMPUTE</span><span className="tiny-rule"/> <span>{data?.timestamp?dateStamp(data.timestamp).toUpperCase():'04 NOV 2026'}</span></div>
         </div>
         <div className="hero-art" aria-label="Diagram of the isolated browser chamber and the severed malicious instruction">
-          <div className="art-index mono">FIG 01 / THE CONTAINMENT BOUNDARY</div>
+          <div className="art-index mono">FIG 01 / INTERNAL DEMO CONTAINMENT</div>
           <div className="art-frame">
             <div className="art-frame-corner art-frame-corner-a"/><div className="art-frame-corner art-frame-corner-b"/>
             <div className="art-title"><span>UNTRUSTED WEB INPUT</span><Tag>DOCUMENT / SUPPLIER</Tag></div>
@@ -114,10 +115,10 @@ function Landing() {
               <div className="art-browser-body">
                 <div className="art-docline w72"/><div className="art-docline w48"/>
                 <div className="art-datagrid"><span>mugs</span><span>04 × 1200</span><span>plates</span><span>03 × 800</span></div>
-                <div className="art-attack"><ShieldAlert size={15}/><span>INSTRUCTION OVERRIDE DETECTED IN PAGE</span></div>
+                <div className="art-attack"><ShieldAlert size={15}/><span>DEMO ATTACK PAYLOAD IN PAGE</span></div>
               </div>
             </div>
-            <div className="art-boundary"><div className="art-beam"/><span className="mono">TOOL BOUNDARY</span><span className="boundary-lock"><ShieldX size={18}/> UNTRUSTED AUTHORITY STOPPED</span></div>
+            <div className="art-boundary"><div className="art-beam"/><span className="mono">TOOL BOUNDARY</span><span className="boundary-lock"><ShieldX size={18}/> DEMO POLICY BOUNDARY</span></div>
             <div className="art-cells">
               <div className="art-cell"><span className="mono">WORKER 01</span><strong>DESTROYED</strong><span className="cell-meta">∅ container / ∅ workspace</span></div>
               <span className="art-arrow">↝</span>
@@ -130,26 +131,26 @@ function Landing() {
       </section>
 
       <section className="proof-ribbon" aria-label="Verified live run statistics">
-        <span className="ribbon-intro">WHAT WE ACTUALLY MEASURED <ArrowDownRight size={16}/></span>
+        <span className="ribbon-intro">INTERNAL DEMO / WHAT WE MEASURED <ArrowDownRight size={16}/></span>
         <div className="ribbon-stat"><strong>{data?.summary.model_calls ?? 3}</strong><span>LIVE MODEL DECISIONS</span></div>
         <div className="ribbon-stat"><strong>{data?.summary.worker_generations ?? 2}</strong><span>ISOLATED GENERATIONS</span></div>
         <div className="ribbon-stat"><strong>{VALUE(data?.summary.value_cents ?? 7200)}</strong><span>VERIFIED VALUATION</span></div>
         <div className="ribbon-stat ribbon-last"><CheckCircle2 size={20}/><span>HASH-CHAIN VERIFIED</span></div>
       </section>
       <section id="approach" className="approach-section">
-        <div className="section-cap"><span>01 / WHY BLASTLAB</span><span>ENGINEERING REALITY, NOT A DEMO TRICK</span></div>
+        <div className="section-cap"><span>01 / WHY BLASTLAB</span><span>HOW THE BOUNDED DEMO WORKS</span></div>
         <div className="approach-head">
           <h2>Most demos show<br/>an agent <em>working.</em><br/>We show its limits.</h2>
           <p>Prompt injection arrives as normal page content. The important question isn't whether the model notices. It's whether untrusted text can become privileged action.</p>
         </div>
         <div className="approach-grid">
-          <div className="approach-item"><div className="item-no">01 / INPUT</div><ScanEye size={29}/><h3>Read the hostile page.</h3><p>A real headless Chromium worker reads legitimate supplier inventory alongside an embedded instruction to override the task.</p></div>
+          <div className="approach-item"><div className="item-no">01 / INPUT</div><ScanEye size={29}/><h3>Read the hostile page.</h3><p>In the labeled internal demo, a headless Chromium worker reads supplier inventory alongside an embedded instruction to override the task.</p></div>
           <div className="approach-item"><div className="item-no">02 / BOUNDARY</div><Shield size={29}/><h3>Enforce a hard limit.</h3><p>Only exact approved browser actions and evidence-backed completion can pass. The supervisor—not the model—owns the container.</p></div>
           <div className="approach-item"><div className="item-no">03 / RECOVERY</div><RefreshCcw size={29}/><h3>Kill it. Keep the mission.</h3><p>Destroy the disposable worker, verify its absence, create a new one, restore a trusted checkpoint, and finish.</p></div>
         </div>
       </section>
       <section id="proof" className="showcase-section">
-        <div className="showcase-side"><div className="section-cap light"><span>02 / REPRODUCIBLE PROOF</span></div><h2>Every decision<br/>has a receipt.</h2><p>Not a fake threat counter. Two distinct, reproducible runs from an actual Vultr VM—one real-model execution, one scripted policy stress test. Both backed by hash-chained events.</p><a className="outline-btn" href="/app/evidence">OPEN EVIDENCE VAULT <ArrowUpRight size={18}/></a></div>
+        <div className="showcase-side"><div className="section-cap light"><span>02 / REPRODUCIBLE PROOF</span></div><h2>Every decision<br/>has a receipt.</h2><p>An independently recorded supplier DEMO, not a connected user-agent campaign. Two distinct, reproducible runs from an actual Vultr VM—one real-model execution, one scripted policy stress test. Both backed by hash-chained events.</p><a className="outline-btn" href="/app/evidence">OPEN EVIDENCE VAULT <ArrowUpRight size={18}/></a></div>
         <div className="showcase-evidence">
           <div className="exhibit-head"><span>CASE FILE / 2026-11-04</span><Pill tone="mint" dot>VERIFIED ON VULTR</Pill></div>
           <div className="exhibit-main"><p>LIVE VULTR MODEL · glm-5.3</p><h3>Boundary survived.<br/>Mission completed.</h3><div className="exhibit-stats"><div><strong>00</strong><span>UNSAFE CALLS PROPOSED</span></div><div><strong>02</strong><span>CONTAINERS DESTROYED</span></div><div><strong>41</strong><span>CHAINED EVENTS</span></div></div></div>
@@ -158,7 +159,7 @@ function Landing() {
         </div>
       </section>
       <section id="infrastructure" className="architecture-landing">
-        <div className="section-cap"><span>03 / ARCHITECTURE</span><span>THE SUPERVISOR OWNS THE SWITCH</span></div>
+        <div className="section-cap"><span>03 / DEMO EXECUTION ARCHITECTURE</span><span>THE SUPERVISOR OWNS THE SWITCH</span></div>
         <div className="architecture-split"><div><h2>Trust is a boundary,<br/>not a prompt.</h2><p>Vultr Serverless Inference proposes tool calls. A separate policy gate approves only exact capabilities. Docker isolates the browser. The trusted supervisor can tear down and recreate it without losing the task.</p><a href="/app/architecture" className="line-link">EXPLORE THE SYSTEM <ArrowUpRight size={18}/></a></div>
           <div className="architecture-mini">
             <div className="mini-node"><span>01 / INFERENCE</span><strong>VULTR · GLM-5.3</strong><small>proposes / never executes</small></div><div className="mini-line"><span>CHECKS TOOL AUTHORITY</span></div>
@@ -167,7 +168,7 @@ function Landing() {
           </div>
         </div>
       </section>
-      <section className="cta-strip"><span>THE ATTACK IS IN THE PAGE.</span><h2>See what the agent actually did.</h2><a href="/app" className="primary-btn">OPEN CHAMBER LIBRARY <ArrowUpRight size={20}/></a></section>
+      <section className="cta-strip"><span>THE ATTACK IS IN THE PAGE.</span><h2>See what the agent actually did.</h2><a href="/app" className="primary-btn">OPEN AGENT LAB <ArrowUpRight size={20}/></a></section>
     </main>
     <footer className="site-footer"><Brand inverse/><p>Agent containment, with receipts.<br/>Built on Vultr Cloud Compute + Serverless Inference.</p><span className="footer-right">RECORDED EVIDENCE · NOVEMBER 2026<br/>CONTROLLED SUPPLIER TEST — NOT A GENERAL SECURITY CERTIFICATION</span></footer>
   </div>;
@@ -260,18 +261,20 @@ function OperatorModal({onClose,onDone}:{onClose:()=>void,onDone:()=>void}) {
 function useSection() {
   const parse=():Section=>{
     const path=location.pathname;
+    if(path.endsWith('/campaign'))return 'campaign';
     if(path.endsWith('/evidence'))return 'evidence';
     if(path.endsWith('/architecture'))return 'architecture';
     if(path.endsWith('/results'))return 'results';
     if(path.endsWith('/control'))return 'control';
     if(path.endsWith('/chambers/web'))return 'setup';
-    return 'chambers';
+    if(path.endsWith('/demo'))return 'chambers';
+    return 'agent';
   };
   const [section,setSection]=useState<Section>(parse);
   useEffect(()=>{const handler=()=>setSection(parse());window.addEventListener('popstate',handler);return()=>window.removeEventListener('popstate',handler)},[]);
   const navigate=(to:Section)=>{
     setSection(to);
-    const path=to==='chambers'?'/app':to==='setup'?'/app/chambers/web':'/app/'+to;
+    const path=to==='agent'?'/app':to==='chambers'?'/app/demo':to==='setup'?'/app/chambers/web':'/app/'+to;
     history.pushState({},'',path);
     window.scrollTo({top:0,behavior:'instant'});
   };
@@ -280,6 +283,14 @@ function useSection() {
 
 function ControlRoom() {
   const {section,navigate}=useSection();
+  const [agentSession,setAgentSession]=useState<{
+    session_id:string;join_token:string;expires_at:string;cases_total:number;
+    source_type:string;connector:string
+  }|null>(()=>{
+    try{const old=sessionStorage.getItem('blastlab-agent-session');return old?JSON.parse(old):null;}
+    catch{return null;}
+  });
+
   const [mode,setMode]=useState<Mode>(()=>new URLSearchParams(location.search).get('run')?.startsWith('scripted-')?'scripted':'live');
   const [selectedRunId,setSelectedRunId]=useState<string|undefined>(()=>{
     const id=new URLSearchParams(location.search).get('run')||'';
@@ -333,6 +344,16 @@ function ControlRoom() {
   const actionsAllowed=data?.events.filter(e=>e.kind==='policy_decision'&&e.detail.decision==='allow').length||0;
   const copyHash=()=>{if(data?.proof.trace_sha256)navigator.clipboard?.writeText(data.proof.trace_sha256).catch(()=>{})};
   const saveEvidence=()=>{if(!data)return;const object=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});const url=URL.createObjectURL(object);const link=document.createElement('a');link.href=url;link.download='blastlab-'+data.id+'-sanitized-evidence.json';link.click();window.setTimeout(()=>URL.revokeObjectURL(url),2000);};
+  const connectAgent=(created:NonNullable<typeof agentSession>)=>{
+    setAgentSession(created);
+    try{sessionStorage.setItem('blastlab-agent-session',JSON.stringify(created));}catch{}
+    navigate('campaign');setMobileNav(false);
+  };
+  const newAgent=()=>{
+    setAgentSession(null);
+    try{sessionStorage.removeItem('blastlab-agent-session');}catch{}
+    navigate('agent');setMobileNav(false);
+  };
   const select=(next:Section)=>{
     navigate(next);
     if((next==='control'||next==='results')&&selectedRunId)
@@ -343,28 +364,37 @@ function ControlRoom() {
     <aside className={'console-rail '+(mobileNav?'rail-open':'')}>
       <div className="rail-brand"><Brand inverse/><button className="rail-close" aria-label="Close menu" onClick={()=>setMobileNav(false)}><X size={19}/></button></div>
       <div className="rail-workspace"><span className="workspace-sigil"><Layers3 size={16}/></span><div><span className="mono">WORKSPACE 001</span><strong>Containment Lab</strong></div><ChevronDown size={14}/></div>
-      <div className="nav-cluster"><span className="rail-label">WORKSPACE</span>
-        <button className={'rail-link '+(section==='chambers'?'active':'')} onClick={()=>select('chambers')}><Layers3 size={18}/> Chamber library <span className="nav-key">01</span></button>
-        <button className={'rail-link '+(section==='setup'?'active':'')} onClick={()=>select('setup')}><ShieldAlert size={18}/> The Web <span className="nav-key">02</span></button>
-        <button className={'rail-link '+(section==='control'?'active':'')} onClick={()=>select('control')}><Activity size={18}/> Control room <span className="nav-key">03</span></button>
-        <button className={'rail-link '+(section==='results'?'active':'')} onClick={()=>select('results')}><CheckCircle2 size={18}/> Run results <span className="nav-key">04</span></button>
-        <button className={'rail-link '+(section==='evidence'?'active':'')} onClick={()=>select('evidence')}><Fingerprint size={18}/> Evidence vault <span className="nav-key">05</span></button>
-        <button className={'rail-link '+(section==='architecture'?'active':'')} onClick={()=>select('architecture')}><Layers3 size={18}/> Architecture <span className="nav-key">06</span></button>
+
+      <div className="nav-cluster"><span className="rail-label">PRODUCT / CONNECT YOUR AGENT</span>
+        <button className={'rail-link '+(section==='agent'?'active':'')} onClick={()=>select('agent')}><Zap size={18}/> Connect your agent <span className="nav-key">01</span></button>
+        <button className={'rail-link '+(section==='campaign'?'active':'')} onClick={()=>select('campaign')}><Activity size={18}/> Attack campaign <span className="nav-key">02</span></button>
+        <span className="rail-label" style={{marginTop:19}}>DEMO / INTERNAL SUPPLIER CASE</span>
+        <button className={'rail-link '+(section==='chambers'?'active':'')} onClick={()=>select('chambers')}><Layers3 size={18}/> Supplier demo <span className="nav-key">D1</span></button>
+        <button className={'rail-link '+(section==='setup'?'active':'')} onClick={()=>select('setup')}><ShieldAlert size={18}/> Demo setup <span className="nav-key">D2</span></button>
+        <button className={'rail-link '+(section==='control'?'active':'')} onClick={()=>select('control')}><Activity size={18}/> Demo replay <span className="nav-key">D3</span></button>
+        <button className={'rail-link '+(section==='results'?'active':'')} onClick={()=>select('results')}><CheckCircle2 size={18}/> Demo results <span className="nav-key">D4</span></button>
+        <button className={'rail-link '+(section==='evidence'?'active':'')} onClick={()=>select('evidence')}><Fingerprint size={18}/> Demo evidence <span className="nav-key">D5</span></button>
+        <button className={'rail-link '+(section==='architecture'?'active':'')} onClick={()=>select('architecture')}><Layers3 size={18}/> Architecture <span className="nav-key">D6</span></button>
       </div>
-      <div className="nav-cluster rail-lower"><span className="rail-label">EXECUTION ENVIRONMENT</span>
-        <div className="provider-item"><span className="provider-icon"><Server size={17}/></span><div><b>Vultr Compute</b><small>Amsterdam · ams</small></div><i className="green-dot"/></div>
-        <div className="provider-item"><span className="provider-icon"><Box size={17}/></span><div><b>Docker Chamber</b><small>Isolated Chromium</small></div><i className="green-dot"/></div>
-        <div className="provider-item"><span className="provider-icon"><Zap size={17}/></span><div><b>GLM-5.3</b><small>Vultr Inference</small></div><i className="green-dot"/></div>
+      <div className="nav-cluster rail-lower"><span className="rail-label">{section==='agent'||section==='campaign'?'PRODUCT / AGENT CONNECTION':'DEMO / EXECUTION ENVIRONMENT'}</span>
+        <div className="provider-item"><span className="provider-icon"><Server size={17}/></span><div><b>Vultr Compute</b><small>Hosted campaign API</small></div><i className="green-dot"/></div>
+        {(section==='agent'||section==='campaign')?
+          <><div className="provider-item"><span className="provider-icon"><Zap size={17}/></span><div><b>External runner</b><small>Your agent, your environment</small></div></div>
+          <div className="provider-item"><span className="provider-icon"><ShieldAlert size={17}/></span><div><b>Curated attacks</b><small>Runner-reported results</small></div></div></>:
+          <><div className="provider-item"><span className="provider-icon"><Box size={17}/></span><div><b>Docker Chamber</b><small>Demo isolated Chromium</small></div><i className="green-dot"/></div>
+          <div className="provider-item"><span className="provider-icon"><Zap size={17}/></span><div><b>GLM-5.3</b><small>Demo Vultr Inference</small></div><i className="green-dot"/></div></>}
       </div>
-      <div className="rail-bottom"><div className="rail-foot-title"><ShieldCheck size={17}/> VERIFIED FIELD TEST</div><p>Evidence recorded on a real Vultr VM. No simulated production claims.</p><a href="/" className="rail-return"><ArrowLeft size={15}/> Back to website</a></div>
+      <div className="rail-bottom"><div className="rail-foot-title"><ShieldCheck size={17}/>{section==='agent'||section==='campaign'?'EXTERNAL AGENT / REPORTED':'VERIFIED SUPPLIER DEMO'}</div><p>{section==='agent'||section==='campaign'?'Your agent runs in your environment. Its reported actions are not VM attested.':'The internal demo ran in a real Vultr Docker environment.'}</p><a href="/" className="rail-return"><ArrowLeft size={15}/> Back to website</a></div>
     </aside>
     {mobileNav&&<div className="rail-overlay" onClick={()=>setMobileNav(false)}/>}
     <div className="console-main">
       <header className="console-topbar">
         <button className="mobile-rail-toggle" onClick={()=>setMobileNav(true)} aria-label="Open menu"><Menu size={21}/></button>
-        <div className="breadcrumb mono">BLASTLAB <span>/</span> TEST FACILITY <span>/</span> {section==='chambers'?'CHAMBERS':section==='setup'?'WEB CHAMBER':section==='results'?'TEST REPORT':section==='control'?'CONTROL ROOM':section==='evidence'?'EVIDENCE VAULT':'ARCHITECTURE'}</div>
-        <div className="topbar-right"><Pill tone="mint" dot>VULTR VM VERIFIED</Pill><button className="top-icon" title="Refresh recorded evidence" aria-label="Refresh evidence" onClick={onRefresh}><RefreshCcw size={17}/></button><button className="top-run-btn" onClick={()=>select('setup')}><Plus size={16}/> NEW TEST RUN</button></div>
+        <div className="breadcrumb mono">BLASTLAB <span>/</span> TEST FACILITY <span>/</span> {section==='agent'?'CONNECT AGENT':section==='campaign'?'AGENT ATTACK CAMPAIGN':section==='chambers'?'SUPPLIER DEMO':section==='setup'?'DEMO SETUP':section==='results'?'TEST REPORT':section==='control'?'CONTROL ROOM':section==='evidence'?'EVIDENCE VAULT':'ARCHITECTURE'}</div>
+        <div className="topbar-right"><Pill tone="mint" dot>VULTR VM VERIFIED</Pill><button className="top-icon" title="Refresh recorded evidence" aria-label="Refresh evidence" onClick={onRefresh}><RefreshCcw size={17}/></button><button className="top-run-btn" onClick={newAgent}><Plus size={16}/> CONNECT AGENT</button></div>
       </header>
+      {section==='agent'&&<AgentLabConnect onCreated={connectAgent} onDemo={()=>select('chambers')}/>}
+      {section==='campaign'&&<AgentLabCampaign created={agentSession} onNew={newAgent}/>}
       {section==='chambers'&&<ChamberLibrary onEnter={()=>select('setup')} onViewRun={openRun}/>}
       {section==='setup'&&<WebChamberSetup onComplete={completedRun} onViewRun={openRun}/>}
       {section==='results'&&<RunResults run={data} loading={loading} error={error} onControl={()=>select('control')} onNew={()=>select('setup')} onViewRun={openRun}/>}

@@ -61,11 +61,11 @@ export function ChamberLibrary({onEnter,onViewRun}:{onEnter:()=>void,onViewRun:(
   const {items}=useHistory();
   const chambers=catalog?.chambers||[];
   return <main className="ch-page">
-    <div className="ch-page-top"><SectionOverline>FACILITY / CHAMBER LIBRARY</SectionOverline><MiniTag live>01 CHAMBER ONLINE</MiniTag></div>
+    <div className="ch-page-top"><SectionOverline>INTERNAL DEMO / CHAMBER LIBRARY</SectionOverline><MiniTag live>01 CHAMBER ONLINE</MiniTag></div>
     <div className="ch-library-head"><div><h1>Choose the<br/><em>attack surface.</em></h1><p>One agent. A legitimate task. A hostile environment. Every action accountable. Enter the Web Chamber to launch a real containment test.</p></div><div className="ch-lab-counter"><span>TEST FACILITY</span><strong>01<span>/05</span></strong><small>Chambers ready for execution</small></div></div>
     {error&&<div className="ch-inline-alert">{error}. The Chamber service may be temporarily unavailable.</div>}
     <div className="ch-active-chamber">
-      <div className="ch-active-no"><span>01 / ACTIVE MODULE</span><span className="ch-live-dot">READY FOR TESTING</span></div>
+      <div className="ch-active-no"><span>01 / LIVE SUPPLIER DEMO</span><span className="ch-live-dot">READY FOR TESTING</span></div>
       <div className="ch-active-layout"><div className="ch-active-title"><Globe2 size={42} strokeWidth={1.5}/><h2>THE<br/>WEB<span>.</span></h2><p>Drop the agent into a malicious supplier page. Watch the model or scripted fixture propose tools, see the policy boundary respond, kill the browser and inspect the recovered result.</p><button className="ch-primary" onClick={onEnter}>ENTER WEB CHAMBER <ArrowUpRight size={19}/></button></div>
       <div className="ch-active-illustration" aria-label="Web chamber schematic showing hostile page contained by policy and Docker">
         <div className="ch-blueprint-grid"/>
@@ -146,7 +146,7 @@ export function WebChamberSetup({onComplete,onViewRun}:{onComplete:(id:string,mo
     }catch(e){setBusy(false);setStatus('failed');setMessage(e instanceof Error?e.message:'Unable to launch test')}
   };
   return <main className="ch-page ch-setup-page">
-    <div className="ch-page-top"><SectionOverline>CHAMBER 01 / TEST CONFIGURATION</SectionOverline><MiniTag live>REAL DOCKER EXECUTION</MiniTag></div>
+    <div className="ch-page-top"><SectionOverline>DEMO / CHAMBER 01 CONFIGURATION</SectionOverline><MiniTag live>REAL DOCKER EXECUTION</MiniTag></div>
     <div className="ch-setup-heading"><div><span className="ch-step-marker">01 — THE WEB</span><h1>Configure the<br/><em>test conditions.</em></h1><p>Pick the authorized work, choose what the hostile page will attempt, then launch inside a disposable browser on Vultr.</p></div><div className="ch-workflow-stages"><span className="is-active">01 CONFIGURE</span><span>02 EXECUTE</span><span>03 INSPECT</span><span>04 REPORT</span></div></div>
     {error&&<div className="ch-inline-alert">{error}</div>}
     <section className="ch-config-section">
@@ -204,7 +204,7 @@ export function RunResults({run,loading,error,onControl,onNew,onViewRun}:{run:Ru
   const good=!!run.summary.acceptance_passed;
   const other=items.filter(x=>x.id!==run.id);
   return <main className="ch-page ch-results-page">
-    <div className="ch-page-top"><SectionOverline>WEB CHAMBER / TEST REPORT</SectionOverline><MiniTag live={good}>{good?'ACCEPTANCE VERIFIED':'INCOMPLETE / INVESTIGATE'}</MiniTag></div>
+    <div className="ch-page-top"><SectionOverline>SUPPLIER DEMO / TEST REPORT</SectionOverline><MiniTag live={good}>{good?'ACCEPTANCE VERIFIED':'INCOMPLETE / INVESTIGATE'}</MiniTag></div>
     <div className="ch-result-hero"><div><span className="ch-step-marker">CASE {run.id.toUpperCase()}</span><h1>{good?'The boundary held.':'Evidence not complete.'}<br/><em>{good?'The mission survived.':'Review the failure.'}</em></h1><p>{report?.scope||'Controlled supplier-page test; not a general security certification.'}</p><div className="ch-result-actions"><button className="ch-primary" onClick={onControl}>INSPECT FULL EXECUTION <ArrowUpRight size={18}/></button><button className="ch-outline" onClick={()=>exportRun(run)}><Download size={16}/> EXPORT VERIFIABLE JSON</button><button className="ch-outline" onClick={onNew}>NEW TEST</button></div></div>
       <div className="ch-result-meter"><span>INDEPENDENT TASK VERIFICATION</span><strong>{money(run.summary.value_cents)}</strong><span>{run.mission_id?.replaceAll('_',' ').toUpperCase()}</span><div className="ch-meter-ticks"><i/><i/><i/><i/><i/><i/><i/><i/><i/></div><b><CheckCircle2 size={15}/> {run.summary.reset_verified?'WORKER RESET VERIFIED':'RESET NOT VERIFIED'}</b></div></div>
     <div className="ch-result-grid"><div><span>RUN PROVENANCE</span><strong>{run.is_scripted?'SCRIPTED ATTACK FIXTURE':'GENUINE VULTR MODEL'}</strong><small>{run.is_scripted?'Not LLM-generated malicious actions':'GLM-5.3 proposed actual tool calls'}</small></div><div><span>DENIED TOOL PROPOSALS</span><strong>{run.summary.denied_actions.toString().padStart(2,'0')}</strong><small>{run.is_scripted?'Deliberately submitted fixture proposals':'Real model decisions only'}</small></div><div><span>DISPOSABLE WORKERS</span><strong>{run.summary.worker_generations.toString().padStart(2,'0')}</strong><small>Generation reset verified</small></div><div><span>CHAINED EVENTS</span><strong>{run.summary.event_count.toString().padStart(2,'0')}</strong><small>Public chain exportable</small></div></div>
