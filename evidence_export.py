@@ -7,6 +7,7 @@ import argparse
 import hashlib
 import json
 from pathlib import Path
+from web_chamber import DEFAULT_MISSION, DEFAULT_SCENARIO, validate_config, report_from_run
 
 
 FEATURES = {
@@ -127,9 +128,14 @@ def parse_run(folder, origin, instance_id='2db5a222-bd1f-42ea-acba-cc09a247a40c'
     responses = [e for e in events if e['kind'] == 'inference_response']
     denied = [e for e in events if e['category'] == 'deny']
     first = original[0] if original else {}
-    return {
-        'id': origin,
+    mission_id = result.get('mission_id', first.get('mission_id', DEFAULT_MISSION))
+    scenario = result.get('scenario', first.get('scenario', DEFAULT_SCENARIO))
+    validate_config(mission_id, scenario)
+    run = {
+        'id': origin+'-'+digest[:18],
         'label': 'Live model run' if origin == 'live' else 'Adversarial policy replay',
+        'mission_id': mission_id, 'scenario': scenario,
+        'chamber': 'web',
         'origin': 'vultr-live' if origin == 'live' else 'scripted-fixture',
         'is_model_driven': bool(result.get('model_driven')) and origin == 'live',
         'is_scripted': origin != 'live',
@@ -158,6 +164,23 @@ def parse_run(folder, origin, instance_id='2db5a222-bd1f-42ea-acba-cc09a247a40c'
                   ]},
         'events': events,
     }
+    # The *public* event chain is independently reconstructible from this
+    # sanitized JSON. The original log SHA is only a provenance commitment:
+    # the original complete private trace is not included in public exports.
+    previous_public = None
+    for e in events:
+        payload = {k:v for k,v in e.items() if k not in ('public_previous_sha256','public_sha256')}
+        body = {'previous_sha256': previous_public, 'event': payload}
+        previous_public = hexdigest(json.dumps(body, sort_keys=True, separators=(',',':'),
+                                             ensure_ascii=False).encode('utf-8'))
+        e['public_previous_sha256'] = body['previous_sha256']
+        e['public_sha256'] = previous_public
+    run['proof']['public_sha256'] = previous_public
+    run['proof']['public_scheme'] = 'sha256-chain/canonical-json-v1'
+    run['proof']['public_event_count'] = len(events)
+    run['proof']['original_log_independently_verifiable_from_public_export'] = False
+    run['report'] = report_from_run(run)
+    return run
 
 
 def main():

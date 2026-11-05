@@ -1,3 +1,15 @@
+# BlastLab — Chamber release audit | 2026-11-05
+
+**Judge-facing capabilities, Nov 5:**
+- Application of Technology: genuine Vultr Serverless Inference GLM-5.3 plus Vultr VM hosted Docker/Chromium; supervisor-owned bounded policy and reset.
+- Presentation: Chamber-first journey, real UI, publicly runnable scripted demo, report and offline verifier; authentic 13-shot recording and 7-slide deck.
+- Business Value: agent engineers can compare trusted mission results under different bounded page attack templates with actionable remediation.
+- Originality: specimen test Chambers, supervisor-scheduled fault injection and separately tracked true-model vs fixture decisions.
+- Limits: only Web Chamber implemented, only fixed supplier page, not SaaS integrations or a universal safety certificate.
+Official judging weights UNKNOWN; no claimed total score.
+
+---
+
 # BlastLab | Judge Scorecard
 > **AUDIT WARNING (2026-11-05):** The 21/24 score below was an internal *visual-only* rubric, not an official judging score or product-completeness score. PRODUCT_REVIEW is reopened because missing Chambers, user-run workflow, assessment, remediation and independent export verification materially affect judged value.
 

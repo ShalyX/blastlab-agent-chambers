@@ -7,6 +7,7 @@ import {
   ShieldCheck, ShieldX, Square, TerminalSquare, Unplug, X, Zap
 } from 'lucide-react';
 import type { Mode, RunData, RunEvent, Section } from './types';
+import {ChamberLibrary, WebChamberSetup, RunResults} from './ChamberExperience';
 
 const VALUE = (cents: number) => '$' + ((cents || 0) / 100).toFixed(2);
 const short = (s?: string | null, n=11) => (s ? s.slice(0, n) : '—');
@@ -44,16 +45,16 @@ function TextButton({ children, onClick, title }: {children:React.ReactNode, onC
 }
 function Tag({ children }: {children:React.ReactNode}) { return <span className="mono tag">{children}</span>; }
 
-function useRun(mode: Mode, refresh=0) {
+function useRun(mode: Mode, refresh=0, runId?:string) {
   const [data, setData] = useState<RunData|null>(null);
   const [loading,setLoading] = useState(true);
   const [fallback,setFallback] = useState(false);
   const [error,setError] = useState('');
   useEffect(()=>{
     let cancelled=false;
-    setLoading(true); setError(''); setFallback(false);
+    setLoading(true); setData(null); setError(''); setFallback(false);
     async function load() {
-      const api = '/api/runs/'+mode;
+      const api = runId?'/api/history/'+encodeURIComponent(runId):'/api/runs/'+mode;
       try {
         const res=await fetch(api,{cache:'no-store'});
         if(!res.ok) throw new Error('API not connected');
@@ -62,6 +63,7 @@ function useRun(mode: Mode, refresh=0) {
         if(!cancelled) {setData(body);setFallback(false);}
       } catch {
         try {
+          if(runId)throw new Error('Archived run unavailable');
           const res=await fetch('/data/'+mode+'.json');
           if(!res.ok) throw new Error('Recorded evidence could not be loaded');
           const body=await res.json() as RunData;
@@ -71,7 +73,7 @@ function useRun(mode: Mode, refresh=0) {
     }
     load();
     return ()=>{cancelled=true;};
-  },[mode,refresh]);
+  },[mode,refresh,runId]);
   return {data, loading, fallback, error};
 }
 
@@ -86,7 +88,7 @@ function Landing() {
         <a href="#proof" onClick={()=>setMenu(false)}>Verified proof</a>
         <a href="#infrastructure" onClick={()=>setMenu(false)}>Architecture</a>
       </nav>
-      <a className="nav-launch" href="/app">ENTER CONTROL ROOM <ArrowUpRight size={17}/></a>
+      <a className="nav-launch" href="/app">EXPLORE CHAMBERS <ArrowUpRight size={17}/></a>
       <button className="mobile-menu" aria-label="Toggle navigation" onClick={()=>setMenu(!menu)}><Menu size={22}/></button>
     </header>
     <main>
@@ -97,10 +99,10 @@ function Landing() {
           <h1>Your agent read<br/><em>the attack.</em><br/>The boundary held<span className="hero-period">.</span></h1>
           <p className="hero-copy">A real crash-test environment for agents navigating hostile content. Watch what they attempt, contain what they cannot do, and prove recovery with evidence.</p>
           <div className="hero-actions">
-            <a href="/app" className="primary-btn">EXPLORE A REAL RUN <ArrowUpRight size={20}/></a>
+            <a href="/app" className="primary-btn">ENTER THE CHAMBERS <ArrowUpRight size={20}/></a>
             <a href="/app/evidence" className="ghost-btn">INSPECT THE PROOF <ArrowRight size={17}/></a>
           </div>
-          <div className="hero-footnote"><span className="live-signal"/><span>RECORDED ON VULTR CLOUD COMPUTE</span><span className="tiny-rule"/> <span>04 NOV 2026</span></div>
+          <div className="hero-footnote"><span className="live-signal"/><span>RECORDED ON VULTR CLOUD COMPUTE</span><span className="tiny-rule"/> <span>{data?.timestamp?dateStamp(data.timestamp).toUpperCase():'04 NOV 2026'}</span></div>
         </div>
         <div className="hero-art" aria-label="Diagram of the isolated browser chamber and the severed malicious instruction">
           <div className="art-index mono">FIG 01 / THE CONTAINMENT BOUNDARY</div>
@@ -121,7 +123,7 @@ function Landing() {
               <span className="art-arrow">↝</span>
               <div className="art-cell art-cell-verified"><span className="mono">WORKER 02</span><strong>RECOVERED</strong><span className="cell-meta">fresh browser / safe resume</span></div>
             </div>
-            <div className="art-final"><CheckCircle2 size={19}/><span>VERIFIED RESULT</span><strong>$72.00</strong></div>
+            <div className="art-final"><CheckCircle2 size={19}/><span>VERIFIED RESULT</span><strong>{VALUE(data?.summary.value_cents ?? 7200)}</strong></div>
           </div>
           <div className="art-bottom mono"><span>ENFORCED, NOT ASSUMED.</span><span>VULTR / DOCKER / CHROMIUM</span></div>
         </div>
@@ -165,7 +167,7 @@ function Landing() {
           </div>
         </div>
       </section>
-      <section className="cta-strip"><span>THE ATTACK IS IN THE PAGE.</span><h2>See what the agent actually did.</h2><a href="/app" className="primary-btn">OPEN CONTROL ROOM <ArrowUpRight size={20}/></a></section>
+      <section className="cta-strip"><span>THE ATTACK IS IN THE PAGE.</span><h2>See what the agent actually did.</h2><a href="/app" className="primary-btn">OPEN CHAMBER LIBRARY <ArrowUpRight size={20}/></a></section>
     </main>
     <footer className="site-footer"><Brand inverse/><p>Agent containment, with receipts.<br/>Built on Vultr Cloud Compute + Serverless Inference.</p><span className="footer-right">RECORDED EVIDENCE · NOVEMBER 2026<br/>CONTROLLED SUPPLIER TEST — NOT A GENERAL SECURITY CERTIFICATION</span></footer>
   </div>;
@@ -256,12 +258,21 @@ function OperatorModal({onClose,onDone}:{onClose:()=>void,onDone:()=>void}) {
 }
 
 function useSection() {
-  const parse=():Section=>location.pathname.endsWith('/evidence')?'evidence':location.pathname.endsWith('/architecture')?'architecture':'control';
+  const parse=():Section=>{
+    const path=location.pathname;
+    if(path.endsWith('/evidence'))return 'evidence';
+    if(path.endsWith('/architecture'))return 'architecture';
+    if(path.endsWith('/results'))return 'results';
+    if(path.endsWith('/control'))return 'control';
+    if(path.endsWith('/chambers/web'))return 'setup';
+    return 'chambers';
+  };
   const [section,setSection]=useState<Section>(parse);
   useEffect(()=>{const handler=()=>setSection(parse());window.addEventListener('popstate',handler);return()=>window.removeEventListener('popstate',handler)},[]);
   const navigate=(to:Section)=>{
     setSection(to);
-    history.pushState({},'',to==='control'?'/app':'/app/'+to);
+    const path=to==='chambers'?'/app':to==='setup'?'/app/chambers/web':'/app/'+to;
+    history.pushState({},'',path);
     window.scrollTo({top:0,behavior:'instant'});
   };
   return {section,navigate};
@@ -269,11 +280,15 @@ function useSection() {
 
 function ControlRoom() {
   const {section,navigate}=useSection();
-  const [mode,setMode]=useState<Mode>('live');
+  const [mode,setMode]=useState<Mode>(()=>new URLSearchParams(location.search).get('run')?.startsWith('scripted-')?'scripted':'live');
+  const [selectedRunId,setSelectedRunId]=useState<string|undefined>(()=>{
+    const id=new URLSearchParams(location.search).get('run')||'';
+    return /^(live|scripted)-[0-9a-f]{18}$/.test(id)?id:undefined;
+  });
   const [refresh,setRefresh]=useState(0);
   const [modal,setModal]=useState(false);
   const [mobileNav,setMobileNav]=useState(false);
-  const {data,loading,fallback,error}=useRun(mode,refresh);
+  const {data,loading,fallback,error}=useRun(mode,refresh,selectedRunId);
   const [position,setPosition]=useState(0);
   const [playing,setPlaying]=useState(false);
   const [filter,setFilter]=useState('all');
@@ -292,7 +307,9 @@ function ControlRoom() {
   const lastResponse=lastOf('inference_response');
   const isEnded=!!elapsed.find(e=>e.kind==='run_finished');
   const onRefresh=useCallback(()=>setRefresh(x=>x+1),[]);
-  const setModeSafe=(next:Mode)=>{setMode(next);setPosition(0);setPlaying(false);setFilter('all');};
+  const setModeSafe=(next:Mode)=>{setMode(next);setSelectedRunId(undefined);setPosition(0);setPlaying(false);setFilter('all');};
+  const openRun=(id:string,source:Mode)=>{setMode(source);setSelectedRunId(id);setRefresh(x=>x+1);navigate('results');history.replaceState({},'','/app/results?run='+encodeURIComponent(id));};
+  const completedRun=(id:string,source:Mode)=>{setMode(source);setSelectedRunId(id);setRefresh(x=>x+1);navigate('results');history.replaceState({},'','/app/results?run='+encodeURIComponent(id));};
   const stepTo=(seq:number)=>{const at=visible.findIndex(e=>e.seq>=seq);setPosition(at<0?visible.length-1:at);setPlaying(false);};
   const advance=useCallback((delta:number)=>setPosition(i=>Math.max(0,Math.min(visible.length-1,i+delta))),[visible]);
   useEffect(()=>{const meaningful=data?.events.filter(e=>e.visible)||[]; const first=meaningful.findIndex(e=>mode==='live'?e.kind==='page_observation':e.category==='deny');setPosition(first<0?0:first);setPlaying(false)},[data?.id,data?.timestamp,mode]);
@@ -316,15 +333,23 @@ function ControlRoom() {
   const actionsAllowed=data?.events.filter(e=>e.kind==='policy_decision'&&e.detail.decision==='allow').length||0;
   const copyHash=()=>{if(data?.proof.trace_sha256)navigator.clipboard?.writeText(data.proof.trace_sha256).catch(()=>{})};
   const saveEvidence=()=>{if(!data)return;const object=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});const url=URL.createObjectURL(object);const link=document.createElement('a');link.href=url;link.download='blastlab-'+data.id+'-sanitized-evidence.json';link.click();window.setTimeout(()=>URL.revokeObjectURL(url),2000);};
-  const select=(next:Section)=>{navigate(next);setMobileNav(false);setPlaying(false);};
+  const select=(next:Section)=>{
+    navigate(next);
+    if((next==='control'||next==='results')&&selectedRunId)
+      history.replaceState({},'',location.pathname+'?run='+encodeURIComponent(selectedRunId));
+    setMobileNav(false);setPlaying(false);
+  };
   return <div className="console-shell">
     <aside className={'console-rail '+(mobileNav?'rail-open':'')}>
       <div className="rail-brand"><Brand inverse/><button className="rail-close" aria-label="Close menu" onClick={()=>setMobileNav(false)}><X size={19}/></button></div>
       <div className="rail-workspace"><span className="workspace-sigil"><Layers3 size={16}/></span><div><span className="mono">WORKSPACE 001</span><strong>Containment Lab</strong></div><ChevronDown size={14}/></div>
       <div className="nav-cluster"><span className="rail-label">WORKSPACE</span>
-        <button className={'rail-link '+(section==='control'?'active':'')} onClick={()=>select('control')}><Activity size={18}/> Control room <span className="nav-key">01</span></button>
-        <button className={'rail-link '+(section==='evidence'?'active':'')} onClick={()=>select('evidence')}><Fingerprint size={18}/> Evidence vault <span className="nav-key">02</span></button>
-        <button className={'rail-link '+(section==='architecture'?'active':'')} onClick={()=>select('architecture')}><Layers3 size={18}/> Architecture <span className="nav-key">03</span></button>
+        <button className={'rail-link '+(section==='chambers'?'active':'')} onClick={()=>select('chambers')}><Layers3 size={18}/> Chamber library <span className="nav-key">01</span></button>
+        <button className={'rail-link '+(section==='setup'?'active':'')} onClick={()=>select('setup')}><ShieldAlert size={18}/> The Web <span className="nav-key">02</span></button>
+        <button className={'rail-link '+(section==='control'?'active':'')} onClick={()=>select('control')}><Activity size={18}/> Control room <span className="nav-key">03</span></button>
+        <button className={'rail-link '+(section==='results'?'active':'')} onClick={()=>select('results')}><CheckCircle2 size={18}/> Run results <span className="nav-key">04</span></button>
+        <button className={'rail-link '+(section==='evidence'?'active':'')} onClick={()=>select('evidence')}><Fingerprint size={18}/> Evidence vault <span className="nav-key">05</span></button>
+        <button className={'rail-link '+(section==='architecture'?'active':'')} onClick={()=>select('architecture')}><Layers3 size={18}/> Architecture <span className="nav-key">06</span></button>
       </div>
       <div className="nav-cluster rail-lower"><span className="rail-label">EXECUTION ENVIRONMENT</span>
         <div className="provider-item"><span className="provider-icon"><Server size={17}/></span><div><b>Vultr Compute</b><small>Amsterdam · ams</small></div><i className="green-dot"/></div>
@@ -337,9 +362,12 @@ function ControlRoom() {
     <div className="console-main">
       <header className="console-topbar">
         <button className="mobile-rail-toggle" onClick={()=>setMobileNav(true)} aria-label="Open menu"><Menu size={21}/></button>
-        <div className="breadcrumb mono">BLASTLAB <span>/</span> WORKSPACE 001 <span>/</span> {section==='control'?'CONTROL ROOM':section==='evidence'?'EVIDENCE VAULT':'ARCHITECTURE'}</div>
-        <div className="topbar-right"><Pill tone="mint" dot>VULTR VM VERIFIED</Pill><button className="top-icon" title="Refresh recorded evidence" aria-label="Refresh evidence" onClick={onRefresh}><RefreshCcw size={17}/></button><button className="top-run-btn" onClick={()=>setModal(true)}><Plus size={16}/> NEW TEST RUN</button></div>
+        <div className="breadcrumb mono">BLASTLAB <span>/</span> TEST FACILITY <span>/</span> {section==='chambers'?'CHAMBERS':section==='setup'?'WEB CHAMBER':section==='results'?'TEST REPORT':section==='control'?'CONTROL ROOM':section==='evidence'?'EVIDENCE VAULT':'ARCHITECTURE'}</div>
+        <div className="topbar-right"><Pill tone="mint" dot>VULTR VM VERIFIED</Pill><button className="top-icon" title="Refresh recorded evidence" aria-label="Refresh evidence" onClick={onRefresh}><RefreshCcw size={17}/></button><button className="top-run-btn" onClick={()=>select('setup')}><Plus size={16}/> NEW TEST RUN</button></div>
       </header>
+      {section==='chambers'&&<ChamberLibrary onEnter={()=>select('setup')} onViewRun={openRun}/>}
+      {section==='setup'&&<WebChamberSetup onComplete={completedRun} onViewRun={openRun}/>}
+      {section==='results'&&<RunResults run={data} loading={loading} error={error} onControl={()=>select('control')} onNew={()=>select('setup')} onViewRun={openRun}/>}
       {section==='control'&&<main className="control-content">
         <div className="intro-row"><div><div className="eyebrow console-eyebrow"><span className="signal-bullet"/> ACTIVE CASE FILE / BL-001</div><h1>Execution <span>under constraint.</span></h1><p>Follow the hostile input, every tool decision, and what survived the reset.</p></div><div className="run-metadata"><span>LAST RECORDED</span><strong>{dateStamp(data?.timestamp)}</strong><span>{stamp(data?.timestamp)}</span></div></div>
         <div className="run-switcher"><span className="switch-label mono">RUN SOURCE</span><div className="mode-switch" role="group" aria-label="Choose evidence source"><button className={mode==='live'?'selected':''} onClick={()=>setModeSafe('live')}><Radio size={15}/> LIVE MODEL</button><button className={mode==='scripted'?'selected':''} onClick={()=>setModeSafe('scripted')}><ShieldAlert size={15}/> ADVERSARIAL REPLAY</button></div><div className="switch-disclosure">{mode==='live'?'3 actual GLM-5.3 proposals · no prohibited calls':'Fixture-generated malicious calls · four denials, not LLM behavior'}</div></div>
@@ -387,7 +415,7 @@ function ControlRoom() {
           <section className="summary-strip"><div><span className="mono">MISSION RESULT</span><strong>{VALUE(data.summary.value_cents)}</strong><small><Check size={13}/> Evidence-backed valuation</small></div><div><span className="mono">POLICY ACTIONS</span><strong>{actionsAllowed}<span className="stat-small"> allowed</span> / {data.summary.denied_actions}<span className="stat-small"> denied</span></strong><small>{mode==='live'?'Live model proposals':'Scripted test proposals'}</small></div><div><span className="mono">CONTAINER LIFECYCLE</span><strong>{data.summary.worker_generations.toString().padStart(2,'0')}<span className="stat-small"> generations</span></strong><small><RefreshCcw size={13}/> Reset independently verified</small></div><div className="summary-proof"><span className="mono">TRACE INTEGRITY</span><strong><CheckCircle2 size={19}/> VALID</strong><small>{short(data.proof.trace_sha256,24)}…</small></div></section>
           <div className="below-grid"><section className="ledger-panel"><div className="ledger-head"><div><Tag>EVENT LEDGER</Tag><h2>The sequence, not the story.</h2></div><span className="mono">{data.summary.event_count} CHAINED EVENTS</span></div><div className="ledger-filters" role="group" aria-label="Event filters">{[['all','All moments'],['policy','Policy'],['lifecycle','Lifecycle'],['model','Model & browser']].map(([k,label])=><button key={k} className={filter===k?'active':''} onClick={()=>setFilter(k)}>{label}</button>)}</div>
             <div className="ledger-scroll">{usableEvents.map(e=><button key={e.seq} onClick={()=>stepTo(e.seq)} className={'ledger-row '+(e.seq===current?.seq?'selected ':'')+(e.category==='deny'?'ledger-deny':'')}><span className="mono">#{('00'+e.seq).slice(-3)}</span><span className={'ledger-symbol category-'+e.category}><EventIcon kind={e.kind} category={e.category} size={16}/></span><span className="ledger-row-main"><strong>{e.title}</strong><small>{stamp(e.at)}{e.generation?' · worker '+e.generation:''}</small></span><span className="ledger-row-end"><ArrowUpRight size={15}/></span></button>)}</div></section>
-            <section className="evidence-side"><div className="panel-caption"><div><Fingerprint size={17}/><span>ATTESTED EXECUTION</span></div><Tag>RECORDED PROOF</Tag></div><h2>Nothing here requires trust.</h2><p>Inspect independently verifiable event chains and actual cloud provenance. We do not substitute scripted attacks for live model behavior.</p><div className="evidence-side-box"><span>TRACE SHA-256</span><strong>{short(data.proof.trace_sha256,28)}...</strong><div className="evidence-actions"><TextButton onClick={copyHash}><Copy size={15}/> COPY DIGEST</TextButton><TextButton onClick={saveEvidence}><Download size={15}/> EXPORT JSON</TextButton></div></div><div className="evidence-checks">{data.proof.security_checks.map(check=><div key={check.label}><CheckCircle2 size={16}/>{check.label}</div>)}</div><button className="detail-link" onClick={()=>select('evidence')}>OPEN COMPLETE PROOF VAULT <ArrowUpRight size={18}/></button></section></div>
+            <section className="evidence-side"><div className="panel-caption"><div><Fingerprint size={17}/><span>ATTESTED EXECUTION</span></div><Tag>RECORDED PROOF</Tag></div><h2>Check the event trail.</h2><p>Download the sanitized event chain for offline verification. The original raw trace digest is separate provenance, and scripted attacks are never attributed to the live model.</p><div className="evidence-side-box"><span>TRACE SHA-256</span><strong>{short(data.proof.trace_sha256,28)}...</strong><div className="evidence-actions"><TextButton onClick={copyHash}><Copy size={15}/> COPY DIGEST</TextButton><TextButton onClick={saveEvidence}><Download size={15}/> EXPORT JSON</TextButton></div></div><div className="evidence-checks">{data.proof.security_checks.map(check=><div key={check.label}><CheckCircle2 size={16}/>{check.label}</div>)}</div><button className="detail-link" onClick={()=>select('evidence')}>OPEN COMPLETE PROOF VAULT <ArrowUpRight size={18}/></button></section></div>
           {fallback&&<div className="fallback-footnote"><CircleAlert size={14}/> Showing bundled, immutable Vultr execution evidence. The live service is not connected; replay remains functional and authentic.</div>}
         </>}
       </main>}
@@ -404,7 +432,7 @@ function ControlRoom() {
         <div className="architecture-facts"><div><Tag>COMPUTE</Tag><h3>Vultr VM</h3><p>Ubuntu 24.04 · 2 vCPU / 4 GB · Amsterdam. The backend supervises isolated browser workers.</p></div><div><Tag>MODEL</Tag><h3>GLM-5.3</h3><p>Every genuine model call uses Vultr Serverless Inference. There is no shadow provider or silent fallback.</p></div><div><Tag>EVIDENCE</Tag><h3>SHA-256 chains</h3><p>Every event includes the preceding digest. Traces are checked against final result digests after execution.</p></div></div><div className="evidence-disclosure"><CircleAlert size={19}/><div><strong>What the boundary does not claim.</strong><p>The current test uses a deliberately constrained Chromium supplier route. This is a working vertical slice for proving capability isolation and recovery, not unrestricted website browsing or a production multi-tenant sandbox.</p></div></div>
         <button className="detail-link" onClick={()=>select('control')}><ArrowLeft size={18}/> RETURN TO THE EXECUTION TRACK</button>
       </main>}
-      <footer className="console-footer"><span>BLASTLAB / AGENT CONTAINMENT TEST BENCH</span><span>BUILT ON VULTR · EVIDENCE FROM 04 NOV 2026</span></footer>
+      <footer className="console-footer"><span>BLASTLAB / AGENT CONTAINMENT TEST BENCH</span><span>BUILT ON VULTR · RECORDED NOV 2026</span></footer>
     </div>
     {modal&&<OperatorModal onClose={()=>setModal(false)} onDone={()=>{setRefresh(x=>x+1)}}/>}
   </div>;

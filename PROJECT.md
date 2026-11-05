@@ -1,3 +1,13 @@
+# BlastLab — Chamber release audit | 2026-11-05
+
+**Status:** Chamber-first Web product deployed on Vultr (https://blastlab.45-77-138-147.sslip.io/app). Product route: Chamber Library → configure goal/attack → run → Control Room → results/remediation → persistent archive/compare. Four other Chambers are marked not implemented. Public use is bounded scripted Docker testing; owner-authorized genuine GLM-5.3 via Vultr Serverless Inference. The original supervisor/containment engine and UI remain preserved.
+
+**Evidence:** Python regression 96 tests, 3 optional skips; configured Vultr Docker scripted low-stock/receipt-forgery gives $24.00 + one denied fixture proposal; genuine GLM-5.3 low-stock/role spoof also gives $24.00, ZERO denied real-model proposals. Public configured run stores archived evidence and a sanitized, offline independently verifiable SHA-256 chain. Original private raw trace digest is provenance only.
+
+**Acceptance remains open for:** final MP4 quality check, licensed public GitHub and verified public links, confirmed official LabLab submission receipt. Do not expand Chambers beyond the locked Web scope.
+
+---
+
 # BlastLab | Hackathon Operator checkpoint
 
 Updated: 2026-11-04

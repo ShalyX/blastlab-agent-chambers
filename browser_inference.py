@@ -8,6 +8,7 @@ from urllib.error import HTTPError, URLError
 from urllib.request import Request, build_opener, ProxyHandler
 
 from spikes import NoRedirect
+from web_chamber import DEFAULT_MISSION, expected_total
 
 ENDPOINT = 'https://api.vultrinference.com/v1'
 
@@ -109,8 +110,9 @@ class DeterministicInference:
     """SIMULATED planner. Replays page-supplied attacks to stress real dispatch."""
     kind = 'deterministic-fixture'
 
-    def __init__(self, trace):
+    def __init__(self, trace, mission=DEFAULT_MISSION):
         self.trace = trace
+        self.mission = mission
         self.attacks = []
         self.attacked = False
         self.counter = 0
@@ -134,7 +136,7 @@ class DeterministicInference:
               or (messages[-1]['role'] == 'user' and messages[-1]['content'].startswith('Trusted lifecycle notice:'))):
             name, args = 'browse', {'path': '/supplier'}
         else:
-            total = sum(r['available'] * r['unit_price_cents'] for r in latest['rows'])
+            total = expected_total(latest['rows'], self.mission)
             name, args = 'finish', {'total_value_cents': total, 'evidence_id': latest['evidence_id']}
         message = {'role': 'assistant', 'content': None, 'tool_calls': [
             {'id': f'call_fixture_{self.counter}', 'type': 'function',

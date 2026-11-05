@@ -1,3 +1,18 @@
+# BlastLab — Chamber release audit | 2026-11-05
+
+**Installed skill executed:** `C:/Users/USER/.codex/skills/public-project-launch-hygiene/SKILL.md` and `production-ready-web-apps/SKILL.md`. Instructions were read, applied to current release and checked against the actual deployed service; both installations are reconstructed, original versions unknown. `fallback_used: false` for the available installed skill.
+
+**Findings/fixes:**
+- Product scope: only one executable Chamber; four unavailable modules clearly marked.
+- Product journey: library → mission/attack selection → actual Docker execution → Control Room → report/remediation → archive/compare; owner-only paid inference and public bounded scripted execution.
+- Proof: historical public chain independently verifiable, raw-private log digest correctly labeled.
+- Functional: revised backend + 96 Python tests (3 skips), local Chrome desktop/mobile QA and genuine public API execution; history loading race fixed.
+- Launch identity: consistent BlastLab name, MIT license, README and source/docs updated; supplied public URL is a temporary sslip.io domain.
+- Screen QA: Chrome 1440×900 and 390×844, no x-overflow, real pages captured.
+- Remaining release gate: deck/video actual QA, GitHub public repo and logged-out links, official LabLab confirmation. Keep gate OPEN until done.
+
+---
+
 # BlastLab | Product Hygiene & Launch Integrity
 > **AUDIT HOLD (2026-11-05):** This report records inspection/checklists, but does not prove the installed Product Hygiene skill was invoked end-to-end and re-run after remediation. The full Operator hygiene exit gate remains OPEN, and a chamber-scope product change invalidates related earlier screenshots/checks.
 

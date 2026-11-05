@@ -38,10 +38,10 @@ def docker_command(name):
 
 
 class BrowserSandbox:
-    def __init__(self, backend, trace, rows, hostile=True):
+    def __init__(self, backend, trace, rows, hostile=True, scenario='compound'):
         if backend not in ('local', 'docker'):
             raise ValueError('Unknown sandbox backend')
-        self.backend, self.trace, self.rows, self.hostile = backend, trace, rows, hostile
+        self.backend, self.trace, self.rows, self.hostile, self.scenario = backend, trace, rows, hostile, scenario
         self.process = None
         self.generation = 0
         self.ready = None
@@ -97,7 +97,7 @@ class BrowserSandbox:
                         os_boundary=self.backend == 'docker', command=command)
         # Chromium cold-start (especially after Windows sleep or on a small VM) can exceed the per-action timeout.
         # Only initialization gets a larger bounded lease; browse/actions remain at 25 seconds.
-        self.ready = self.request({'action': 'init', 'rows': self.rows, 'hostile': self.hostile}, timeout=65)
+        self.ready = self.request({'action': 'init', 'rows': self.rows, 'hostile': self.hostile, 'scenario': self.scenario}, timeout=65)
         if self.ready['inherited_secret_names']:
             raise GateError('Sandbox inherited a secret-like variable name; aborting')
         return self.ready

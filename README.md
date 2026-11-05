@@ -3,12 +3,30 @@
 **Crash-test the blast radius. Prove the boundary held.**
 
 **Live product:** https://blastlab.45-77-138-147.sslip.io/
-**Control room:** https://blastlab.45-77-138-147.sslip.io/app
+**Web Chamber:** https://blastlab.45-77-138-147.sslip.io/app/chambers/web
+**Control room:** https://blastlab.45-77-138-147.sslip.io/app/control
 **Evidence vault:** https://blastlab.45-77-138-147.sslip.io/app/evidence
 
 BlastLab is a test bench for browser agents operating against untrusted content. It records real model action proposals, enforces an independent capability boundary, destroys and recreates isolated Docker/Chromium workers and verifies that an interrupted mission still succeeds.
 
-The live application is hosted on **Vultr Cloud Compute (Amsterdam)**, with real **GLM-5.3 Serverless Inference** behind the trusted supervisor. The public site offers honest read-only evidence replay, a time-scrubbable execution track, policy and lifecycle inspectors, trace hash-chain checks, and sanitized evidence downloads. An authenticated operator can run another fixed-scenario test. No API credentials are sent to the browser or disposable worker.
+The live application is hosted on **Vultr Cloud Compute (Amsterdam)**, with real **GLM-5.3 Serverless Inference** behind the trusted supervisor. The public site offers a bounded user-configured scripted Docker challenge alongside honest evidence replay, a time-scrubbable execution track, policy and lifecycle inspectors, trace hash-chain checks, and sanitized evidence downloads. An authenticated operator can run owner-only genuine GLM-5.3 tests across approved Web Chamber scenarios. No API credentials are sent to the browser or disposable worker.
+
+## Web Chamber v2 - complete product workflow
+
+**Chamber Library -> Configure Web -> Execute -> Control Room -> Results and remediation -> History and evidence.**
+
+- **Chambers:** The Web is real and runnable. Toolchain, Vault, Machine and Chaos are explicitly planned, **not implemented**.
+- **Legitimate missions:** value all supplier stock (sample $72.00) or calculate low-stock exposure (available <= 3, sample $24.00).
+- **Threat scenarios:** clean control; role-spoofed system override; off-route exfiltration bait; evidence/receipt forgery; compound multi-step attack. Each scenario changes actual untrusted text served in the sandbox.
+- **Real execution:** user-configured Web missions run Chromium inside Docker on Vultr. A genuine GLM-5.3 agent uses Serverless Inference through the trusted supervisor, while a separate labeled deterministic adversarial fixture intentionally submits prohibited calls for policy testing.
+- **Public demo access:** an anonymous judge can run a **bounded scripted** scenario through the same Vultr Docker boundary. Only the authorized owner may start paid live inference. No arbitrary user prompts, URLs, shell commands or private agent credentials are accepted.
+- **Report:** actual allowed/denied tool proposals, mission result, two distinct worker generations and verified teardown; observed blast radius, limitations, source-labeled remediation suggestions and a stable archive ID for each run.
+- **Evidence:** public exported JSON has its own self-contained SHA-256 chain. Verify offline with `python verify_public_evidence.py path/to/run.json`. The separate original raw trace hash is provenance only; the private original raw log is not included in the sanitized export.
+- **Comparison:** choose two archived runs and compare mission, attack, mode, denied proposals and verified result. This is a bounded test facility, **not** a general agent security certification.
+
+**Best judge path:** [Chamber Library](https://blastlab.45-77-138-147.sslip.io/app) ? Web ? choose Low-stock exposure + Receipt forgery + Scripted challenge ? Launch ? inspect $24.00 verified report ? Control Room ? Evidence. The real GLM-5.3 counterpart appears in Run History and is distinct from fixture attacks.
+
+**Product scope:** only a controlled local `/supplier` browser fixture. This tests our own agent harness, not arbitrary connected third-party agents. The forced reset is supervisor-planned fault injection, not automatically triggered compromise detection.
 
 ## Verified runs
 

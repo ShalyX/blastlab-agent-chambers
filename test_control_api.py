@@ -57,7 +57,7 @@ class GatewayTests(unittest.TestCase):
     def test_public_health(self):
         status,body=self.request('GET','/api/health')
         self.assertEqual(status,200)
-        self.assertEqual(body['execution_mode'],'operator-only')
+        self.assertIn('owner live',body['execution_mode'])
 
     def test_public_safe_proof(self):
         status,body=self.request('GET','/api/runs/live')
@@ -69,7 +69,7 @@ class GatewayTests(unittest.TestCase):
     def test_owner_token_required(self):
         status,body=self.request('POST','/api/runs',{'mode':'scripted'})
         self.assertEqual(status,401)
-        self.assertIn('Operator token',body['error'])
+        self.assertIn('token required',body['error'].lower())
         status,_=self.request('GET','/api/jobs/nothing')
         self.assertEqual(status,401)
 

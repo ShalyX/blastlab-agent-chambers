@@ -23,3 +23,15 @@ web/qa/
 operator-result.txt
 prompt-next.txt
 prompt.txt
+
+web/qa-chambers/
+web/submission-captures/
+web/*.webm
+submission/captures/
+submission/*.mp4
+submission/*.wav
+tools/slides/node_modules/
+submission/crops/
+submission/preview/
+submission/audio/
+submission/BlastLab-Agent-Rush.mp4

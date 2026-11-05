@@ -1,3 +1,9 @@
+# BlastLab — Chamber release audit | 2026-11-05
+
+**Organizer-verified requirements (Nov 5, 2026):** Submit through LabLab, not an optional Vultr Community post. Required: title, short and long descriptions, tech/category tags, cover image, video presentation, slide presentation, public GitHub, demo application platform and URL. Challenge 1 needs actual browser work in an isolated sandbox on Vultr, backend and web app hosted on Vultr, agent LLM calls via Vultr Serverless Inference, recorded containment moment and Vultr architecture explanation in README. Teams 1–6; online build Nov 3–8. Submission deadline precise hour must be confirmed from participant dashboard.
+
+---
+
 # Vultr Agent Rush | verified brief
 
 Checked: 2026-11-04

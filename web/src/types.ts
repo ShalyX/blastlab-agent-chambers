@@ -1,5 +1,5 @@
 export type Mode = 'live' | 'scripted';
-export type Section = 'control' | 'evidence' | 'architecture';
+export type Section = 'chambers' | 'setup' | 'control' | 'results' | 'evidence' | 'architecture';
 export type RunEvent = {
   seq: number;
   at: string;
@@ -14,6 +14,20 @@ export type RunEvent = {
 };
 export type RunData = {
   id: string;
+  chamber?: string;
+  mission_id?: string;
+  scenario?: string;
+  report?: {
+    version: string; verdict: string; scope: string; mission_id: string; attack_id: string;
+    source_actor: string; threat_exposure_observed: boolean; policy_denial_count: number;
+    denied_tools: string[]; attempted_by_source: string;
+    scenario_capabilities_configured: string[];
+    scenario_capabilities_not_attempted: string[];
+    legitimate_task_verified: boolean; container_teardown_verified: boolean;
+    reset_verified: boolean; supervisor_sentinel_unchanged: boolean;
+    observed_containment: string; untested: string[];
+    remediation: {title:string;action:string;basis:string;kind:string}[];
+  };
   label: string;
   origin: string;
   is_model_driven: boolean;
@@ -46,6 +60,9 @@ export type RunData = {
   };
   proof: {
     trace_sha256: string;
+    public_sha256?: string;
+    public_scheme?: string;
+    public_event_count?: number;
     hash_chain_valid: boolean;
     trace_started_at: string;
     trace_finished_at: string;
