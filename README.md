@@ -6,6 +6,12 @@
 **Web Chamber:** https://blastlab.45-77-138-147.sslip.io/app/chambers/web
 **Control room:** https://blastlab.45-77-138-147.sslip.io/app/control
 **Evidence vault:** https://blastlab.45-77-138-147.sslip.io/app/evidence
+**Demo video (80 seconds, actual execution):** https://blastlab.45-77-138-147.sslip.io/media/BlastLab-Agent-Rush.mp4
+**Slide deck (7 slides):** https://blastlab.45-77-138-147.sslip.io/media/BlastLab-Vultr-Agent-Rush.pptx
+**Cover image:** https://blastlab.45-77-138-147.sslip.io/media/BlastLab-Cover.png
+**Complete LabLab submission text and links:** [submission/SUBMISSION.md](submission/SUBMISSION.md)
+**Verified public GLM-5.3 run:** https://blastlab.45-77-138-147.sslip.io/app/results?run=live-fc49cc39d3fba372b5
+**Verified scripted policy challenge:** https://blastlab.45-77-138-147.sslip.io/app/results?run=scripted-99bb851e7f39b5ba82
 
 BlastLab is a test bench for browser agents operating against untrusted content. It records real model action proposals, enforces an independent capability boundary, destroys and recreates isolated Docker/Chromium workers and verifies that an interrupted mission still succeeds.
 

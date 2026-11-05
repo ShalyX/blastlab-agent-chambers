@@ -1,3 +1,5 @@
+**FINAL RELEASE QA (2026-11-05):** MP4 visually inspected via 10-frame contact sheet, 1920x1080/30 fps H.264, 80 s, AAC (peak -1.5 dB); seven-slide PPTX generated and title overflow corrected; public media and ZIP GET/HEAD 200; GitHub repository publicly readable and committed. **Release blocker:** LabLab submission requires authenticated user account; browser currently redirected to login. No submission receipt yet.
+
 # BlastLab — Chamber release audit | 2026-11-05
 
 **Installed skill executed:** `C:/Users/USER/.codex/skills/public-project-launch-hygiene/SKILL.md` and `production-ready-web-apps/SKILL.md`. Instructions were read, applied to current release and checked against the actual deployed service; both installations are reconstructed, original versions unknown. `fallback_used: false` for the available installed skill.

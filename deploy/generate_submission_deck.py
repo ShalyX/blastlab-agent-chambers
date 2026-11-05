@@ -67,8 +67,8 @@ def base(k,title,sub=None):
  txt(sl,f'{k:02d} / 07',12.13,.42,.8,.24,10,MUTED,True,'Consolas',PP_ALIGN.RIGHT)
  rect(sl,.55,7.07,12.2,.012,LINE)
  txt(sl,URL,.59,7.14,8,.2,8,MUTED,False,'Consolas')
- if title:txt(sl,title,.58,.95,11.9,.75,36,WHITE,True)
- if sub:txt(sl,sub,.6,1.74,11.7,.48,16,MUTED)
+ if title:txt(sl,title,.58,.90,11.9,1.16,34,WHITE,True)
+ if sub:txt(sl,sub,.6,2.06,11.7,.35,15,MUTED)
  return sl
 
 def note(sl,text,y=6.53):

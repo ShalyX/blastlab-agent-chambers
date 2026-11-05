@@ -2,10 +2,10 @@
   "project": "BlastLab",
   "event": "Vultr Agent Rush",
   "updated_at": "2026-11-05",
-  "phase": "SUBMISSION_PACKAGE",
+  "phase": "SUBMISSION_READY_ACCOUNT_ACTION_REQUIRED",
   "specialist": "product-critic",
   "exit_proof": "Reconciled chamber-based crash-test facility thesis; one user-complete Web Chamber from mission/scenario selection through genuine Vultr execution to evidence-grounded assessment and recommendations. No false claims that other Chambers are live.",
-  "gate": "WEB_CHAMBER_VERIFIED_LAUNCH_PENDING",
+  "gate": "RELEASE_ASSETS_VERIFIED__LABLAB_LOGIN_SUBMISSION_OUTSTANDING",
   "evidence": {
     "local_tests": {
       "status": "VERIFIED",
@@ -59,14 +59,10 @@
     }
   },
   "blockers": [
-    "P0 PRODUCT DRIFT: Chamber-based crash-test facility collapsed into fixed supplier case-file replay; PRODUCT_LOCK must be reconciled",
-    "P0 USER JOURNEY: no Chamber selection, mission configuration, hostile scenario catalogue or user-run accessible test path",
-    "P0 EVALUATION: no blast-radius assessment, coverage scoring, evidence-grounded remediation or independent public trace verifier",
-    "P0 SUBMISSION: public GitHub, video, slide presentation, official submission and deadline cutoff confirmation outstanding",
-    "P1 NAME: BlastLab is only a working title; similar preexisting software company identified",
-    "P1 FIXTURE TRUTH: live GLM-5.3 model proposed zero forbidden calls; 4 denied actions are from deterministic fixture"
+    "LabLab browser session not logged in (redirect to login)",
+    "No final LabLab submission receipt or project URL"
   ],
-  "next_action": "Finish demo video QA/public URL, clean public GitHub, final LabLab entry and receipt.",
+  "next_action": "User signs into LabLab and submits prepared fields/media in submission/SUBMISSION.md; confirm receipt and official project URL",
   "drift_audit": {
     "date": "2026-11-05",
     "status": "VERIFIED_GAPS__NO_PRODUCT_FIXES_APPLIED",
@@ -87,5 +83,13 @@
     "four_other_chambers": "NOT_IMPLEMENTED",
     "configured_missions": 2,
     "attack_scenarios_including_control": 5
+  },
+  "release_assets": {
+    "github": "https://github.com/ShalyX/blastlab-agent-chambers",
+    "web_app": "https://blastlab.45-77-138-147.sslip.io/app",
+    "video": "https://blastlab.45-77-138-147.sslip.io/media/BlastLab-Agent-Rush.mp4",
+    "slides": "https://blastlab.45-77-138-147.sslip.io/media/BlastLab-Vultr-Agent-Rush.pptx",
+    "cover": "https://blastlab.45-77-138-147.sslip.io/media/BlastLab-Cover.png",
+    "zip": "https://blastlab.45-77-138-147.sslip.io/media/BlastLab-Submission-Package.zip"
   }
 }
