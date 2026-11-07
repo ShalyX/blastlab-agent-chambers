@@ -2,7 +2,7 @@
 
 **Date:** November 7, 2026
 **Product:** BlastLab — real bring-your-own-agent adversarial testing
-**Status:** Conditional engineering acceptance; full-suite and formal Operator gate checks required before advancement.
+**Status:** VERIFIED for the 12 locked functional engineering acceptance scenarios. Separately unproven independent outside-customer adoption is assigned to Phase24 PROOF_ENGINE; no outside-customer acceptance claim is made.
 
 ## Locked twelve P0 feature acceptance
 
@@ -56,4 +56,13 @@
 - Previous 238-test serial suite passed with 3 skips (prior Phase23). New final unit regression is being rerun after a Windows HTTP test-server lifecycle fix.
 - The Operator gate can only advance if **all twelve current functional P0s are legitimately accepted**, evidence files exist, the updated suite passes, and the external-customer limitation is explicitly carried to Phase24 without being falsely described as proven.
 
-**Operator instruction:** A recorded phase PASS is engineering completion only; it is NOT readiness to submit. Do not bypass remaining Phase24–35 gates.
+**Operator instruction:** Phase23 PASS is functional engineering completion only; it is NOT readiness to submit. Outside-operated customer adoption, independent source attestation, semantic correctness and the other Phase24 handoff obligations are explicitly unproven. Do not bypass phases 24–35.
+
+
+## Final gate verification
+
+- Final serial unit regression **PASS**: 240 tests, 3 skipped, zero errors/failures. Windows-only intermittent localhost transport WinError 10053 handled with a bounded retry inside TEST harness only; production gateway unchanged. Log: artifacts/phase23_full_regression_windows_transport_fixed.log.
+- Real model same-agent 3 -> 0 exact-plan repair independently validated; 6/6 reports in both runs match the same plan.
+- Frontend production deployment PASS; local desktop/mobile browser QA PASS for TermProof, vulnerable sample, and exact same-agent remediation.
+- Repository and private evidence locations recorded. Raw session credentials and recovery receipt are NOT in Git.
+- Proof limits and remaining external adoption obligations handed to PHASE24_PROOF_ENGINE_HANDOFF.md.

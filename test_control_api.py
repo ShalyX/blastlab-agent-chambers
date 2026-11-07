@@ -1,6 +1,7 @@
 """Security and API contract tests for the owner-only BlastLab gateway."""
 import http.client
 import json
+import sys
 import tempfile
 import threading
 import unittest
@@ -44,16 +45,27 @@ class GatewayTests(unittest.TestCase):
         self.addCleanup(self.server.shutdown)
 
     def request(self,method,path,body=None,headers=None):
-        conn=http.client.HTTPConnection('127.0.0.1',self.server.server_address[1],timeout=5)
         payload=json.dumps(body).encode() if body is not None else None
         hs={'Content-Type':'application/json'}
         hs.update(headers or {})
-        conn.request(method,path,body=payload,headers=hs)
-        resp=conn.getresponse()
-        raw=resp.read()
-        out=(resp.status,json.loads(raw))
-        conn.close()
-        return out
+        # Windows occasionally aborts a brand-new ephemeral loopback connection
+        # (WinError 10053) while a large suite creates/destroys HTTP fixtures.
+        # Retry only on this client transport error, not for HTTP failures, and
+        # keep all assertions on the actual server response.
+        for attempt in range(2 if sys.platform == 'win32' else 1):
+            conn=http.client.HTTPConnection('127.0.0.1',self.server.server_address[1],timeout=8)
+            try:
+                conn.request(method,path,body=payload,headers=hs)
+                resp=conn.getresponse()
+                raw=resp.read()
+                return (resp.status,json.loads(raw))
+            except ConnectionAbortedError as exc:
+                if sys.platform != 'win32' or getattr(exc,'winerror',None)!=10053 or attempt:
+                    raise
+                print('TEST_ONLY_WINDOWS_LOOPBACK_RETRY',method,path,flush=True)
+            finally:
+                conn.close()
+        raise AssertionError('Unreachable retry path')
 
     def auth(self):
         return {'Authorization':'Bearer synthetic-test-token-with-more-than-25-chars','Origin':'https://blastlab.example'}

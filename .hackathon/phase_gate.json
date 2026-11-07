@@ -172,7 +172,7 @@
       "reason": "Actual desktop/mobile local and published web captures, correct pre/post connection content, real project-owned report/replay views, public HTTPS 200/API health, keyboard interaction, mobile 390 no overflow and malformed-report error handling. P0s remain independently gated."
     },
     "BUILD_LOOP": {
-      "status": "OPEN",
+      "status": "PASS",
       "proof": [
         "PRODUCT_REVIEW_V4.md",
         "PRODUCT-COVERAGE.md",
@@ -180,24 +180,33 @@
         "PHASE23_RECOVERY.md",
         "PHASE23_INTEROP_AND_CONTAINMENT.md",
         "PHASE23_FRESH_CONTAINED_RUN.md",
-        "PHASE23_TERMPROOF_OWNER_ATTEMPT.md"
+        "PHASE23_TERMPROOF_OWNER_ATTEMPT.md",
+        "PHASE23_BUILD_LOOP_EXIT.md",
+        "PHASE24_PROOF_ENGINE_HANDOFF.md"
       ],
-      "reason": "Founder-assisted actual TermProof BYOA exact replay now PASS (real 6/6 task VERIFIED, 0 tool violations, unchanged attack plan and verified manifests). Independently outside-operated customer adoption and remaining locked P0s not yet accepted."
+      "reason": "All twelve original functional engineering P0 acceptance scenarios passed; 240-test regression green; live TermProof, same-agent exact replay, and real contained Vultr sample verified. Unproven independent outside-customer adoption and signed source attestation explicitly remain Phase24 proof obligations, not claimed."
     }
   },
   "judge_simulation_v3": "NOT_RUN",
   "locked_p0": {
-    "P0-01": "IN_PROGRESS",
-    "P0-02": "IN_PROGRESS",
-    "P0-03": "PARTIAL",
-    "P0-04": "PARTIAL",
-    "P0-05": "IN_PROGRESS",
-    "P0-06": "PARTIAL",
-    "P0-07": "PARTIAL",
-    "P0-08": "PARTIAL",
-    "P0-09": "PARTIAL",
-    "P0-10": "PARTIAL",
-    "P0-11": "PARTIAL",
-    "P0-12": "PARTIAL"
+    "P0-01": "VERIFIED",
+    "P0-02": "VERIFIED",
+    "P0-03": "VERIFIED",
+    "P0-04": "VERIFIED",
+    "P0-05": "VERIFIED",
+    "P0-06": "VERIFIED",
+    "P0-07": "VERIFIED",
+    "P0-08": "VERIFIED",
+    "P0-09": "VERIFIED",
+    "P0-10": "VERIFIED",
+    "P0-11": "VERIFIED",
+    "P0-12": "VERIFIED"
+  },
+  "proof_engine_outstanding": {
+    "independently_outside_operated_customer": "NOT_PROVEN",
+    "signed_customer_runner_provenance": "NOT_PROVEN",
+    "customer_tool_side_effect_attestation": "NOT_PROVEN",
+    "semantic_correctness_generalization": "NOT_PROVEN",
+    "source": "PHASE24_PROOF_ENGINE_HANDOFF.md"
   }
 }

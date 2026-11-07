@@ -2,7 +2,7 @@
   "project": "BlastLab",
   "event": "Vultr Agent Rush",
   "updated_at": "2026-11-07",
-  "phase": "BUILD_LOOP",
+  "phase": "PROOF_ENGINE",
   "specialist": "product-engineer",
   "exit_proof": "VISUAL_QA_V4.md: live first-party UI and local report/retest visual QA passed; 12 P0s still separately gated.",
   "gate": "BUILD_LOOP_OPEN",
@@ -70,7 +70,7 @@
     "P0 same-customer-agent mitigation and exact retest not yet demonstrated.",
     "P0 BYOA agent/action execution is not contained in a Vultr worker; supplier Web Chamber is separate DEMO evidence."
   ],
-  "next_action": "Finish remaining locked P0 product gaps; recruit a genuinely outside operator for independent customer BYOA proof; preserve successful founder-assisted TermProof 6/6 exact-plan evidence. Proceed only through Phase23 gate.",
+  "next_action": "PROOF_ENGINE Phase24: compile full verified proof portfolio and recruit genuinely independent outside agent owner/operator; do not claim signed runner attestation or external customer adoption.",
   "drift_audit": {
     "date": "2026-11-05",
     "status": "VERIFIED_GAPS__NO_PRODUCT_FIXES_APPLIED",
@@ -125,7 +125,7 @@
   "scope_revision": 4,
   "phase_integrity": {
     "baseline": "User explicitly reaffirmed bring-your-own-agent red-teaming product on Nov 5; internal supplier scene is DEMO only",
-    "earliest_unmet": "BUILD_LOOP",
+    "earliest_unmet": "PROOF_ENGINE",
     "product_review": "PASS ? audit complete, full product NOT READY",
     "build_loop": "NOT STARTED for BYOA; previous internal fixture work classified DEMO_VERIFIED",
     "downstream_invalidated": [
@@ -177,8 +177,11 @@
     "contained_judge_archive": "PASS - original Phase12 independent 22/22 archive publicly integrated, not public job execution",
     "fresh_fixed_vultr_sample": "PASS - public UI, 22/22 independent checks, 6 cases, 12 Vultr requests, 10 denied, teardown, 390px production QA",
     "independent_customer_agent": "OPEN - founder-assisted acceptance passed but independent outside-operated customer agent not yet evidenced",
-    "full_backend_regression": "PASS - serial full suite 238 tests (3 skipped); earlier concurrent run failed due Windows sandbox/timeouts and is documented",
-    "termproof_founder_acceptance": "PASS - real existing TermProof Gemini production agent through public BYOA, original and corrected exact replay six cases; corrected 6/6 deterministic VERIFIED, 0 forbidden-tool violations, identical attack plan, two verified manifests"
+    "full_backend_regression": "PASS - 240 tests, 3 skipped, zero failures; documented test-only WinError10053 bounded retry",
+    "termproof_founder_acceptance": "PASS - real existing TermProof Gemini production agent through public BYOA, original and corrected exact replay six cases; corrected 6/6 deterministic VERIFIED, 0 forbidden-tool violations, identical attack plan, two verified manifests",
+    "build_loop_functional_p0": "PASS - twelve original P0 engineering acceptance scenarios accepted with explicit qualifications and handoff",
+    "outside_customer_acceptance": "NOT_PROVEN - independent external customer operator belongs to Phase24 proof obligation",
+    "source_attestation": "NOT_PROVEN - unsigned runner-reported event chain; outside runtime actions not attested"
   },
   "phase_revision": 19,
   "product_lock_revision": 4
