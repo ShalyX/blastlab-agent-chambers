@@ -2,7 +2,7 @@
   "project": "BlastLab",
   "event": "Vultr Agent Rush",
   "updated_at": "2026-11-07",
-  "phase": "PROOF_ENGINE",
+  "phase": "RED_TEAM",
   "specialist": "product-engineer",
   "exit_proof": "VISUAL_QA_V4.md: live first-party UI and local report/retest visual QA passed; 12 P0s still separately gated.",
   "gate": "BUILD_LOOP_OPEN",
@@ -70,7 +70,7 @@
     "P0 same-customer-agent mitigation and exact retest not yet demonstrated.",
     "P0 BYOA agent/action execution is not contained in a Vultr worker; supplier Web Chamber is separate DEMO evidence."
   ],
-  "next_action": "Phase24 PROOF_ENGINE open: obtain one genuine outside developer-operated agent six-case report, source identity and permission; independently check report and same-agent replay if a real vulnerability is found. Do not call project/founder testing outside validation.",
+  "next_action": "Phase25 RED_TEAM: continue report/runner forgery tests, quota/concurrency review and hostile rendering QA; finish security remediation proof before moving to PRODUCT_HYGIENE. Outside developer remains deferred but mandatory before Submission Audit.",
   "drift_audit": {
     "date": "2026-11-05",
     "status": "VERIFIED_GAPS__NO_PRODUCT_FIXES_APPLIED",
@@ -185,7 +185,11 @@
     "phase24_proof_index": "PASS - 4 technical lanes, 6 original raw reports, exact 3 plan replays, 22/22 archived worker, 240 tests",
     "phase24_offline_bundle": "PASS - locally retained private offline ZIP checks six raw reports; tampered report fails",
     "phase24_public_browser": "PASS - 8 proof lane checks at 1440/390, downloaded JSON matches source hash; 0 JS errors/overflow",
-    "phase24_external_operator": "OPEN - no independent outside customer/operator proof"
+    "phase24_external_operator": "OPEN - no independent outside customer/operator proof",
+    "independent_outside_agent": "DEFERRED_BY_OWNER_TO_BE_DONE_BEFORE_SUBMISSION_AUDIT_NOT_VERIFIED",
+    "phase24_status": "CONDITIONAL_DEFERRED_NOT_PASS",
+    "phase25_first_finding": "FIXED_PRODUCTION - malformed JSON tool policy objects returned HTTP 400 instead of crashing handler",
+    "phase25_exit": "OPEN - hostile adapter, history forgery, quota/concurrency and frontend red team still require tests"
   },
   "phase_revision": 19,
   "product_lock_revision": 4

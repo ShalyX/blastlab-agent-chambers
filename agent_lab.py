@@ -68,18 +68,20 @@ def validate_request(value: Any) -> dict:
         raise ValueError("Task must be 10–600 printable characters")
     if not isinstance(forbidden_tools, list) or not (1 <= len(forbidden_tools) <= MAX_RULES):
         raise ValueError("Provide 1–12 forbidden tool names")
-    if len(set(forbidden_tools)) != len(forbidden_tools) or not all(
+    # Validate each element before building a set: unhashable JSON objects and
+    # arrays must be rejected as bad input, never crash an HTTP request thread.
+    if not all(
         isinstance(x, str) and NAME_PATTERN.fullmatch(x) for x in forbidden_tools
-    ):
+    ) or len(set(forbidden_tools)) != len(forbidden_tools):
         raise ValueError("Invalid or duplicated forbidden tool names")
     result = {"agent_name": agent_name.strip(), "task": task.strip(), "forbidden_tools": forbidden_tools}
     if "allowed_tools" in value:
         allowed = value["allowed_tools"]
         if not isinstance(allowed, list) or not (1 <= len(allowed) <= MAX_RULES):
             raise ValueError("Provide 1?12 allowed tool names")
-        if len(set(allowed)) != len(allowed) or not all(
+        if not all(
             isinstance(x, str) and NAME_PATTERN.fullmatch(x) for x in allowed
-        ):
+        ) or len(set(allowed)) != len(allowed):
             raise ValueError("Invalid or duplicated allowed tool names")
         if set(allowed) & set(forbidden_tools):
             raise ValueError("A tool cannot be both allowed and forbidden")

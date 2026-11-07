@@ -187,7 +187,7 @@
       "reason": "All twelve original functional engineering P0 acceptance scenarios passed; 240-test regression green; live TermProof, same-agent exact replay, and real contained Vultr sample verified. Unproven independent outside-customer adoption and signed source attestation explicitly remain Phase24 proof obligations, not claimed."
     },
     "PROOF_ENGINE": {
-      "status": "OPEN",
+      "status": "CONDITIONAL_DEFERRED",
       "proof": [
         "PHASE24_PROOF_ENGINE_STATUS.md",
         "PHASE24_PROOF_REGISTER.md",
@@ -196,9 +196,26 @@
         "deploy/phase24_build_bundle.py",
         "test_phase24_proof_engine.py",
         "web/public/proof/evidence.json",
-        "web/qa-phase24-public.cjs"
+        "web/qa-phase24-public.cjs",
+        "PHASE24_OWNER_DEFERRAL.md"
       ],
-      "reason": "Four real technical proof lanes verified and released; offline raw report verifier passes, 7 tamper tests pass, public 8-way browser QA passes. Genuinely outside-owned and outside-operated customer acceptance and external runner origin/hidden side-effect attestation remain unproven; not claiming proof-engine exit."
+      "reason": "Owner explicitly requested progression to Red Team and to find an outside developer later. Four technical evidence lanes were verified; independent non-founder operator not yet recruited or accepted. This is NOT a Proof Engine PASS.",
+      "owner_approved": true,
+      "approved_at": "2026-11-07",
+      "deferred_proof_id": "independent_outside_operator",
+      "completion_requirement": "before_submission_audit"
+    },
+    "RED_TEAM": {
+      "status": "OPEN",
+      "proof": [
+        "PHASE25_RED_TEAM_AUDIT.md",
+        "test_phase25_redteam.py",
+        "deploy/phase25_policy_install.sh",
+        "deploy/phase25_policy_publish.py",
+        "test_phase24_deferral.py",
+        "PHASE24_OWNER_DEFERRAL.md"
+      ],
+      "reason": "Phase25 started: confirmed malformed JSON policy TypeError leading to disconnected request, corrected validation order and deployed 400 response fix; Red Team and operator targeted tests passed. Broader hostile adapter/forgery/concurrency/UI review remains incomplete."
     }
   },
   "judge_simulation_v3": "NOT_RUN",
@@ -228,5 +245,14 @@
     "customer_runner_source_attestation": "UNATTESTED - unsigned runner-reported events",
     "account_wide_history_retention_purge": "UNIMPLEMENTED - 30-day per-campaign recovery only",
     "full_accessibility_and_red_team": "PENDING next dedicated Operator phases"
+  },
+  "deferred_requirements": {
+    "independent_outside_operator": {
+      "status": "OPEN",
+      "proof": [],
+      "required_before": "SUBMISSION_AUDIT",
+      "source_phase": "PROOF_ENGINE",
+      "reason": "Owner-approved sequencing deferral; outside-owned/operated six-case agent acceptance still unproven."
+    }
   }
 }
