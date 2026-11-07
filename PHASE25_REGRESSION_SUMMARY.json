@@ -1,0 +1,39 @@
+{
+  "schema": "blastlab.phase25.red-team-exit.v1",
+  "date": "2026-11-07",
+  "status": "PASS",
+  "tests_executed": 295,
+  "tests_skipped": 3,
+  "test_modules": 20,
+  "test_failures": [],
+  "test_execution_method": "Every test module executed in a separate process, no test assertions mocked or bypassed",
+  "confirmed_issues": [
+    {
+      "id": "R25-01",
+      "summary": "malformed JSON tool-policy member raised uncaught TypeError",
+      "status": "FIXED_PRODUCTION",
+      "verification": "live invalid policy HTTP 400 after service restart"
+    },
+    {
+      "id": "R25-02",
+      "summary": "long hostile runner text broke report layout",
+      "status": "FIXED_PRODUCTION",
+      "verification": "live desktop/mobile Chrome hostile payloads escaped, no overflow/errors/external traffic"
+    }
+  ],
+  "browser_qa": {
+    "local": {
+      "1440": "PASS",
+      "390": "PASS"
+    },
+    "production_served": {
+      "1440": "PASS",
+      "390": "PASS"
+    },
+    "outbound_attack_requests": 0,
+    "script_executed": false
+  },
+  "attestation_limit": "External agent behavior is runner-reported and unsigned; no independently authenticated customer execution.",
+  "independent_outside_developer_status": "OPEN_DEFERRED_UNTIL_BEFORE_SUBMISSION_AUDIT",
+  "proof": "PHASE25_RED_TEAM_EXIT.md"
+}

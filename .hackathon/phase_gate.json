@@ -206,16 +206,24 @@
       "completion_requirement": "before_submission_audit"
     },
     "RED_TEAM": {
-      "status": "OPEN",
+      "status": "PASS",
       "proof": [
+        "PHASE25_RED_TEAM_EXIT.md",
+        "PHASE25_REGRESSION_SUMMARY.json",
         "PHASE25_RED_TEAM_AUDIT.md",
         "test_phase25_redteam.py",
+        "test_phase25_redteam_completion.py",
+        "web/qa-phase25-redteam.cjs",
+        "web/qa-phase25-public.cjs",
         "deploy/phase25_policy_install.sh",
-        "deploy/phase25_policy_publish.py",
-        "test_phase24_deferral.py",
-        "PHASE24_OWNER_DEFERRAL.md"
+        "deploy/phase25_hostile_ui_install.sh"
       ],
-      "reason": "Phase25 started: confirmed malformed JSON policy TypeError leading to disconnected request, corrected validation order and deployed 400 response fix; Red Team and operator targeted tests passed. Broader hostile adapter/forgery/concurrency/UI review remains incomplete."
+      "reason": "Two reproduced flaws fixed in live Vultr production; 295 executable unit tests PASS, 3 skipped, zero failed; malformed HTTP, concurrent quota, cross-session auth, recovery, forged reports and adapter metadata tested; real production-served hostile UI Chrome checks PASS at 1440/390. Runner-reported behavior and outside operator explicitly unproven, remain documented as separate debts."
+    },
+    "PRODUCT_HYGIENE": {
+      "status": "OPEN",
+      "proof": [],
+      "reason": "Phase26 has not yet completed its separate end-to-end Product Hygiene audit."
     }
   },
   "judge_simulation_v3": "NOT_RUN",

@@ -2,7 +2,7 @@
   "project": "BlastLab",
   "event": "Vultr Agent Rush",
   "updated_at": "2026-11-07",
-  "phase": "RED_TEAM",
+  "phase": "PRODUCT_HYGIENE",
   "specialist": "product-engineer",
   "exit_proof": "VISUAL_QA_V4.md: live first-party UI and local report/retest visual QA passed; 12 P0s still separately gated.",
   "gate": "BUILD_LOOP_OPEN",
@@ -70,7 +70,7 @@
     "P0 same-customer-agent mitigation and exact retest not yet demonstrated.",
     "P0 BYOA agent/action execution is not contained in a Vultr worker; supplier Web Chamber is separate DEMO evidence."
   ],
-  "next_action": "Phase25 RED_TEAM: continue report/runner forgery tests, quota/concurrency review and hostile rendering QA; finish security remediation proof before moving to PRODUCT_HYGIENE. Outside developer remains deferred but mandatory before Submission Audit.",
+  "next_action": "Advance adjacent gate to PRODUCT_HYGIENE (Phase26); run dedicated end-to-end Product Hygiene, accessibility and real user-journey audit. Independent outside operator remains OPEN, mandatory before Submission Audit.",
   "drift_audit": {
     "date": "2026-11-05",
     "status": "VERIFIED_GAPS__NO_PRODUCT_FIXES_APPLIED",
@@ -189,7 +189,8 @@
     "independent_outside_agent": "DEFERRED_BY_OWNER_TO_BE_DONE_BEFORE_SUBMISSION_AUDIT_NOT_VERIFIED",
     "phase24_status": "CONDITIONAL_DEFERRED_NOT_PASS",
     "phase25_first_finding": "FIXED_PRODUCTION - malformed JSON tool policy objects returned HTTP 400 instead of crashing handler",
-    "phase25_exit": "OPEN - hostile adapter, history forgery, quota/concurrency and frontend red team still require tests"
+    "phase25_exit": "OPEN - hostile adapter, history forgery, quota/concurrency and frontend red team still require tests",
+    "phase25_red_team": "PASS - 295 executable tests; 3 skips; production policy crash and hostile overflow repaired; live Chrome QA 2 viewports"
   },
   "phase_revision": 19,
   "product_lock_revision": 4

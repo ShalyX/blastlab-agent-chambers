@@ -281,3 +281,13 @@
 .byoa-compare-task-signal small{color:#aebeb1;font-size:10px}
 @media(max-width:1100px){.byoa-surface-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:690px){.byoa-surface-top{flex-direction:column;gap:12px}.byoa-surface-grid{grid-template-columns:1fr}.byoa-success-coverage strong{flex-direction:column;gap:0}.byoa-surface-count{white-space:normal}}
+
+
+/* Phase25: safe display of attacker-controlled, unbroken response text. */
+.byoa-finding,.byoa-observation,.byoa-mitigation-detail,.byoa-compare-remediations{min-width:0;max-width:100%}
+.byoa-finding :is(p,small,code,pre),.byoa-mitigation-detail :is(a,p,small,code),
+.byoa-compare-remediations :is(p,small,pre,code){
+  overflow-wrap:anywhere;
+  word-break:break-word;
+}
+.byoa-finding pre,.byoa-mitigation-detail pre{white-space:pre-wrap}
