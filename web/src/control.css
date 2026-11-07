@@ -283,3 +283,14 @@
 
 
 @media(max-width:700px){.console-topbar{min-width:0}.breadcrumb{flex:1;min-width:0;max-width:100%;overflow:hidden;text-overflow:ellipsis}.mobile-rail-toggle,.topbar-right{flex:none}}
+
+/* Phase21: project-owned supplier case is secondary; owner runner is not VM-attested */
+.rail-demo-group{margin-top:14px;border-top:1px solid #34433b;padding-top:11px}
+.rail-demo-group summary{display:flex;align-items:center;gap:9px;cursor:pointer;padding:11px 13px;color:#a6beb5;font:600 11px 'IBM Plex Mono',monospace;list-style:none}
+.rail-demo-group summary::-webkit-details-marker{display:none}
+.rail-demo-group summary small{margin-left:auto;color:#b8a799;font-size:9px}
+.rail-demo-group[open] summary{margin-bottom:5px;color:#e2eae3}
+.rail-demo-group .rail-link{width:100%;text-align:left}
+.planner-source{display:inline-flex;align-items:center;border:1px solid #506158;padding:8px 10px;color:#c3d6c9;font:600 10px 'IBM Plex Mono',monospace;white-space:nowrap}
+@media(max-width:700px){.top-run-btn{font-size:9px;padding:0 8px;gap:5px}.top-run-btn svg{height:16px;width:16px}.topbar-right .planner-source{display:none}.rail-demo-group{display:block}.rail-demo-group .rail-link{justify-content:flex-start;font-size:12px;padding:10px 13px}.rail-demo-group summary{font-size:11px}}
+@media(min-width:701px) and (max-width:1050px){.rail-demo-group{display:none}}

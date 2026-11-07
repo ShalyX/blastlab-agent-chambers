@@ -4,6 +4,7 @@ import json
 import sys
 import tempfile
 import unittest
+from test_support_agent_plan import fake_live_plan
 from pathlib import Path
 from unittest.mock import patch
 
@@ -24,6 +25,9 @@ class ProductExternalAgentTests(unittest.TestCase):
         p=patch.object(service,"DIR",Path(tmp.name))
         p.start()
         self.addCleanup(p.stop)
+        planner=patch.object(service,"generate_vultr_attack_plan",side_effect=fake_live_plan)
+        planner.start()
+        self.addCleanup(planner.stop)
 
     def configuration(self):
         return {
@@ -86,7 +90,7 @@ class ProductExternalAgentTests(unittest.TestCase):
             ident,"Bearer "+created["join_token"],
             {"case_id":"role_spoof","answer":"fake","tool_calls":[]})
         self.assertEqual(status,400)
-        self.assertIn("order",reply["error"].lower())
+        self.assertIn("invalid case id",reply["error"].lower())
 
     def test_no_arbitrary_agent_code_or_endpoint(self):
         bad=self.configuration()
@@ -111,6 +115,9 @@ class ProductHttpTests(GatewayTests):
         p=patch.object(service,"DIR",Path(tmp.name))
         p.start()
         self.addCleanup(p.stop)
+        planner=patch.object(service,"generate_vultr_attack_plan",side_effect=fake_live_plan)
+        planner.start()
+        self.addCleanup(planner.stop)
 
     def config(self):
         return {

@@ -2,6 +2,7 @@
 import json
 import os
 import queue
+import re
 import shutil
 import subprocess
 import threading
@@ -35,6 +36,25 @@ def docker_command(name):
             '--cpus=1', '--user=10001:10001',
             '--tmpfs=/tmp:rw,nosuid,nodev,size=256m,mode=1777',
             '--shm-size=128m', 'blastlab-browser:spike']
+
+
+def docker_cli():
+    """Use the local Docker CLI or a fixed, authenticated SSH Docker host.
+
+    SSH mode keeps inference credentials on the supervisor while running the
+    disposable browser container on the remote Docker daemon.
+    """
+    target = os.environ.get('BLASTLAB_DOCKER_SSH_TARGET', '').strip()
+    if not target:
+        return ['docker']
+    if not re.fullmatch(r'(?:[A-Za-z0-9_][A-Za-z0-9_.-]*@)?[A-Za-z0-9][A-Za-z0-9_.-]*', target):
+        raise GateError('Invalid Docker SSH target')
+    command = ['ssh', '-T', '-o', 'BatchMode=yes',
+               '-o', 'StrictHostKeyChecking=yes', '-o', 'ConnectTimeout=12']
+    key = os.environ.get('BLASTLAB_DOCKER_SSH_KEY') or os.environ.get('VULTR_VM_SSH_KEY')
+    if key:
+        command += ['-i', key]
+    return command + [target, 'docker']
 
 
 class BrowserSandbox:
@@ -82,9 +102,10 @@ class BrowserSandbox:
         self.generation += 1
         self.name = 'blastlab-' + uuid.uuid4().hex
         if self.backend == 'docker':
-            if not shutil.which('docker'):
-                raise GateError('Docker executable unavailable; provision Docker on the Vultr VM')
-            command, env = docker_command(self.name), None
+            cli = docker_cli()
+            if not shutil.which(cli[0]):
+                raise GateError('Docker transport unavailable; provision Docker or SSH')
+            command, env = cli + docker_command(self.name)[1:], None
         else:
             command, env = ['node', str(ROOT / 'browser-worker.cjs')], worker_environment()
         self.responses = queue.Queue(maxsize=16)
@@ -118,16 +139,25 @@ class BrowserSandbox:
                 process.wait(timeout=10)
             container_absent = self.backend != 'docker'
             if self.backend == 'docker':
-                # Check the Docker daemon's actual container list, not the
-                # version-specific wording of 'docker inspect' error messages.
+                # A --rm container normally disappears when the worker exits.
+                # Query the daemon first over high-latency SSH; force removal
+                # only if still present, then independently verify absence.
+                remote = bool(os.environ.get('BLASTLAB_DOCKER_SSH_TARGET'))
+                cleanup_timeout = 75 if remote else 15
                 try:
-                    subprocess.run(['docker', 'rm', '-f', self.name],
-                                   capture_output=True, timeout=15)
-                    listing = subprocess.run(
-                        ['docker', 'ps', '-a', '--filter', f'name=^/{self.name}$',
-                         '--format', '{{.Names}}'],
-                        capture_output=True, timeout=15)
+                    cli = docker_cli()
+                    check = cli + ['ps', '-a', '--filter', f'name=^/{self.name}$',
+                                   '--format', '{{.Names}}']
+                    if not remote:
+                        subprocess.run(cli + ['rm', '-f', self.name],
+                                       capture_output=True, timeout=cleanup_timeout)
+                    listing = subprocess.run(check, capture_output=True, timeout=cleanup_timeout)
                     container_absent = listing.returncode == 0 and not listing.stdout.strip()
+                    if remote and not container_absent:
+                        subprocess.run(cli + ['rm', '-f', self.name],
+                                       capture_output=True, timeout=cleanup_timeout)
+                        listing = subprocess.run(check, capture_output=True, timeout=cleanup_timeout)
+                        container_absent = listing.returncode == 0 and not listing.stdout.strip()
                 except (OSError, subprocess.TimeoutExpired):
                     container_absent = False
             try:

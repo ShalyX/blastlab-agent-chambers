@@ -9,6 +9,8 @@ import {
 import type { Mode, RunData, RunEvent, Section } from './types';
 import {ChamberLibrary, WebChamberSetup, RunResults} from './ChamberExperience';
 import { AgentLabConnect, AgentLabCampaign } from './AgentLabExperience';
+import JudgeDemo from './JudgeDemo';
+import ContainedSample from './ContainedSample';
 
 const VALUE = (cents: number) => '$' + ((cents || 0) / 100).toFixed(2);
 const short = (s?: string | null, n=11) => (s ? s.slice(0, n) : '—');
@@ -285,7 +287,8 @@ function ControlRoom() {
   const {section,navigate}=useSection();
   const [agentSession,setAgentSession]=useState<{
     session_id:string;join_token:string;expires_at:string;cases_total:number;
-    source_type:string;connector:string
+    source_type:string;connector:string;attack_source:string;
+    attack_provider:string;attack_model:string;attack_plan_sha256:string;recovery_key?:string;recovery_expires_at?:string
   }|null>(()=>{
     try{const old=sessionStorage.getItem('blastlab-agent-session');return old?JSON.parse(old):null;}
     catch{return null;}
@@ -346,7 +349,10 @@ function ControlRoom() {
   const saveEvidence=()=>{if(!data)return;const object=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});const url=URL.createObjectURL(object);const link=document.createElement('a');link.href=url;link.download='blastlab-'+data.id+'-sanitized-evidence.json';link.click();window.setTimeout(()=>URL.revokeObjectURL(url),2000);};
   const connectAgent=(created:NonNullable<typeof agentSession>)=>{
     setAgentSession(created);
-    try{sessionStorage.setItem('blastlab-agent-session',JSON.stringify(created));}catch{}
+    // The read-only recovery secret is intentionally NOT browser-persisted.
+    const {recovery_key: _oneTimeRecoveryKey, ...reloadable} = created;
+    void _oneTimeRecoveryKey;
+    try{sessionStorage.setItem('blastlab-agent-session',JSON.stringify(reloadable));}catch{}
     navigate('campaign');setMobileNav(false);
   };
   const newAgent=()=>{
@@ -363,18 +369,19 @@ function ControlRoom() {
   return <div className="console-shell">
     <aside className={'console-rail '+(mobileNav?'rail-open':'')}>
       <div className="rail-brand"><Brand inverse/><button className="rail-close" aria-label="Close menu" onClick={()=>setMobileNav(false)}><X size={19}/></button></div>
-      <div className="rail-workspace"><span className="workspace-sigil"><Layers3 size={16}/></span><div><span className="mono">WORKSPACE 001</span><strong>Containment Lab</strong></div><ChevronDown size={14}/></div>
+      <div className="rail-workspace"><span className="workspace-sigil"><Layers3 size={16}/></span><div><span className="mono">WORKSPACE 001</span><strong>{section==='agent'||section==='campaign'?'Agent Test Bench':'Sample Containment Demo'}</strong></div><ChevronDown size={14}/></div>
 
       <div className="nav-cluster"><span className="rail-label">PRODUCT / CONNECT YOUR AGENT</span>
-        <button className={'rail-link '+(section==='agent'?'active':'')} onClick={()=>select('agent')}><Zap size={18}/> Connect your agent <span className="nav-key">01</span></button>
-        <button className={'rail-link '+(section==='campaign'?'active':'')} onClick={()=>select('campaign')}><Activity size={18}/> Attack campaign <span className="nav-key">02</span></button>
-        <span className="rail-label" style={{marginTop:19}}>DEMO / INTERNAL SUPPLIER CASE</span>
+        <button className={'rail-link '+(section==='agent'?'active':'')} onClick={()=>select('agent')}><Zap size={18}/> Connect &amp; rules <span className="nav-key">01</span></button>
+        <button className={'rail-link '+(section==='campaign'?'active':'')} onClick={()=>select('campaign')}><Activity size={18}/> Campaign / evidence / retest <span className="nav-key">02</span></button>
+        <details className="rail-demo-group" key={section==='agent'||section==='campaign'?'sample-closed':'sample-open'} open={section!=='agent'&&section!=='campaign'}><summary><Layers3 size={16}/> Sample Lab <small>DEMO</small></summary>
         <button className={'rail-link '+(section==='chambers'?'active':'')} onClick={()=>select('chambers')}><Layers3 size={18}/> Supplier demo <span className="nav-key">D1</span></button>
         <button className={'rail-link '+(section==='setup'?'active':'')} onClick={()=>select('setup')}><ShieldAlert size={18}/> Demo setup <span className="nav-key">D2</span></button>
         <button className={'rail-link '+(section==='control'?'active':'')} onClick={()=>select('control')}><Activity size={18}/> Demo replay <span className="nav-key">D3</span></button>
         <button className={'rail-link '+(section==='results'?'active':'')} onClick={()=>select('results')}><CheckCircle2 size={18}/> Demo results <span className="nav-key">D4</span></button>
         <button className={'rail-link '+(section==='evidence'?'active':'')} onClick={()=>select('evidence')}><Fingerprint size={18}/> Demo evidence <span className="nav-key">D5</span></button>
         <button className={'rail-link '+(section==='architecture'?'active':'')} onClick={()=>select('architecture')}><Layers3 size={18}/> Architecture <span className="nav-key">D6</span></button>
+        </details>
       </div>
       <div className="nav-cluster rail-lower"><span className="rail-label">{section==='agent'||section==='campaign'?'PRODUCT / AGENT CONNECTION':'DEMO / EXECUTION ENVIRONMENT'}</span>
         <div className="provider-item"><span className="provider-icon"><Server size={17}/></span><div><b>Vultr Compute</b><small>Hosted campaign API</small></div><i className="green-dot"/></div>
@@ -391,10 +398,10 @@ function ControlRoom() {
       <header className="console-topbar">
         <button className="mobile-rail-toggle" onClick={()=>setMobileNav(true)} aria-label="Open menu"><Menu size={21}/></button>
         <div className="breadcrumb mono">BLASTLAB <span>/</span> TEST FACILITY <span>/</span> {section==='agent'?'CONNECT AGENT':section==='campaign'?'AGENT ATTACK CAMPAIGN':section==='chambers'?'SUPPLIER DEMO':section==='setup'?'DEMO SETUP':section==='results'?'TEST REPORT':section==='control'?'CONTROL ROOM':section==='evidence'?'EVIDENCE VAULT':'ARCHITECTURE'}</div>
-        <div className="topbar-right"><Pill tone="mint" dot>VULTR VM VERIFIED</Pill><button className="top-icon" title="Refresh recorded evidence" aria-label="Refresh evidence" onClick={onRefresh}><RefreshCcw size={17}/></button><button className="top-run-btn" onClick={newAgent}><Plus size={16}/> CONNECT AGENT</button></div>
+        <div className="topbar-right">{(section==='agent'||section==='campaign')?<span className="planner-source">ATTACK PLANNER / VULTR</span>:<Pill tone="mint" dot>VULTR SAMPLE VERIFIED</Pill>}<button className="top-icon" title="Refresh recorded evidence" aria-label="Refresh evidence" onClick={onRefresh}><RefreshCcw size={17}/></button><button className="top-run-btn" onClick={section==='agent'?()=>document.getElementById('byoa-connect-form')?.scrollIntoView({behavior:'auto',block:'start'}):newAgent}><Plus size={16}/> CONNECT AGENT</button></div>
       </header>
       {section==='agent'&&<AgentLabConnect onCreated={connectAgent} onDemo={()=>select('chambers')}/>}
-      {section==='campaign'&&<AgentLabCampaign created={agentSession} onNew={newAgent}/>}
+      {section==='campaign'&&<AgentLabCampaign key={agentSession?.session_id} created={agentSession} onNew={newAgent} onRetest={connectAgent}/>}
       {section==='chambers'&&<ChamberLibrary onEnter={()=>select('setup')} onViewRun={openRun}/>}
       {section==='setup'&&<WebChamberSetup onComplete={completedRun} onViewRun={openRun}/>}
       {section==='results'&&<RunResults run={data} loading={loading} error={error} onControl={()=>select('control')} onNew={()=>select('setup')} onViewRun={openRun}/>}
@@ -467,4 +474,4 @@ function ControlRoom() {
     {modal&&<OperatorModal onClose={()=>setModal(false)} onDone={()=>{setRefresh(x=>x+1)}}/>}
   </div>;
 }
-export default function App(){return location.pathname.startsWith('/app')?<ControlRoom/>:<Landing/>;}
+export default function App(){return location.pathname==='/contained-sample'?<ContainedSample/>:location.pathname==='/judge-demo'?<JudgeDemo/>:location.pathname.startsWith('/app')?<ControlRoom/>:<Landing/>;}

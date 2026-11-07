@@ -58,15 +58,28 @@ def availability():
 class VultrInference:
     kind = 'vultr-live'
 
-    def __init__(self, config, trace, opener=None):
+    def __init__(self, config, trace, opener=None, *,
+                 completion_tokens=4096, timeout_seconds=45, reasoning_effort=None):
         self.config, self.trace = config, trace
+        if not isinstance(completion_tokens, int) or not 1 <= completion_tokens <= 16384:
+            raise ValueError("Invalid Vultr completion-token budget")
+        if not isinstance(timeout_seconds, (int, float)) or not 5 <= timeout_seconds <= 180:
+            raise ValueError("Invalid Vultr inference timeout")
+        if reasoning_effort not in (None, 'minimal', 'low', 'medium'):
+            raise ValueError("Unsupported Vultr reasoning effort")
+        self.completion_tokens = completion_tokens
+        self.timeout_seconds = timeout_seconds
+        self.reasoning_effort = reasoning_effort
         if opener is not None:
             self.kind = 'vultr-contract-mock'
         self.opener = opener or build_opener(ProxyHandler({}), NoRedirect())
 
     def complete(self, messages, tools):
         payload = {'model': self.config.model, 'messages': messages, 'tools': tools,
-                   'tool_choice': 'auto', 'stream': False, 'max_completion_tokens': 2048}
+                   'tool_choice': 'auto', 'stream': False,
+                   'max_completion_tokens': self.completion_tokens}
+        if self.reasoning_effort is not None:
+            payload['reasoning_effort'] = self.reasoning_effort
         self.trace.emit('inference_request', provider=self.kind, endpoint=ENDPOINT,
                         body=payload)
         request = Request(ENDPOINT + '/chat/completions',
@@ -75,7 +88,7 @@ class VultrInference:
                                    'Content-Type': 'application/json'})
         started = time.perf_counter()
         try:
-            with self.opener.open(request, timeout=45) as response:
+            with self.opener.open(request, timeout=self.timeout_seconds) as response:
                 raw = response.read(262145)
                 if len(raw) > 262144:
                     raise GateError('Vultr response exceeds 256 KiB limit.')
@@ -91,14 +104,16 @@ class VultrInference:
         try:
             choice = body['choices'][0]
             message = choice['message']
-            if (choice.get('finish_reason') not in ('stop', 'tool_calls')
-                    or message.get('role') != 'assistant'
-                    or body.get('model') != self.config.model):
-                raise ValueError()
+            if body.get('model') != self.config.model:
+                raise GateError('Vultr returned a model ID different from the configured model.')
+            if message.get('role') != 'assistant':
+                raise GateError('Vultr returned a non-assistant message.')
+            if choice.get('finish_reason') not in ('stop', 'tool_calls'):
+                raise GateError('Vultr response was incomplete (finish_reason=' + str(choice.get('finish_reason')) + ').')
             # Do not persist provider private reasoning, only executable/public output.
             public = {k: message[k] for k in ('role', 'content', 'tool_calls') if k in message}
         except (KeyError, IndexError, TypeError, ValueError):
-            raise GateError('Invalid/truncated response or returned model differs from configured model.') from None
+            raise GateError('Invalid or truncated Vultr response structure.') from None
         self.trace.emit('inference_response', provider=self.kind, response_id=body.get('id'),
                         requested_model=self.config.model, returned_model=body.get('model'),
                         elapsed_ms=round((time.perf_counter() - started) * 1000, 3),

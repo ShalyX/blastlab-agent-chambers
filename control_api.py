@@ -21,7 +21,9 @@ from urllib.parse import urlparse
 
 from evidence_export import parse_run
 from web_chamber import catalog, validate_config, DEFAULT_MISSION, DEFAULT_SCENARIO
-from agent_lab_service import new_campaign, get_campaign, post_campaign
+from agent_lab_service import new_campaign, get_campaign, post_campaign, get_recovery_report
+import contained_sample_service as contained_sample
+from agent_lab import verify_import
 
 ROOT = Path(__file__).resolve().parent
 DATA_DIR = Path(os.environ.get('BLASTLAB_PROOF_DIR', '/var/www/blastlab/data'))
@@ -224,6 +226,8 @@ class Handler(BaseHTTPRequestHandler):
 
     def read_body(self):
         max_size = 7500 if self.path.startswith('/api/agent-lab/') else MAX_REQUEST_BYTES
+        if urlparse(self.path).path in ('/api/agent-lab/sessions', '/api/agent-lab/reports/verify'):
+            max_size = 1100000  # Two bounded report exports plus the replay configuration.
         try:n=int(self.headers.get('Content-Length','0'))
         except ValueError:n=0
         if not 0<n<=max_size:
@@ -239,6 +243,17 @@ class Handler(BaseHTTPRequestHandler):
 
     def do_GET(self):
         path=urlparse(self.path).path
+        if path=="/api/contained-sample/latest":
+            code, data = contained_sample.latest()
+            return self.send(code, data)
+        fresh_job=re.fullmatch(r"/api/contained-sample/jobs/([a-f0-9]{32})",path)
+        if fresh_job:
+            code, data = contained_sample.get(fresh_job.group(1))
+            return self.send(code, data)
+        recovery_read=re.fullmatch(r'/api/agent-lab/sessions/([a-f0-9]{32})/recovery-report',path)
+        if recovery_read:
+            code, value = get_recovery_report(recovery_read.group(1), self.headers.get('Authorization'))
+            return self.send(code, value)
         agent_read=re.fullmatch(r'/api/agent-lab/sessions/([a-f0-9]{32})/(status|next|report)',path)
         if agent_read:
             status,result=get_campaign(agent_read.group(1),self.headers.get('Authorization'),agent_read.group(2))
@@ -280,12 +295,31 @@ class Handler(BaseHTTPRequestHandler):
     def do_POST(self):
         global ACTIVE_JOB
         path=urlparse(self.path).path
+        if path=="/api/contained-sample/jobs":
+            if not self.origin_allowed(required=True):
+                return self.send(403,{"error":"Origin not permitted"})
+            body=self.read_body()
+            if body is None:return
+            code,data=contained_sample.start(
+                owner=authorized(self.headers.get("Authorization")),requested=body)
+            return self.send(code,data)
+        if path=='/api/agent-lab/reports/verify':
+            if not self.origin_allowed(required=True):
+                return self.send(403,{'error':'Origin not permitted'})
+            body=self.read_body()
+            if body is None:return
+            try:return self.send(200,verify_import(body))
+            except ValueError as exc:return self.send(400,{'error':str(exc)})
         if path=='/api/agent-lab/sessions':
             if not self.origin_allowed(required=True):
                 return self.send(403,{'error':'Origin not permitted'})
             body=self.read_body()
             if body is None:return
-            status,result=new_campaign(body)
+            # Owner-only QA allocation: authenticated using the existing
+            # server-side operator token. Public clients cannot claim owner
+            # privileges by adding a JSON field.
+            is_operator=authorized(self.headers.get('Authorization'))
+            status,result=new_campaign(body,owner=True) if is_operator else new_campaign(body)
             return self.send(status,result)
         agent_write=re.fullmatch(r'/api/agent-lab/sessions/([a-f0-9]{32})/response',path)
         if agent_write:

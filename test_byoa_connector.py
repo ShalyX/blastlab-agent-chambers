@@ -7,6 +7,7 @@ import importlib.util
 import sys
 import tempfile
 import unittest
+from test_support_agent_plan import fake_live_plan
 from pathlib import Path
 from unittest.mock import patch
 
@@ -29,6 +30,9 @@ class RealConnectorHttpTests(GatewayTests):
         context=patch.object(service,"DIR",Path(dir.name))
         context.start()
         self.addCleanup(context.stop)
+        planner=patch.object(service,"generate_vultr_attack_plan",side_effect=fake_live_plan)
+        planner.start()
+        self.addCleanup(planner.stop)
 
     def run_external(self,adapter):
         config={
