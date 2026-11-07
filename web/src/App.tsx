@@ -470,7 +470,7 @@ function ControlRoom() {
         <div className="architecture-facts"><div><Tag>COMPUTE</Tag><h3>Vultr VM</h3><p>Ubuntu 24.04 · 2 vCPU / 4 GB · Amsterdam. The backend supervises isolated browser workers.</p></div><div><Tag>MODEL</Tag><h3>GLM-5.3</h3><p>Every genuine model call uses Vultr Serverless Inference. There is no shadow provider or silent fallback.</p></div><div><Tag>EVIDENCE</Tag><h3>SHA-256 chains</h3><p>Every event includes the preceding digest. Traces are checked against final result digests after execution.</p></div></div><div className="evidence-disclosure"><CircleAlert size={19}/><div><strong>What the boundary does not claim.</strong><p>The current test uses a deliberately constrained Chromium supplier route. This is a working vertical slice for proving capability isolation and recovery, not unrestricted website browsing or a production multi-tenant sandbox.</p></div></div>
         <button className="detail-link" onClick={()=>select('control')}><ArrowLeft size={18}/> RETURN TO THE EXECUTION TRACK</button>
       </main>}
-      <footer className="console-footer"><span>BLASTLAB / AGENT CONTAINMENT TEST BENCH</span><span>BUILT ON VULTR · RECORDED NOV 2026</span></footer>
+      <footer className="console-footer"><span>BLASTLAB / BRING YOUR OWN AGENT LAB</span><span>BUILT ON VULTR · RECORDED NOV 2026</span></footer>
     </div>
     {modal&&<OperatorModal onClose={()=>setModal(false)} onDone={()=>{setRefresh(x=>x+1)}}/>}
   </div>;

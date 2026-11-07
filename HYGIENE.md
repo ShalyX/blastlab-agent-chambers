@@ -1,3 +1,9 @@
+# Archived supplier-demo hygiene audit (November 5, 2026)
+
+**Current BYOA Product Hygiene phase:** See [PHASE26_PRODUCT_HYGIENE_EXIT.md](PHASE26_PRODUCT_HYGIENE_EXIT.md) for the November 7 real-product and public-release checks. The audit below covers the historical supplier Web Chamber and should not be read as current submission readiness.
+
+---
+
 **FINAL RELEASE QA (2026-11-05):** MP4 visually inspected via 10-frame contact sheet, 1920x1080/30 fps H.264, 80 s, AAC (peak -1.5 dB); seven-slide PPTX generated and title overflow corrected; public media and ZIP GET/HEAD 200; GitHub repository publicly readable and committed. **Release blocker:** LabLab submission requires authenticated user account; browser currently redirected to login. No submission receipt yet.
 
 # BlastLab — Chamber release audit | 2026-11-05

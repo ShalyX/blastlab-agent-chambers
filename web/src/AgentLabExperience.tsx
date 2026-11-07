@@ -152,7 +152,7 @@ export function AgentLabConnect({onCreated,onDemo}:{
         <p>Connect an agent you actually built. We'll feed it controlled adversarial prompts and poisoned content, record the responses it really produces, and give you an evidence-based security report.</p>
         <div className="byoa-traits"><span><CheckCircle2 size={14}/> Your agent</span><span><ShieldAlert size={14}/> Vultr-generated attacks</span><span><Fingerprint size={14}/> Actual observations</span></div>
         <a href="#byoa-connect-form" className="byoa-jump-link">Set up your agent <ArrowRight size={16}/></a>
-        <a href="/connect/independent-tester.md" className="byoa-jump-link" target="_blank" rel="noreferrer">Independent agent testing protocol <ArrowRight size={16}/></a>
+        <a href="/connect/independent-tester.md" className="byoa-jump-link" target="_blank" rel="noopener noreferrer">Independent agent testing protocol <ArrowRight size={16}/></a>
         <a href="/proof" className="byoa-jump-link">Inspect verified judge evidence <ArrowRight size={16}/></a>
       </div>
       <div className="byoa-diagnostic" aria-label="Illustration of the BYOA test process, not a live connection status">
@@ -326,10 +326,10 @@ export function AgentLabCampaign({created,onNew,onRetest}:{created:Created|null,
       <small>Expires {created.recovery_expires_at?new Date(created.recovery_expires_at).toLocaleString():'30 days after creation'}. Keep this file private. It contains a bearer credential.</small>
     </section>}
     {!done&&<div className="byoa-connection-grid">
-      <section className="byoa-connection-panel"><Kicker>CONNECTOR / STEP ONE</Kicker><h2>Download the Python connector.</h2><p>It calls a Python function you own, passes the attack as untrusted input, and sends the agent's actual output and tool intents back to this campaign.</p><a className="ch-primary" href="/connect/blastlab_connector.py" download><Download size={17}/> DOWNLOAD CONNECTOR</a><a className="byoa-inline-link" href="https://github.com/ShalyX/blastlab-agent-chambers/tree/master/examples" target="_blank" rel="noreferrer">View example agent adapters <ArrowUpRight size={15}/></a></section>
+      <section className="byoa-connection-panel"><Kicker>CONNECTOR / STEP ONE</Kicker><h2>Download the Python connector.</h2><p>It calls a Python function you own, passes the attack as untrusted input, and sends the agent's actual output and tool intents back to this campaign.</p><a className="ch-primary" href="/connect/blastlab_connector.py" download><Download size={17}/> DOWNLOAD CONNECTOR</a><a className="byoa-inline-link" href="https://github.com/ShalyX/blastlab-agent-chambers/tree/master/examples" target="_blank" rel="noopener noreferrer">View example agent adapters <ArrowUpRight size={15}/></a></section>
       <section className="byoa-connection-panel"><Kicker>CONNECTOR / STEP TWO</Kicker><h2>Run your own agent.</h2><p>Expose <code>respond(case)</code> in your Python agent module. Set the one-time session token locally and launch the connector.</p>
-        <label>ONE-TIME JOIN TOKEN</label><div className="byoa-token"><code>{created.join_token}</code><button onClick={()=>copy(created.join_token)}><Copy size={16}/></button></div>
-        <label>TERMINAL COMMAND</label><pre>python blastlab_connector.py --session {created.session_id} --adapter your_agent:respond</pre><p className="byoa-command-note">Set <code>BLASTLAB_SESSION_TOKEN</code> to the token above in your local terminal. Do not commit it, paste real API keys, or execute unrestricted tools during tests. Expires {new Date(created.expires_at).toLocaleString()}.</p>
+        <span className="byoa-field-note">ONE-TIME JOIN TOKEN</span><div className="byoa-token"><code>{created.join_token}</code><button type="button" aria-label="Copy one-time join token" title="Copy one-time join token" onClick={()=>copy(created.join_token)}><Copy size={16}/></button></div>
+        <span className="byoa-field-note">TERMINAL COMMAND</span><pre>python blastlab_connector.py --session {created.session_id} --adapter your_agent:respond</pre><p className="byoa-command-note">Set <code>BLASTLAB_SESSION_TOKEN</code> to the token above in your local terminal. Do not commit it, paste real API keys, or execute unrestricted tools during tests. Expires {new Date(created.expires_at).toLocaleString()}.</p>
       </section>
     </div>}
     {error&&<div className="ch-inline-alert" role="status">{error}</div>}

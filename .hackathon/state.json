@@ -2,7 +2,7 @@
   "project": "BlastLab",
   "event": "Vultr Agent Rush",
   "updated_at": "2026-11-07",
-  "phase": "PRODUCT_HYGIENE",
+  "phase": "DEMO_PRODUCTION",
   "specialist": "product-engineer",
   "exit_proof": "VISUAL_QA_V4.md: live first-party UI and local report/retest visual QA passed; 12 P0s still separately gated.",
   "gate": "BUILD_LOOP_OPEN",
@@ -70,7 +70,7 @@
     "P0 same-customer-agent mitigation and exact retest not yet demonstrated.",
     "P0 BYOA agent/action execution is not contained in a Vultr worker; supplier Web Chamber is separate DEMO evidence."
   ],
-  "next_action": "Advance adjacent gate to PRODUCT_HYGIENE (Phase26); run dedicated end-to-end Product Hygiene, accessibility and real user-journey audit. Independent outside operator remains OPEN, mandatory before Submission Audit.",
+  "next_action": "Phase26 hygiene PASS, advance to Phase27 DEMO_PRODUCTION. Record and verify actual shipped BYOA Connect -> six cases -> evidence -> fix -> exact replay; no supplier demo substitution. Independent outside operator deferred and mandatory before Submission Audit.",
   "drift_audit": {
     "date": "2026-11-05",
     "status": "VERIFIED_GAPS__NO_PRODUCT_FIXES_APPLIED",
@@ -190,7 +190,8 @@
     "phase24_status": "CONDITIONAL_DEFERRED_NOT_PASS",
     "phase25_first_finding": "FIXED_PRODUCTION - malformed JSON tool policy objects returned HTTP 400 instead of crashing handler",
     "phase25_exit": "OPEN - hostile adapter, history forgery, quota/concurrency and frontend red team still require tests",
-    "phase25_red_team": "PASS - 295 executable tests; 3 skips; production policy crash and hostile overflow repaired; live Chrome QA 2 viewports"
+    "phase25_red_team": "PASS - 295 executable tests; 3 skips; production policy crash and hostile overflow repaired; live Chrome QA 2 viewports",
+    "phase26_product_hygiene": "PASS - 295 Python tests 3 skips zero failures, 14 real public route audits, 6 functional public browser checks, 12 URL checks; byte-matching live HTML and JS; old supplier preview corrected"
   },
   "phase_revision": 19,
   "product_lock_revision": 4

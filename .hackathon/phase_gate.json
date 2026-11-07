@@ -221,9 +221,33 @@
       "reason": "Two reproduced flaws fixed in live Vultr production; 295 executable unit tests PASS, 3 skipped, zero failed; malformed HTTP, concurrent quota, cross-session auth, recovery, forged reports and adapter metadata tested; real production-served hostile UI Chrome checks PASS at 1440/390. Runner-reported behavior and outside operator explicitly unproven, remain documented as separate debts."
     },
     "PRODUCT_HYGIENE": {
+      "status": "PASS",
+      "proof": [
+        "PHASE26_PRODUCT_HYGIENE_EXIT.md",
+        "README.md",
+        "HYGIENE.md",
+        "web/index.html",
+        "web/src/AgentLabExperience.tsx",
+        "web/src/App.tsx",
+        "web/src/ContainedSample.tsx",
+        "web/public/og-card.png",
+        "web/package.json",
+        "web/package-lock.json",
+        "web/qa-phase26-hygiene.cjs",
+        "web/qa-phase26-functional.cjs",
+        "web/qa-phase26-functional-public.cjs",
+        "web/qa-phase26-social-capture.cjs",
+        "deploy/phase26_hygiene_publish.py",
+        "deploy/phase26_hygiene_install.sh",
+        "deploy/phase26_hygiene_v2_publish.py",
+        "deploy/phase26_hygiene_v2_install.sh"
+      ],
+      "reason": "Read and applied installed public-project-launch-hygiene and production-ready-web-apps skills to live locked BYOA product; corrected inaccurate supplier-demo metadata/OG, accessible token-copy UI, safe links, outdated README/branding and shared footer. 14/14 production route QA; 6/6 public mock-state browser QA; 12/12 public links; fresh actual screenshot, 295 Python tests/3 skips/0 failures, deployed HTML and JS match local build. Scope excludes certified WCAG, independent customer adoption and final submission."
+    },
+    "DEMO_PRODUCTION": {
       "status": "OPEN",
       "proof": [],
-      "reason": "Phase26 has not yet completed its separate end-to-end Product Hygiene audit."
+      "reason": "Phase27 needs a real BYOA demo video and script; older supplier demo is not acceptable."
     }
   },
   "judge_simulation_v3": "NOT_RUN",

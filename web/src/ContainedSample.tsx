@@ -185,7 +185,7 @@ export default function ContainedSample(){
         <div><span className="contained-eyebrow">04 / THIRD-PARTY FRAMEWORK / DIFFERENT TEST</span>
           <h2>A real external agent runtime.<br/>Not a customer testimonial.</h2>
           <p>We connected the PydanticAI Agent framework to BlastLab over public HTTPS using Vultr GLM-5.3. This verifies the connector works beyond our native agent implementation; the wrapper and test account are still project-owned.</p>
-          <a href="/third-party-pydantic/proof.json" target="_blank" rel="noreferrer">INSPECT FRAMEWORK EVIDENCE <ArrowUpRight size={15}/></a>
+          <a href="/third-party-pydantic/proof.json" target="_blank" rel="noopener noreferrer">INSPECT FRAMEWORK EVIDENCE <ArrowUpRight size={15}/></a>
         </div>
         <div className="contained-interop-result"><span>EXACT SIX-CASE RETEST / SAME PLAN</span>
           <strong>{framework.baseline_violations}<i><ArrowRight size={32}/></i>{framework.retest_violations}</strong>
