@@ -1,37 +1,203 @@
 {
   "version": "operator-gate-v1",
-  "product_lock_revision": 3,
-  "current_approved_thesis": "Users connect their own AI agents and BlastLab adversarially tests, evaluates, remediates and supports retests; internal supplier scenario is demo-only.",
+  "product_lock_revision": 4,
+  "current_approved_thesis": "BlastLab is a guided BYOA adversarial security-regression lab: developers connect their own agents, define task and capability rules, run adaptive attacks, inspect evidence-backed findings, apply mitigations and replay the exact plan. Owner-run BYOA evidence is runner-reported; the Vultr judge path must separately prove contained execution.",
   "exit_proofs": {
     "PRODUCT_LOCK": {
-      "status": "OPEN",
-      "proof": ["PRODUCT.md","OPERATOR_SEQUENCE.md"],
-      "reason": "P0 restored; technical connector probe underway. Exit requires confirmed baseline and honest scope reconciliation."
+      "status": "PASS",
+      "proof": [
+        "PRODUCT.md",
+        "PRODUCT-COVERAGE.md",
+        "PRODUCT_LOCK_REVIEW.md"
+      ],
+      "reason": "Product Lock v4 freezes the unchanged BYOA thesis, full journey, evidence semantics, non-goals, boundaries and all twelve P0 acceptance rows. Open implementation gaps remain explicit."
     },
     "NAME_LOCK": {
-      "status": "OPEN",
-      "proof": ["BRAND.md"],
-      "reason": "Working BlastLab name has a collision candidate; no name-lock certification."
+      "status": "PASS",
+      "proof": [
+        "NAME_LOCK.md",
+        "BRAND.md"
+      ],
+      "reason": "User explicitly chose to retain BlastLab after disclosure of the existing Blast Lab company collision signal. The Lab suffix is intentional. Collision is knowingly accepted for this hackathon build; no legal/trademark/domain clearance is claimed."
     },
     "JUDGE_SIMULATION": {
       "status": "FAIL",
-      "proof": ["JUDGE_SIMULATION_2026-11-05.md"],
+      "proof": [
+        "JUDGE_SIMULATION_2026-11-05.md"
+      ],
       "reason": "Prior v2 judge fail; invalid for current product v3."
+    },
+    "VALIDATION": {
+      "status": "MODIFY",
+      "proof": [
+        "VALIDATION.md"
+      ],
+      "thesis_unchanged": true,
+      "modifications_recorded": true,
+      "reason": "Problem and technical concept survive; category is crowded, guided hosted BYOA differentiation is recorded, and Vultr-contained BYOA execution is a hard dependency for later technical phases."
+    },
+    "DEMO_ARCHITECTURE": {
+      "status": "PASS",
+      "proof": [
+        "DEMO.md",
+        "JUDGE_DEMO_SCRIPT.md"
+      ],
+      "reason": "The current deployed 2?0 example-comparison cut, full BYOA target storyboard, truthful proof contract, reset path, sponsor-tech beat, recording plan and failure dependencies are defined. Recording and full-product BYOA proof remain open."
+    },
+    "EVIDENCE_PLAN": {
+      "status": "PASS",
+      "proof": [
+        "EVIDENCE.md"
+      ],
+      "reason": "Seventeen material claims, including every locked P0 and sponsor/release/impact/demo/compliance claims, are mapped to proof standards, methods, owners, artifact targets, environments, observations, limitations, due points and judge-facing locations."
+    },
+    "DEPENDENCY_ATTACK": {
+      "status": "PASS",
+      "proof": [
+        "DEPENDENCY_ATTACK.md",
+        "EVIDENCE.md"
+      ],
+      "reason": "External dependencies were ranked; 18 connector/API tests passed; a real GLM-5.3 project-owned external test-agent report completed six cases and exposed one output-level canary finding; the missing Vultr-contained BYOA action path was confirmed and routed to Technical Derisk with no false fallback."
+    },
+    "TECHNICAL_DERISK": {
+      "status": "PASS",
+      "proof": [
+        "TECHNICAL_DERISK.md",
+        "artifacts/vultr-byoa-containment-phase12-20261106/independent-verification.json",
+        "artifacts/vultr-byoa-containment-phase12-20261106/control-plane-verification.json"
+      ],
+      "reason": "Authenticated original Vultr VM API HTTP 200, active/OK/running; actual project-owned sample agent inside disposable isolated Vultr worker; 6 cases, 12 real GLM-5.3 calls, harmless tool actions, explicit policy probes, teardown and 22/22 independent checks. Public BYOA product integration not claimed."
+    },
+    "BUILD_VERTICAL_SLICE": {
+      "status": "PASS",
+      "proof": [
+        "PHASE13_SLICE.md",
+        "web/qa-agent-public/phase13-desktop.png",
+        "web/qa-agent-public/phase13-mobile.png",
+        "artifacts/phase13-live-20261106/before-report.json"
+      ],
+      "reason": "Real project-owned public BYOA agent completed exact six-case GLM-5.3 baseline 3 violations and same-agent refined hardening 0, independent VM verification and live server report match, 101 backend tests. Not independent customer attestation or integrated production containment."
+    },
+    "PRODUCT_REVIEW": {
+      "status": "PASS",
+      "proof": [
+        "PRODUCT_REVIEW_V4.md",
+        "PRODUCT-COVERAGE.md",
+        "PRODUCT.md"
+      ],
+      "reason": "Phase 14 Product Critic v4 reviewed all 12 locked P0s, retained the BYOA thesis and identified acceptance criteria and critical blockers. The review is complete, but product readiness and P0 verification remain blocked.",
+      "product_readiness": "NOT_READY",
+      "review_verdict": "MODIFY_IMPLEMENTATION_KEEP_THESIS"
+    },
+    "BRAND_KIT": {
+      "status": "PASS",
+      "proof": [
+        "BRAND_KIT_V4.md",
+        "BRAND.md",
+        "NAME_LOCK.md"
+      ],
+      "reason": "Brand identity spec completed for locked BlastLab BYOA product v4: verbal identity, logo directions, semantic color/typography, provenance and sample disclosure, navigation, copy, collision warning, visual downstream constraints. No visual lock or product proof implied."
+    },
+    "ART_DIRECTION": {
+      "status": "PASS",
+      "proof": [
+        "ART_DIRECTION_V4.md",
+        "BRAND_KIT_V4.md",
+        "PRODUCT_REVIEW_V4.md"
+      ],
+      "reason": "Three distinct real BYOA visual territories evaluated; Test Bench selected for user journey, truthful evidence and responsive implementation. No screenshots/design lock implied."
+    },
+    "REFERENCE_BOARD": {
+      "status": "PASS",
+      "proof": [
+        "REFERENCE_BOARD_V4.md",
+        "ART_DIRECTION_V4.md"
+      ],
+      "reason": "Five source-linked visual and interaction references critiqued with borrow/reject rules and specific BYOA design mappings. No third-party screenshot reuse authorized."
+    },
+    "VISUAL_ASSET_STRATEGY": {
+      "status": "PASS",
+      "proof": [
+        "VISUAL_ASSET_STRATEGY_V4.md",
+        "REFERENCE_BOARD_V4.md"
+      ],
+      "reason": "12 asset source-of-truth contracts prioritized, with honest dynamic/brand provenance, no third-party copying, and explicit production exit standards."
+    },
+    "MOTION_STORYBOARD": {
+      "status": "PASS",
+      "proof": [
+        "MOTION_STORYBOARD_V4.md",
+        "VISUAL_ASSET_STRATEGY_V4.md"
+      ],
+      "reason": "Real event-triggered product motion, failures, static/reduced-motion states and non-fabricated judge storyboard mapped; no animation/footage completion claimed."
+    },
+    "DESIGN_LOCK": {
+      "status": "PASS",
+      "proof": [
+        "DESIGN_LOCK_V4.md",
+        "ART_DIRECTION_V4.md",
+        "MOTION_STORYBOARD_V4.md",
+        "web/qa-agent-public/phase13-desktop.png",
+        "web/qa-agent-public/phase13-mobile.png"
+      ],
+      "reason": "Actual pre-connect desktop/mobile screenshot review; Test Bench composition selected, ten corrections specified, five-step user journey and truthful BYOA labels locked; no runtime or Visual QA signoff."
+    },
+    "DESIGN_ENGINEERING": {
+      "status": "PASS",
+      "proof": [
+        "DESIGN_ENGINEERING_V4.md",
+        "web/qa-phase21-local.cjs",
+        "web/qa-phase21-connector.cjs",
+        "web/qa-phase21-import.cjs",
+        "web/qa-phase21/desktop-connect.png",
+        "web/qa-phase21/mobile-connect.png",
+        "web/qa-phase21/connected-results.png",
+        "web/qa-phase21/imported-exact-retest.png"
+      ],
+      "reason": "Four source files repaired. Local build, 192 backend tests (3 skipped), authenticated six-case project-owned connector, exact import/replay and desktop/mobile Chrome passed. Public release and product P0s remain open."
+    },
+    "VISUAL_QA": {
+      "status": "PASS",
+      "proof": [
+        "VISUAL_QA_V4.md",
+        "web/qa-phase22-public.cjs",
+        "web/qa-phase22-public-error.cjs",
+        "web/qa-phase22-public/desktop-live.png",
+        "web/qa-phase22-public/mobile-live.png",
+        "web/qa-phase22-public/mobile-invalid-report.png",
+        "web/qa-phase21/connected-results.png",
+        "web/qa-phase21/imported-exact-retest.png",
+        "deploy/phase22_publish_ui.py"
+      ],
+      "reason": "Actual desktop/mobile local and published web captures, correct pre/post connection content, real project-owned report/replay views, public HTTPS 200/API health, keyboard interaction, mobile 390 no overflow and malformed-report error handling. P0s remain independently gated."
+    },
+    "BUILD_LOOP": {
+      "status": "OPEN",
+      "proof": [
+        "PRODUCT_REVIEW_V4.md",
+        "PRODUCT-COVERAGE.md",
+        "VISUAL_QA_V4.md",
+        "PHASE23_RECOVERY.md",
+        "PHASE23_INTEROP_AND_CONTAINMENT.md",
+        "PHASE23_FRESH_CONTAINED_RUN.md",
+        "PHASE23_TERMPROOF_OWNER_ATTEMPT.md"
+      ],
+      "reason": "Founder-assisted actual TermProof BYOA exact replay now PASS (real 6/6 task VERIFIED, 0 tool violations, unchanged attack plan and verified manifests). Independently outside-operated customer adoption and remaining locked P0s not yet accepted."
     }
   },
   "judge_simulation_v3": "NOT_RUN",
-  "v3_locked_p0": {
-    "P0-01":"IN_PROGRESS",
-    "P0-02":"IN_PROGRESS",
-    "P0-03":"IN_PROGRESS",
-    "P0-04":"PARTIAL",
-    "P0-05":"IN_PROGRESS",
-    "P0-06":"IN_PROGRESS",
-    "P0-07":"PARTIAL",
-    "P0-08":"IN_PROGRESS",
-    "P0-09":"PARTIAL",
-    "P0-10":"PARTIAL",
-    "P0-11":"PARTIAL",
-    "P0-12":"IN_PROGRESS"
+  "locked_p0": {
+    "P0-01": "IN_PROGRESS",
+    "P0-02": "IN_PROGRESS",
+    "P0-03": "PARTIAL",
+    "P0-04": "PARTIAL",
+    "P0-05": "IN_PROGRESS",
+    "P0-06": "PARTIAL",
+    "P0-07": "PARTIAL",
+    "P0-08": "PARTIAL",
+    "P0-09": "PARTIAL",
+    "P0-10": "PARTIAL",
+    "P0-11": "PARTIAL",
+    "P0-12": "PARTIAL"
   }
 }
