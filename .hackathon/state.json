@@ -70,7 +70,7 @@
     "P0 same-customer-agent mitigation and exact retest not yet demonstrated.",
     "P0 BYOA agent/action execution is not contained in a Vultr worker; supplier Web Chamber is separate DEMO evidence."
   ],
-  "next_action": "PROOF_ENGINE Phase24: compile full verified proof portfolio and recruit genuinely independent outside agent owner/operator; do not claim signed runner attestation or external customer adoption.",
+  "next_action": "Phase24 PROOF_ENGINE open: obtain one genuine outside developer-operated agent six-case report, source identity and permission; independently check report and same-agent replay if a real vulnerability is found. Do not call project/founder testing outside validation.",
   "drift_audit": {
     "date": "2026-11-05",
     "status": "VERIFIED_GAPS__NO_PRODUCT_FIXES_APPLIED",
@@ -181,7 +181,11 @@
     "termproof_founder_acceptance": "PASS - real existing TermProof Gemini production agent through public BYOA, original and corrected exact replay six cases; corrected 6/6 deterministic VERIFIED, 0 forbidden-tool violations, identical attack plan, two verified manifests",
     "build_loop_functional_p0": "PASS - twelve original P0 engineering acceptance scenarios accepted with explicit qualifications and handoff",
     "outside_customer_acceptance": "NOT_PROVEN - independent external customer operator belongs to Phase24 proof obligation",
-    "source_attestation": "NOT_PROVEN - unsigned runner-reported event chain; outside runtime actions not attested"
+    "source_attestation": "NOT_PROVEN - unsigned runner-reported event chain; outside runtime actions not attested",
+    "phase24_proof_index": "PASS - 4 technical lanes, 6 original raw reports, exact 3 plan replays, 22/22 archived worker, 240 tests",
+    "phase24_offline_bundle": "PASS - locally retained private offline ZIP checks six raw reports; tampered report fails",
+    "phase24_public_browser": "PASS - 8 proof lane checks at 1440/390, downloaded JSON matches source hash; 0 JS errors/overflow",
+    "phase24_external_operator": "OPEN - no independent outside customer/operator proof"
   },
   "phase_revision": 19,
   "product_lock_revision": 4

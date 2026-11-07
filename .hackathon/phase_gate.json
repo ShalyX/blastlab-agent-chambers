@@ -185,6 +185,20 @@
         "PHASE24_PROOF_ENGINE_HANDOFF.md"
       ],
       "reason": "All twelve original functional engineering P0 acceptance scenarios passed; 240-test regression green; live TermProof, same-agent exact replay, and real contained Vultr sample verified. Unproven independent outside-customer adoption and signed source attestation explicitly remain Phase24 proof obligations, not claimed."
+    },
+    "PROOF_ENGINE": {
+      "status": "OPEN",
+      "proof": [
+        "PHASE24_PROOF_ENGINE_STATUS.md",
+        "PHASE24_PROOF_REGISTER.md",
+        "PHASE24_PROOF_ENGINE_HANDOFF.md",
+        "deploy/phase24_compile_proof.py",
+        "deploy/phase24_build_bundle.py",
+        "test_phase24_proof_engine.py",
+        "web/public/proof/evidence.json",
+        "web/qa-phase24-public.cjs"
+      ],
+      "reason": "Four real technical proof lanes verified and released; offline raw report verifier passes, 7 tamper tests pass, public 8-way browser QA passes. Genuinely outside-owned and outside-operated customer acceptance and external runner origin/hidden side-effect attestation remain unproven; not claiming proof-engine exit."
     }
   },
   "judge_simulation_v3": "NOT_RUN",
@@ -208,5 +222,11 @@
     "customer_tool_side_effect_attestation": "NOT_PROVEN",
     "semantic_correctness_generalization": "NOT_PROVEN",
     "source": "PHASE24_PROOF_ENGINE_HANDOFF.md"
+  },
+  "phase24_proof_debts": {
+    "independent_outside_agent_operator": "OPEN - founder TermProof and project PydanticAI do not qualify",
+    "customer_runner_source_attestation": "UNATTESTED - unsigned runner-reported events",
+    "account_wide_history_retention_purge": "UNIMPLEMENTED - 30-day per-campaign recovery only",
+    "full_accessibility_and_red_team": "PENDING next dedicated Operator phases"
   }
 }

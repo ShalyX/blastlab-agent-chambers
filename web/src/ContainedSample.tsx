@@ -91,7 +91,7 @@ export default function ContainedSample(){
     <header className="contained-nav">
       <a href="/" className="contained-wordmark">BLAST<span>/</span>LAB <small> / EVIDENCE 012</small></a>
       <div><span className="contained-recorded">ARCHIVED + FRESH SAMPLE EVIDENCE</span>
-      <a href="/app"><ArrowLeft size={14}/> CONNECT YOUR AGENT</a></div>
+      <a href="/proof">ALL VERIFIED PROOFS <ArrowUpRight size={14}/></a><a href="/app"><ArrowLeft size={14}/> CONNECT YOUR AGENT</a></div>
     </header>
     {!data&&!error&&<p className="contained-loading">LOADING VERIFIED CONTAINMENT RECORD…</p>}
     {error&&<p className="contained-error" role="alert">{error}</p>}

@@ -153,6 +153,7 @@ export function AgentLabConnect({onCreated,onDemo}:{
         <div className="byoa-traits"><span><CheckCircle2 size={14}/> Your agent</span><span><ShieldAlert size={14}/> Vultr-generated attacks</span><span><Fingerprint size={14}/> Actual observations</span></div>
         <a href="#byoa-connect-form" className="byoa-jump-link">Set up your agent <ArrowRight size={16}/></a>
         <a href="/connect/independent-tester.md" className="byoa-jump-link" target="_blank" rel="noreferrer">Independent agent testing protocol <ArrowRight size={16}/></a>
+        <a href="/proof" className="byoa-jump-link">Inspect verified judge evidence <ArrowRight size={16}/></a>
       </div>
       <div className="byoa-diagnostic" aria-label="Illustration of the BYOA test process, not a live connection status">
         <div className="byoa-schematic-top"><span>BLASTLAB / EXTERNAL AGENT CONNECTOR</span><span>01 — 04</span></div>

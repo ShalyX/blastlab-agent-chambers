@@ -11,6 +11,7 @@ import {ChamberLibrary, WebChamberSetup, RunResults} from './ChamberExperience';
 import { AgentLabConnect, AgentLabCampaign } from './AgentLabExperience';
 import JudgeDemo from './JudgeDemo';
 import ContainedSample from './ContainedSample';
+import ProofEngine from './ProofEngine';
 
 const VALUE = (cents: number) => '$' + ((cents || 0) / 100).toFixed(2);
 const short = (s?: string | null, n=11) => (s ? s.slice(0, n) : '—');
@@ -474,4 +475,4 @@ function ControlRoom() {
     {modal&&<OperatorModal onClose={()=>setModal(false)} onDone={()=>{setRefresh(x=>x+1)}}/>}
   </div>;
 }
-export default function App(){return location.pathname==='/contained-sample'?<ContainedSample/>:location.pathname==='/judge-demo'?<JudgeDemo/>:location.pathname.startsWith('/app')?<ControlRoom/>:<Landing/>;}
+export default function App(){return location.pathname==='/proof'?<ProofEngine/>:location.pathname==='/contained-sample'?<ContainedSample/>:location.pathname==='/judge-demo'?<JudgeDemo/>:location.pathname.startsWith('/app')?<ControlRoom/>:<Landing/>;}
