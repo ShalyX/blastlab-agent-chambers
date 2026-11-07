@@ -36,7 +36,11 @@ class GatewayTests(unittest.TestCase):
         self.server=ThreadingHTTPServer(('127.0.0.1',0),gateway.Handler)
         self.thread=threading.Thread(target=self.server.serve_forever,daemon=True)
         self.thread.start()
+        # Ensure the Windows HTTP listener thread actually exits before
+        # closing/reusing its ephemeral port in the 200+ test regression.
+        # LIFO cleanup: shutdown, join, then close.
         self.addCleanup(self.server.server_close)
+        self.addCleanup(self.thread.join, 4)
         self.addCleanup(self.server.shutdown)
 
     def request(self,method,path,body=None,headers=None):
