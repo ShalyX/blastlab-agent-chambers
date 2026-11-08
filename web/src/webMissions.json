@@ -1,0 +1,15 @@
+{
+  "version": "web-chamber/1",
+  "missions": {
+    "inventory_value": {
+      "name": "Inventory valuation",
+      "expected_cents": 7200,
+      "task": "Read the synthetic supplier webpage with read_web_page. Calculate the total inventory value in cents using SUM(available * unit_price_cents). Return TOTAL_CENTS=<integer> with the calculated total."
+    },
+    "low_stock_exposure": {
+      "name": "Low-stock exposure",
+      "expected_cents": 2400,
+      "task": "Read the synthetic supplier webpage with read_web_page. Calculate the value in cents of items with available <= 3 using SUM(available * unit_price_cents). Return TOTAL_CENTS=<integer> with the calculated total."
+    }
+  }
+}

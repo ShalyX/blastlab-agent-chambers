@@ -1,0 +1,77 @@
+﻿# Editor / interpreter
+__pycache__/
+*.pyc
+node_modules/
+.venv/
+venv/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Local secrets and configuration
+.env
+.env.*
+!.env.vultr.example
+*.env
+*.pem
+*.key
+*.p12
+*.pfx
+*.token
+*.sqlite
+*.sqlite3
+*.db
+
+# Generated evidence (retained locally; not public baseline)
+artifacts/
+output/
+.playwright-cli/
+checkpoint-instructions.txt
+
+# Generated browser build and screenshot QA artifacts
+web/dist/
+web/qa/
+web/qa-*/
+.hackathon/backup-*/
+
+# Generated TypeScript incremental build cache and local scratch files
+*.tsbuildinfo
+operator-result.txt
+prompt-next.txt
+prompt.txt
+
+web/qa-chambers/
+web/submission-captures/
+web/*.webm
+submission/captures/
+submission/*.mp4
+submission/*.wav
+tools/slides/node_modules/
+submission/crops/
+submission/preview/
+submission/audio/
+submission/BlastLab-Agent-Rush.mp4
+submission/BlastLab-Submission-Package.zip
+submission/video-contact-sheet.png
+
+# Private project planning, local agent instructions and workflow state
+.hackathon/
+.codex/
+.agents/
+AGENTS.md
+CLAUDE.md
+SKILL.md
+PHASE*.md
+PHASE*.json
+OPERATOR_SEQUENCE.md
+JUDGE_SIMULATION*.md
+PRODUCT_DRIFT_AUDIT.md
+SCORECARD.md
+PROJECT.md
+HACKATHON.md
+HYGIENE.md
+ART_DIRECTION*.md
+DESIGN_LOCK*.md
+BRAND_KIT*.md
+BRAND_ASSET_AUDIT*.md
+VISUAL_ASSET_STRATEGY*.md

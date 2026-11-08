@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900" role="img" aria-labelledby="title desc">
+<title id="title">BlastLab hosted Web Chamber execution</title>
+<desc id="desc">Developer agent source executes in one restricted Vultr container. A separate controller-owned Chromium container reads synthetic hostile pages. The trusted controller mediates fixed page reads and Vultr inference, keeps credentials outside both workers, and verifies removal of both containers before releasing the report. This is an explanatory architecture diagram, not live telemetry.</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#acf0d4"/></marker></defs>
+<rect width="1200" height="900" fill="#101416"/>
+<g font-family="Arial,sans-serif" fill="#e7f1e9">
+<text x="48" y="52" font-size="25" font-weight="700">BLAST/LAB · THE WEB</text><text x="1152" y="50" text-anchor="end" font-size="13" fill="#acf0d4">ARCHITECTURE / NOT TELEMETRY</text>
+<rect x="330" y="88" width="540" height="100" fill="#1b3029" stroke="#719781"/>
+<text x="600" y="125" text-anchor="middle" font-size="22" font-weight="700">VULTR SERVERLESS INFERENCE</text><text x="600" y="154" text-anchor="middle" font-size="16" fill="#b5c4bc">Task-specific attack planning + target-agent model calls</text>
+<rect x="25" y="219" width="1150" height="550" fill="none" stroke="#456354" stroke-dasharray="6 5"/>
+<text x="48" y="247" font-size="14" fill="#acf0d4">VULTR COMPUTE / CONTROLLER AND ISOLATED WORKERS</text>
+<path d="M600 192V279" fill="none" stroke="#acf0d4" stroke-width="2" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+<rect x="330" y="284" width="540" height="105" fill="#1b3029" stroke="#719781"/>
+<text x="600" y="322" text-anchor="middle" font-size="24" font-weight="700">TRUSTED CAMPAIGN CONTROLLER</text><text x="600" y="352" text-anchor="middle" font-size="16" fill="#b5c4bc">Provider keys stay here · bounded capabilities · lifecycle owner</text>
+<path d="M435 394L290 470" fill="none" stroke="#acf0d4" stroke-width="2" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+<path d="M765 394L910 470" fill="none" stroke="#acf0d4" stroke-width="2" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+<text x="190" y="430" font-size="14" fill="#acf0d4" paint-order="stroke" stroke="#101416" stroke-width="6" stroke-linejoin="round">AGENT CASES / INFERENCE / PAGE READ BRIDGE</text>
+<text x="792" y="430" font-size="14" fill="#acf0d4" paint-order="stroke" stroke="#101416" stroke-width="6" stroke-linejoin="round">FIXED PAGE / DOM OBSERVATIONS</text>
+<rect x="65" y="477" width="490" height="150" fill="#1c2826" stroke="#719781"/>
+<text x="92" y="512" font-size="14" fill="#acf0d4">DISPOSABLE AGENT CONTAINER</text><text x="92" y="548" font-size="28" font-weight="700">Your uploaded agent</text>
+<text x="92" y="577" font-size="16" fill="#b5c4bc">Your decision logic · legitimate mission · declared tool intents</text><text x="92" y="604" font-size="15" fill="#b5c4bc">No external network, host mounts or provider credentials</text>
+<rect x="645" y="477" width="490" height="150" fill="#1c2826" stroke="#719781"/>
+<text x="672" y="512" font-size="14" fill="#acf0d4">SEPARATE CONTROLLED BROWSER CONTAINER</text><text x="672" y="548" font-size="28" font-weight="700">Chromium / synthetic webpage</text>
+<text x="672" y="577" font-size="16" fill="#b5c4bc">Fixed /specimen route · escaped hostile page note</text><text x="672" y="604" font-size="15" fill="#b5c4bc">No public browsing · scripts disabled · fresh context per read</text>
+<path d="M310 633V670H890V633" fill="none" stroke="#acf0d4" stroke-width="2"/>
+<path d="M600 670V696" fill="none" stroke="#acf0d4" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="270" y="700" width="660" height="50" fill="#1b3029" stroke="#719781"/><text x="600" y="732" text-anchor="middle" font-size="19" font-weight="700">BOTH WORKERS REMOVED → VERIFIED REPORT RELEASE</text>
+<text x="48" y="815" font-size="17" fill="#b5c4bc">Report: browser reads + source/page fingerprints + numeric mission result + policy findings + exact replay.</text>
+<text x="48" y="846" font-size="15" fill="#b5c4bc">Internal agent side effects remain unverified. Fresh execution is not mission recovery after compromise.</text>
+<text x="48" y="877" font-size="14" fill="#acf0d4">TOOLCHAIN · THE VAULT · THE MACHINE · CHAOS — PLANNED / NOT RUNNABLE</text>
+</g></svg>

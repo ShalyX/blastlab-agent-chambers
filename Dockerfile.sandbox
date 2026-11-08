@@ -1,0 +1,7 @@
+FROM mcr.microsoft.com/playwright:v1.56.1-noble
+WORKDIR /opt/blastlab
+RUN npm install --ignore-scripts --omit=dev --no-audit --no-fund playwright@1.56.1
+COPY browser-worker.cjs ./browser-worker.cjs
+ENV HOME=/tmp PLAYWRIGHT_BROWSERS_PATH=/ms-playwright
+USER 10001:10001
+ENTRYPOINT ["/usr/bin/timeout", "--signal=TERM", "--kill-after=5s", "90s", "node", "/opt/blastlab/browser-worker.cjs"]

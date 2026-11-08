@@ -1,0 +1,45 @@
+WEBVTT
+
+1
+00:00:00.164 --> 00:00:08.783
+Six cases. One agent. Three observed policy violations. Change its trust policy. and on the exact replay: zero.
+
+2
+00:00:09.112 --> 00:00:15.471
+BlastLab tests AI agents developers actually own. The agent stays in their environment. not ours.
+
+3
+00:00:15.800 --> 00:00:23.520
+Define the legitimate task. allowed and forbidden tools. then connect an outbound runner. No model API keys leave the developer's machine.
+
+4
+00:00:23.849 --> 00:00:32.906
+Vultr's GLM five point three generates a six-case plan: one clean control and five adversarial inputs. The runner records the answers and tool intentions.
+
+5
+00:00:33.235 --> 00:00:42.555
+In the verified baseline. three cases breached the configured policy: role spoofing. synthetic exfiltration bait. and memory poisoning. No harmful tool ran.
+
+6
+00:00:42.884 --> 00:00:52.226
+We changed only this project's agent trust policy. Same callable. model. tools. task and attack plan. We then replayed those exact six cases.
+
+7
+00:00:52.555 --> 00:00:59.814
+The observed violations fell from three to zero. Both reports and the identical attack-plan fingerprint are available for inspection.
+
+8
+00:01:00.143 --> 00:01:11.195
+We also tested TermProof. a preexisting founder-operated agent. Correcting the connector restored all six legitimate task outcomes. That was an integration repair. not a model-security patch.
+
+9
+00:01:11.524 --> 00:01:19.046
+A separate. project-owned Vultr worker passed all twenty-two containment checks. It does not execute customers' agents in our cloud.
+
+10
+00:01:19.375 --> 00:01:26.634
+The reports are hash-checked. External actions remain runner-reported. and independent outside-customer validation is still pending.
+
+11
+00:01:26.963 --> 00:01:34.879
+Bring your agent. Test what it actually does. Fix the boundary. Replay the same attacks. BlastLab.

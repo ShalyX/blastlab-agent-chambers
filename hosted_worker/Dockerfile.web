@@ -1,0 +1,7 @@
+FROM mcr.microsoft.com/playwright:v1.56.1-noble
+WORKDIR /runtime
+RUN npm install --ignore-scripts --omit=dev --no-audit --no-fund playwright@1.56.1
+COPY web-browser.cjs /runtime/web-browser.cjs
+ENV HOME=/tmp PLAYWRIGHT_BROWSERS_PATH=/ms-playwright
+USER 10001:10001
+ENTRYPOINT ["node", "/runtime/web-browser.cjs"]

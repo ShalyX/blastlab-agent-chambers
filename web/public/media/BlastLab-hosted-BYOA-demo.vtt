@@ -1,0 +1,137 @@
+WEBVTT
+
+1
+00:00:00.360 --> 00:00:02.440
+Before shipping an agent, I want to know
+
+2
+00:00:02.460 --> 00:00:04.500
+what hostile content can make it do.
+
+3
+00:00:05.040 --> 00:00:07.080
+BlastLab makes that repeatable.
+
+4
+00:00:10.360 --> 00:00:13.180
+I define the legitimate job, the tools my agent
+
+5
+00:00:13.200 --> 00:00:16.140
+can use, and the capabilities it must avoid.
+
+6
+00:00:17.020 --> 00:00:19.240
+Vultr sandbox is selected by default.
+
+7
+00:00:23.360 --> 00:00:26.200
+Vultr generates five task-specific attacks.
+
+8
+00:00:27.060 --> 00:00:28.720
+BlastLab adds a clean control.
+
+9
+00:00:29.380 --> 00:00:30.540
+I upload my agent source
+
+10
+00:00:30.560 --> 00:00:32.260
+and set the entry point.
+
+11
+00:00:34.360 --> 00:00:37.460
+My code runs in a disposable worker on Vultr.
+
+12
+00:00:38.040 --> 00:00:40.120
+Model calls go through a trusted bridge.
+
+13
+00:00:40.660 --> 00:00:42.500
+The provider key stays on the host.
+
+14
+00:00:46.360 --> 00:00:49.340
+This project-run baseline returned three findings.
+
+15
+00:00:50.100 --> 00:00:52.320
+I can inspect the hostile input, the
+
+16
+00:00:52.340 --> 00:00:54.220
+actual response and the rule it
+
+17
+00:00:54.240 --> 00:00:57.120
+violated, then follow a targeted mitigation.
+
+18
+00:01:03.780 --> 00:01:05.760
+The receipt links my source to this run.
+
+19
+00:01:06.380 --> 00:01:07.860
+Ten host boundary checks passed,
+
+20
+00:01:07.880 --> 00:01:09.940
+and worker removal was verified.
+
+21
+00:01:17.360 --> 00:01:18.640
+I strengthen how this agent
+
+22
+00:01:18.660 --> 00:01:21.080
+handles instructions hidden in documents.
+
+23
+00:01:21.980 --> 00:01:23.980
+Then I upload the revision and replay
+
+24
+00:01:24.000 --> 00:01:26.200
+the same campaign in a fresh worker.
+
+25
+00:01:26.800 --> 00:01:27.640
+The source changes.
+
+26
+00:01:28.440 --> 00:01:30.060
+The attack plan stays fixed.
+
+27
+00:01:33.360 --> 00:01:34.440
+Two findings clear.
+
+28
+00:01:35.100 --> 00:01:36.500
+Role spoofing still fails.
+
+29
+00:01:37.180 --> 00:01:39.360
+The comparison shows two resolved and no
+
+30
+00:01:39.380 --> 00:01:42.020
+new findings, and keeps every case visible.
+
+31
+00:01:51.880 --> 00:01:53.100
+Bring the agent you built.
+
+32
+00:01:53.600 --> 00:01:54.340
+Find what failed.
+
+33
+00:01:54.560 --> 00:01:55.540
+Test what changed.
+
+34
+00:01:55.940 --> 00:01:56.700
+BlastLab.

@@ -1,0 +1,29 @@
+name: Clean checkout checks
+on:
+  push:
+    branches: [master, 'codex/**', wip/byoa-restoration-20261105]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Public file boundary
+        run: python tools/check_public_files.py
+      - name: Public backend tests
+        run: python -m unittest discover -q
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - name: Frontend production build
+        working-directory: web
+        run: |
+          npm ci --no-audit --no-fund
+          npm run build
