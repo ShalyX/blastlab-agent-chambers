@@ -15,8 +15,6 @@ jobs:
           python-version: '3.12'
       - name: Public file boundary
         run: python tools/check_public_files.py
-      - name: Public backend tests
-        run: python -m unittest discover -q
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
@@ -27,3 +25,11 @@ jobs:
         run: |
           npm ci --no-audit --no-fund
           npm run build
+      - name: Install browser test runtime
+        shell: bash
+        run: |
+          npm install --prefix "$RUNNER_TEMP/blastlab-browser-tests" --no-save --ignore-scripts --no-audit --no-fund playwright@1.56.1
+          "$RUNNER_TEMP/blastlab-browser-tests/node_modules/.bin/playwright" install --with-deps chromium
+          echo "BLASTLAB_PLAYWRIGHT_MODULE=$RUNNER_TEMP/blastlab-browser-tests/node_modules/playwright" >> "$GITHUB_ENV"
+      - name: Public backend tests
+        run: python -m unittest discover -q

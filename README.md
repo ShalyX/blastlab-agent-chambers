@@ -82,7 +82,11 @@ loopback port 8123. Running the frontend alone does not start Docker workers or
 configure inference. Follow the [deployment guide](deploy/README.md) for the
 backend, both container images, private environment files and rollback procedure.
 The [CI workflow](.github/workflows/checks.yml) runs the public tests and frontend
-build. The unit tests use deterministic local fixtures, without provider keys.
+build. The tests use deterministic local fixtures, without provider keys. The
+full suite also exercises real Chromium through Playwright. CI installs that
+browser runtime explicitly; local full-suite runs need Playwright 1.56.1 and
+Chromium, with `BLASTLAB_PLAYWRIGHT_MODULE` pointing to the installed Playwright
+module directory. Docker-specific tests require separate explicit opt-in.
 
 ## Repository map
 
